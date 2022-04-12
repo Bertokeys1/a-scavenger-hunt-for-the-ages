@@ -1,1 +1,0 @@
-# a-scavenger-hunt-for-the-ages
