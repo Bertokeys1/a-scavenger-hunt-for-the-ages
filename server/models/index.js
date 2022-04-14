@@ -1,6 +1,6 @@
 const User = require('./User');
-const Hunts = require('./Hunts');
-const Challenges = require('./Challenges');
+const Hunt = require('./Hunt');
+const Challenge = require('./Challenge');
 
 
-module.exports = { User, Hunts, Challenges };
+module.exports = { User, Hunt, Challenge };

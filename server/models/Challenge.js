@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 
 const challengeSchema = new Schema ({
-    challengename: {
+    challengeName: {
     type: String,
     required: true,
     trim: true,
@@ -23,6 +23,6 @@ const challengeSchema = new Schema ({
 
 });
 
-const Challenge = model('Challenge', ChallengeSchema);
+const Challenge = model('Challenge', challengeSchema);
 
 module.exports = Challenge;
