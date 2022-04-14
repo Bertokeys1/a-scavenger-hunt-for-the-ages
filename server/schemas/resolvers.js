@@ -37,12 +37,12 @@ const resolvers = {
   },
 
   Mutation: {
-    addUser: async (parent, { username, email, password }) => {
+    addUser: async (_, { username, email, password }) => {
       const user = await User.create({ username, email, password });
       const token = signToken(user);
       return { token, user };
     },
-    login: async (parent, { email, password }) => {
+    login: async (_, { email, password }) => {
       const user = await User.findOne({ email });
 
       if (!user) {
@@ -59,6 +59,42 @@ const resolvers = {
 
       return { token, user };
     },
+    createHunt: async (_, {data}, context) => {
+      if (context.user) {
+        const hunt = await Hunt.create({
+          huntName: data.huntName, 
+          challenges: data.challenges 
+        });
+        return hunt
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    updateHunt: async (_, {_id, data}, context) => {
+      if (context.user) {
+        const updatedHunt = await Hunt.findByIdAndUpdate(
+          {_id},
+          {
+            huntName: data.huntName, 
+            challenges: data.challenges
+          },
+          {new: true}
+        );
+        return updatedHunt;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    deleteHunt: async (_, {_id}, context) => {
+      if (context.user) {
+        const hunt = await Hunt.findByIdAndDelete({_id});
+        const user = await User.findOneAndUpdate(
+          {_id: context.user._id},
+          {$pull: {hunts: hunt._id}},
+          {new: true}
+        );
+        return user;
+      }
+      throw new AuthenticationError('You need to be logged in!')
+    }
   }
 };
 

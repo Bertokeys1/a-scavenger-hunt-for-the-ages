@@ -12,6 +12,6 @@ const huntSchema = new Schema ({
     }],
 });
 
-const Hunt = model('Hunts', huntSchema);
+const Hunt = model('Hunt', huntSchema);
 
 module.exports = Hunt;
