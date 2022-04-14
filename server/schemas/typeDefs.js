@@ -11,7 +11,7 @@ const typeDefs = gql`
 
   type Challenge {
     _id: ID!
-    challengename: String!
+    challengeName: String!
     location: String
     todo: String
     check: Boolean
@@ -25,13 +25,13 @@ const typeDefs = gql`
 
   type Hunt {
     _id: ID!
-    huntname: String!
+    huntName: String!
     challenges: [Challenge]
   }
 
   input HuntData {
-    huntname: String!
-    challenges: [Challenge]
+    huntName: String!
+    challenges: [ChallengeData]
   }
 
   type Auth {
@@ -43,15 +43,15 @@ const typeDefs = gql`
     users: [User]
     user(username: String!): User
     me: User
-    hunt (huntname: String!): Hunt
+    hunt (_id: ID!): Hunt
     challenges: [Challenge]
   }
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    createHunt(huntname: String!, challenges: [String]!): Hunt
-    updateHunt(huntname: String!, challenges: [String]!): Hunt
+    createHunt(data:HuntData!): Hunt
+    updateHunt(_id: ID! data:HuntData!): Hunt
     deleteHunt(_id: ID!): User
     createChallenge(data:ChallengeData): Challenge
     updateChallenge(_id:ID! data:ChallengeData): Challenge

@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 
 const huntSchema = new Schema ({
-    huntname: {
+    huntName: {
         type: String,
         required: true,
         trim: true,
