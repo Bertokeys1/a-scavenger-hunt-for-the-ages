@@ -43,6 +43,7 @@ const typeDefs = gql`
     users: [User]
     user(username: String!): User
     me: User
+    hunts: [Hunt]
     hunt (_id: ID!): Hunt
     challenges: [Challenge]
   }
