@@ -18,7 +18,7 @@ const typeDefs = gql`
   }
   
   input ChallengeData {
-    challenge: String!
+    challengeName: String!
     location: String
     todo: String
   }

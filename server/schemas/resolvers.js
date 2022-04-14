@@ -61,7 +61,10 @@ const resolvers = {
     },
     createHunt: async (_, {data}, context) => {
       if (context.user) {
-        const hunt = await Hunt.create({data});
+        const hunt = await Hunt.create({
+          huntName: data.huntName, 
+          challenges: data.challenges 
+        });
         return hunt
       }
       throw new AuthenticationError('You need to be logged in!');
@@ -69,8 +72,11 @@ const resolvers = {
     updateHunt: async (_, {_id, data}, context) => {
       if (context.user) {
         const updatedHunt = await Hunt.findByIdAndUpdate(
-          {_id:_id},
-          {data},
+          {_id},
+          {
+            huntName: data.huntName, 
+            challenges: data.challenges
+          },
           {new: true}
         );
         return updatedHunt;
@@ -79,12 +85,13 @@ const resolvers = {
     },
     deleteHunt: async (_, {_id}, context) => {
       if (context.user) {
-        const hunt = await Hunt.findByIdAndDelete({_id:_id});
-        const user = await User.findByIdAndUpdate(
+        const hunt = await Hunt.findByIdAndDelete({_id});
+        const user = await User.findOneAndUpdate(
           {_id: context.user._id},
           {$pull: {hunts: hunt._id}},
           {new: true}
-        ) 
+        );
+        return user;
       }
       throw new AuthenticationError('You need to be logged in!')
     }
