@@ -10,7 +10,7 @@ const typeDefs = gql`
   }
 
   type Challenge {
-    _id: ID!
+    challengeId: ID!
     challengeName: String!
     location: [Address]
     todo: String
@@ -20,8 +20,8 @@ const typeDefs = gql`
   type Address {
     address1: String
     address2: String
-    city: String!
-    state: String!
+    city: String
+    state: String
     zipCode: String
   }
   
@@ -34,8 +34,8 @@ const typeDefs = gql`
   input AddressData {
     address1: String
     address2: String
-    city: String!
-    state: String!
+    city: String
+    state: String
     zipCode: String
   }
   
@@ -47,7 +47,6 @@ const typeDefs = gql`
 
   input HuntData {
     huntName: String!
-    challenges: [ChallengeData]
   }
 
   type Auth {
@@ -67,13 +66,15 @@ const typeDefs = gql`
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
+
     createHunt(data:HuntData!): User
-    updateHunt(_id: ID! data:HuntData!): Hunt
+    updateHunt(_id: ID!, huntName: String!): Hunt
     deleteHunt(_id: ID!): User
-    createChallenge(data:ChallengeData): Challenge
-    updateChallenge(_id:ID! data:ChallengeData): Challenge
-    deleteChallenge(_id: ID!): Hunt
-    checkChallenge(_id: ID!): Challenge
+
+    createChallenge(data:ChallengeData, huntId: ID!): Hunt
+    updateChallenge(challengeId:ID!, data:ChallengeData): Challenge
+    deleteChallenge(challengeId: ID!, huntId: ID!): Hunt
+    checkChallenge(challengeId: ID!): Challenge
   }
 `;
 

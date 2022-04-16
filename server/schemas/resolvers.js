@@ -1,5 +1,6 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Challenge, Hunt  } = require('../models');
+const { User, Hunt } = require('../models');
+const { schema } = require('../models/User');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -65,7 +66,7 @@ const resolvers = {
       if (context.user) {
         const hunt = await Hunt.create({
           huntName: data.huntName, 
-          challenges: data.challenges 
+          challenges: [] 
         });
         const user = await User.findOneAndUpdate(
           {_id: context.user._id},
@@ -106,17 +107,39 @@ const resolvers = {
     },
 
     /** Challenge mutations */
-    createChallenge: async (_, {data}, context) => {
+    createChallenge: async (_, { huntId, data }, context) => {
       if (context.user) {
-        const challenge = await Challenge.create({
-          challengeName: data.challengeName, 
-          location: data.location,
-          todo: data.todo
-        });
+        const hunt = await Hunt.findOneAndUpdate(
+          { _id: huntId },
+          {
+            $push: {
+              challenges: {
+                challengeName: data.challengeName,
+                location: [
+                  {
+                    address1: data.location.address1,
+                    address2: data.location.address2,
+                    city: data.location.city,
+                    state: data.location.state,
+                    zipCode: data.location.zipCode,
+                  },
+                ],
+                todo: data.todo,
+              },
+            },
+          },
+          { new: true }
+        );
+        return hunt;
+        // const challenge = await Challenge.create({
+        //   challengeName: data.challengeName,
+        //   location: data.location,
+        //   todo: data.todo,
+        // });
 
-        return challenge
+        // return challenge;
       }
-      throw new AuthenticationError('You need to be logged in!')
+      throw new AuthenticationError("You need to be logged in!");
     },
     updateChallenge: async (_, {_id, data}, context) => {
       if (context.user) {
@@ -133,8 +156,18 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!')
     },
-    deleteChallenge: async (_, {_id}, context) => {
+    deleteChallenge: async (_, {_id, huntId}, context) => {
+      if (context.user) {
+        const challenge = await Challenge.findByIdAndDelete(_id);
 
+        const hunt = await Hunt.findOneAndUpdate(
+          {_id: huntId},
+          {$pull: {challenges: challenge._id}},
+          {new: true}
+        );
+        return hunt;
+      }
+      throw new AuthenticationError('You need to be logged in!')
     }
   }
 };
