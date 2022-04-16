@@ -18,7 +18,13 @@ const userSchema = new Schema({
     type: String,
     required: true,
     minlength: 5,
-  }
+  },
+  hunts: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Hunt',
+    }
+  ],
 });
 
 userSchema.pre('save', async function (next) {
