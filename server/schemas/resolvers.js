@@ -108,7 +108,7 @@ const resolvers = {
     /** Challenge mutations */
     createChallenge: async (_, {data}, context) => {
       if (context.user) {
-        const challenge = await Hunt.create({
+        const challenge = await Challenge.create({
           challengeName: data.challengeName, 
           location: data.location,
           todo: data.todo

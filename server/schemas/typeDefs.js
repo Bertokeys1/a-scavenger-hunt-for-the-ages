@@ -12,17 +12,33 @@ const typeDefs = gql`
   type Challenge {
     _id: ID!
     challengeName: String!
-    location: String
+    location: [Address]
     todo: String
     check: Boolean
   }
-  
+
+  type Address {
+    address1: String
+    address2: String
+    city: String!
+    state: String!
+    zipCode: String
+  }
+
   input ChallengeData {
     challengeName: String!
-    location: String
+    location: [AddressData]
     todo: String
   }
 
+  input AddressData {
+    address1: String
+    address2: String
+    city: String!
+    state: String!
+    zipCode: String
+  }
+  
   type Hunt {
     _id: ID!
     huntName: String!
