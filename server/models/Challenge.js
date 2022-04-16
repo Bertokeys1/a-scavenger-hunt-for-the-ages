@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const Address = require('./Address')
 
 const challengeSchema = new Schema ({
     challengeName: {
@@ -7,10 +8,7 @@ const challengeSchema = new Schema ({
     trim: true,
     },
 
-    location: {
-        type: [String],
-        required: false,
-    },
+    location: [Address.schema],
 
     todo: {
         type: String,
