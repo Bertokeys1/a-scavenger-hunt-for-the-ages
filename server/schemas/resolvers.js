@@ -65,7 +65,12 @@ const resolvers = {
           huntName: data.huntName, 
           challenges: data.challenges 
         });
-        return hunt
+        const user = await User.findOneAndUpdate(
+          {_id: context.user._id},
+          {$push: {hunts: hunt._id}},
+          {new: true}
+        );
+        return user;
       }
       throw new AuthenticationError('You need to be logged in!');
     },
@@ -85,13 +90,15 @@ const resolvers = {
     },
     deleteHunt: async (_, {_id}, context) => {
       if (context.user) {
-        const hunt = await Hunt.findByIdAndDelete({_id});
+        const hunt = await Hunt.findByIdAndDelete(_id);
+
         const user = await User.findOneAndUpdate(
           {_id: context.user._id},
           {$pull: {hunts: hunt._id}},
           {new: true}
         );
         return user;
+        
       }
       throw new AuthenticationError('You need to be logged in!')
     }
