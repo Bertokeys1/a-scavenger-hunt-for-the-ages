@@ -59,6 +59,8 @@ const resolvers = {
 
       return { token, user };
     },
+
+    /** Hunt mutations */
     createHunt: async (_, {data}, context) => {
       if (context.user) {
         const hunt = await Hunt.create({
@@ -101,6 +103,38 @@ const resolvers = {
         
       }
       throw new AuthenticationError('You need to be logged in!')
+    },
+
+    /** Challenge mutations */
+    createChallenge: async (_, {data}, context) => {
+      if (context.user) {
+        const challenge = await Hunt.create({
+          challengeName: data.challengeName, 
+          location: data.location,
+          todo: data.todo
+        });
+
+        return challenge
+      }
+      throw new AuthenticationError('You need to be logged in!')
+    },
+    updateChallenge: async (_, {_id, data}, context) => {
+      if (context.user) {
+        const updatedChallenge = await Challenge.findByIdAndUpdate(
+          {_id},
+          {
+            challengeName: data.challengeName, 
+            location: data.location,
+            todo: data.todo
+          },
+          {new: true}
+        );
+        return updatedChallenge;
+      }
+      throw new AuthenticationError('You need to be logged in!')
+    },
+    deleteChallenge: async (_, {_id}, context) => {
+
     }
   }
 };
