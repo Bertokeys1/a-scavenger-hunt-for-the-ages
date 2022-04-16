@@ -1,26 +1,32 @@
-const { Schema, model } = require('mongoose');
-const Address = require('./Address')
+const { Schema, Types } = require("mongoose");
+const addressSchema = require("./Address");
 
-const challengeSchema = new Schema ({
+const challengeSchema = new Schema(
+  {
+    challengeId: {
+      type: Schema.Types.ObjectId,
+      default: () => new Types.ObjectId(),
+    },
     challengeName: {
-    type: String,
-    required: true,
-    trim: true,
+      type: String,
+      required: true,
+      trim: true,
     },
 
-    location: [Address.schema],
+    location: [addressSchema],
 
     todo: {
-        type: String,
-        required: false,
+      type: String,
+      required: false,
     },
 
     check: {
-        type: Boolean,
-    }
+      type: Boolean,
+    },
+  },
+  {
+    id: false,
+  }
+);
 
-});
-
-const Challenge = model('Challenge', challengeSchema);
-
-module.exports = Challenge;
+module.exports = challengeSchema;

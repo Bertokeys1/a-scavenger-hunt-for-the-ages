@@ -24,7 +24,7 @@ const typeDefs = gql`
     state: String!
     zipCode: String
   }
-
+  
   input ChallengeData {
     challengeName: String!
     location: [AddressData]
