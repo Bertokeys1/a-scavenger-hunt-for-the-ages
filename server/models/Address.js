@@ -2,10 +2,6 @@ const { Schema, Types } = require("mongoose");
 
 const addressSchema = new Schema(
   {
-    addressId: {
-        type: Schema.Types.ObjectId,
-        default: () => new Types.ObjectId(),
-      },
     address1: {
       type: String,
       required: false,
@@ -18,12 +14,12 @@ const addressSchema = new Schema(
     },
     city: {
       type: String,
-      required: true,
+      required: false,
       trim: true,
     },
     state: {
       type: String,
-      required: true,
+      required: false,
       trim: true,
     },
     zipCode: {
