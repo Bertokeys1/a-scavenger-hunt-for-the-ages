@@ -68,11 +68,7 @@ const resolvers = {
           huntName: data.huntName,
           challenges: [],
         });
-        const user = await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $push: { hunts: hunt._id } },
-          { new: true }
-        );
+        const user = await User.findOneAndUpdate({ _id: context.user._id }, { $push: { hunts: hunt._id } }, { new: true });
         return user;
       }
       throw new AuthenticationError("You need to be logged in!");
@@ -95,11 +91,7 @@ const resolvers = {
       if (context.user) {
         const hunt = await Hunt.findByIdAndDelete(_id);
 
-        const user = await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $pull: { hunts: hunt._id } },
-          { new: true }
-        );
+        const user = await User.findOneAndUpdate({ _id: context.user._id }, { $pull: { hunts: hunt._id } }, { new: true });
         return user;
       }
       throw new AuthenticationError("You need to be logged in!");
@@ -134,29 +126,38 @@ const resolvers = {
     },
     updateChallenge: async (_, { huntId, challengeId, data }, context) => {
       if (context.user) {
-        const updatedChallenge = await Hunt.findOneAndUpdate(
+        await Hunt.findOneAndUpdate(
           { _id: huntId },
           {
-            $set:
-            {
-              challenges:
-               {_id: challengeId,
+            $pull: {
+              challenges: {
+                _id: challengeId,
+              },
+            },
+          },
+          { new: true }
+        );
+        
+        return Hunt.findOneAndUpdate(
+          { _id: huntId },
+          {
+            $push: {
+              challenges: {
+                _id: challengeId,
                 challengeName: data?.challengeName,
-                location: 
-                  {
+                location: {
                   address1: data?.location.address1,
                   address2: data?.location.address2,
                   city: data?.location.city,
                   state: data?.location.state,
                   zipCode: data?.location.zipCode,
-                  },
+                },
                 todo: data?.todo,
               },
             },
           },
           { new: true }
         );
-        return updatedChallenge;
       }
       throw new AuthenticationError("You need to be logged in!");
     },
@@ -164,11 +165,7 @@ const resolvers = {
       if (context.user) {
         const challenge = await Challenge.findByIdAndDelete(_id);
 
-        const hunt = await Hunt.findOneAndUpdate(
-          { _id: huntId },
-          { $pull: { challenges: challenge._id } },
-          { new: true }
-        );
+        const hunt = await Hunt.findOneAndUpdate({ _id: huntId }, { $pull: { challenges: challenge._id } }, { new: true });
         return hunt;
       }
       throw new AuthenticationError("You need to be logged in!");
