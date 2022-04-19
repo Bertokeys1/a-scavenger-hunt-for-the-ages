@@ -10,7 +10,7 @@ const typeDefs = gql`
   }
 
   type Challenge {
-    challengeId: ID!
+    _id: ID!
     challengeName: String!
     location: Address
     todo: String
@@ -72,7 +72,7 @@ const typeDefs = gql`
     deleteHunt(_id: ID!): User
 
     createChallenge(data:ChallengeData, huntId: ID!): Hunt
-    updateChallenge(challengeId:ID!, data:ChallengeData): Challenge
+    updateChallenge(huntId: ID!, challengeId:ID!, data:ChallengeData): Challenge
     deleteChallenge(challengeId: ID!, huntId: ID!): Hunt
     checkChallenge(challengeId: ID!): Challenge
   }

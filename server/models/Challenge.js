@@ -3,10 +3,6 @@ const addressSchema = require("./Address");
 
 const challengeSchema = new Schema(
   {
-    challengeId: {
-      type: Schema.Types.ObjectId,
-      default: () => new Types.ObjectId(),
-    },
     challengeName: {
       type: String,
       required: true,
@@ -23,9 +19,6 @@ const challengeSchema = new Schema(
     check: {
       type: Boolean,
     },
-  },
-  {
-    id: false,
   }
 );
 
