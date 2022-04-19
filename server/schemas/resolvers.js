@@ -29,12 +29,6 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
-    challenges: async (_, __, context) => {
-      if (context.user) {
-        return Challenge.findAll();
-      }
-      throw new AuthenticationError("You need to be logged in!");
-    },
   },
 
   Mutation: {
