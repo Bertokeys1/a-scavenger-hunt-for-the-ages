@@ -13,7 +13,7 @@ const challengeSchema = new Schema(
       trim: true,
     },
 
-    location: [addressSchema],
+    location: addressSchema,
 
     todo: {
       type: String,
