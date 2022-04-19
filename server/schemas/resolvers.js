@@ -161,11 +161,10 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
-    deleteChallenge: async (_, { _id, huntId }, context) => {
+    deleteChallenge: async (_, { challengeId, huntId }, context) => {
       if (context.user) {
-        const challenge = await Challenge.findByIdAndDelete(_id);
-
-        const hunt = await Hunt.findOneAndUpdate({ _id: huntId }, { $pull: { challenges: challenge._id } }, { new: true });
+   
+        const hunt = await Hunt.findOneAndUpdate({ _id: huntId }, { $pull: { challenges: {_id: challengeId} } }, { new: true });
         return hunt;
       }
       throw new AuthenticationError("You need to be logged in!");
