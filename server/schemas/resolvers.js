@@ -1,7 +1,7 @@
-const { AuthenticationError } = require('apollo-server-express');
-const { User, Hunt } = require('../models');
-const { schema } = require('../models/User');
-const { signToken } = require('../utils/auth');
+const { AuthenticationError } = require("apollo-server-express");
+const { User, Hunt } = require("../models");
+const { schema } = require("../models/User");
+const { signToken } = require("../utils/auth");
 
 const resolvers = {
   Query: {
@@ -15,26 +15,26 @@ const resolvers = {
       if (context.user) {
         return User.findOne({ _id: context.user._id });
       }
-      throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError("You need to be logged in!");
     },
-    hunts: async(_, __, context) => {
+    hunts: async (_, __, context) => {
       if (context.user) {
         return Hunt.findAll();
       }
-      throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError("You need to be logged in!");
     },
-    hunt: async (_, {huntId}, context) => {
+    hunt: async (_, { huntId }, context) => {
       if (context.user) {
-        return Hunt.findById(huntId).populate('challenges');
+        return Hunt.findById(huntId).populate("challenges");
       }
-      throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError("You need to be logged in!");
     },
     challenges: async (_, __, context) => {
       if (context.user) {
         return Challenge.findAll();
       }
-      throw new AuthenticationError('You need to be logged in!');
-    }
+      throw new AuthenticationError("You need to be logged in!");
+    },
   },
 
   Mutation: {
@@ -47,13 +47,13 @@ const resolvers = {
       const user = await User.findOne({ email });
 
       if (!user) {
-        throw new AuthenticationError('No user found with this email address');
+        throw new AuthenticationError("No user found with this email address");
       }
 
       const correctPw = await user.isCorrectPassword(password);
 
       if (!correctPw) {
-        throw new AuthenticationError('Incorrect credentials');
+        throw new AuthenticationError("Incorrect credentials");
       }
 
       const token = signToken(user);
@@ -62,48 +62,47 @@ const resolvers = {
     },
 
     /** Hunt mutations */
-    createHunt: async (_, {data}, context) => {
+    createHunt: async (_, { data }, context) => {
       if (context.user) {
         const hunt = await Hunt.create({
-          huntName: data.huntName, 
-          challenges: [] 
+          huntName: data.huntName,
+          challenges: [],
         });
         const user = await User.findOneAndUpdate(
-          {_id: context.user._id},
-          {$push: {hunts: hunt._id}},
-          {new: true}
+          { _id: context.user._id },
+          { $push: { hunts: hunt._id } },
+          { new: true }
         );
         return user;
       }
-      throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError("You need to be logged in!");
     },
-    updateHunt: async (_, {_id, data}, context) => {
+    updateHunt: async (_, { _id, data }, context) => {
       if (context.user) {
         const updatedHunt = await Hunt.findByIdAndUpdate(
-          {_id},
+          { _id },
           {
-            huntName: data.huntName, 
-            challenges: data.challenges
+            huntName: data.huntName,
+            challenges: data.challenges,
           },
-          {new: true}
+          { new: true }
         );
         return updatedHunt;
       }
-      throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError("You need to be logged in!");
     },
-    deleteHunt: async (_, {_id}, context) => {
+    deleteHunt: async (_, { _id }, context) => {
       if (context.user) {
         const hunt = await Hunt.findByIdAndDelete(_id);
 
         const user = await User.findOneAndUpdate(
-          {_id: context.user._id},
-          {$pull: {hunts: hunt._id}},
-          {new: true}
+          { _id: context.user._id },
+          { $pull: { hunts: hunt._id } },
+          { new: true }
         );
         return user;
-        
       }
-      throw new AuthenticationError('You need to be logged in!')
+      throw new AuthenticationError("You need to be logged in!");
     },
 
     /** Challenge mutations */
@@ -115,16 +114,15 @@ const resolvers = {
             $push: {
               challenges: {
                 challengeName: data.challengeName,
-                location: 
-                  {
-                    address1: data.location.address1,
-                    address2: data.location.address2,
-                    city: data.location.city,
-                    state: data.location.state,
-                    zipCode: data.location.zipCode,
-                  },
+                location: {
+                  address1: data.location.address1,
+                  address2: data.location.address2,
+                  city: data.location.city,
+                  state: data.location.state,
+                  zipCode: data.location.zipCode,
+                },
                 todo: data.todo,
-                check: 0
+                check: 0,
               },
             },
           },
@@ -134,35 +132,48 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
-    updateChallenge: async (_, {_id, data}, context) => {
+    updateChallenge: async (_, { huntId, challengeId, data }, context) => {
       if (context.user) {
-        const updatedChallenge = await Challenge.findByIdAndUpdate(
-          {_id},
+        const updatedChallenge = await Hunt.findOneAndUpdate(
+          { _id: huntId },
           {
-            challengeName: data.challengeName, 
-            location: data.location,
-            todo: data.todo
+            $set:
+            {
+              challenges:
+               {_id: challengeId,
+                challengeName: data?.challengeName,
+                location: 
+                  {
+                  address1: data?.location.address1,
+                  address2: data?.location.address2,
+                  city: data?.location.city,
+                  state: data?.location.state,
+                  zipCode: data?.location.zipCode,
+                  },
+                todo: data?.todo,
+              },
+            },
           },
-          {new: true}
+          { new: true }
         );
         return updatedChallenge;
       }
-      throw new AuthenticationError('You need to be logged in!')
+      throw new AuthenticationError("You need to be logged in!");
     },
-    deleteChallenge: async (_, {_id, huntId}, context) => {
+    deleteChallenge: async (_, { _id, huntId }, context) => {
       if (context.user) {
         const challenge = await Challenge.findByIdAndDelete(_id);
 
         const hunt = await Hunt.findOneAndUpdate(
-          {_id: huntId},
-          {$pull: {challenges: challenge._id}},
-          {new: true}
+          { _id: huntId },
+          { $pull: { challenges: challenge._id } },
+          { new: true }
         );
         return hunt;
       }
-      throw new AuthenticationError('You need to be logged in!')
-    }
-  }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+  },
 };
 
 module.exports = resolvers;
