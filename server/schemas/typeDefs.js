@@ -12,7 +12,7 @@ const typeDefs = gql`
   type Challenge {
     challengeId: ID!
     challengeName: String!
-    location: [Address]
+    location: Address
     todo: String
     check: Boolean
   }
@@ -27,7 +27,7 @@ const typeDefs = gql`
   
   input ChallengeData {
     challengeName: String!
-    location: [AddressData]
+    location: AddressData
     todo: String
   }
 
