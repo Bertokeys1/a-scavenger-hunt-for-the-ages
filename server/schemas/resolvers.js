@@ -115,7 +115,7 @@ const resolvers = {
             $push: {
               challenges: {
                 challengeName: data.challengeName,
-                location: [
+                location: 
                   {
                     address1: data.location.address1,
                     address2: data.location.address2,
@@ -123,21 +123,14 @@ const resolvers = {
                     state: data.location.state,
                     zipCode: data.location.zipCode,
                   },
-                ],
                 todo: data.todo,
+                check: 0
               },
             },
           },
           { new: true }
         );
         return hunt;
-        // const challenge = await Challenge.create({
-        //   challengeName: data.challengeName,
-        //   location: data.location,
-        //   todo: data.todo,
-        // });
-
-        // return challenge;
       }
       throw new AuthenticationError("You need to be logged in!");
     },
