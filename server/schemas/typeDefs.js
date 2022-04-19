@@ -60,8 +60,7 @@ const typeDefs = gql`
     me: User
     hunts: [Hunt]
     hunt (_id: ID!): Hunt
-    challenges: [Challenge]
-  }
+    }
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
