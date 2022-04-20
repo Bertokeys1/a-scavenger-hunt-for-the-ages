@@ -29,7 +29,6 @@ const typeDefs = gql`
     challengeName: String!
     location: AddressData
     todo: String
-    check: Boolean
   }
 
   input AddressData {
@@ -74,7 +73,7 @@ const typeDefs = gql`
     createChallenge(data:ChallengeData, huntId: ID!): Hunt
     updateChallenge(huntId: ID!, challengeId:ID!, data:ChallengeData): Hunt
     deleteChallenge(challengeId: ID!, huntId: ID!): Hunt
-    checkChallenge(challengeId: ID!, huntId: ID!): Hunt
+    # checkChallenge(challengeId: ID!): Challenge
   }
 `;
 

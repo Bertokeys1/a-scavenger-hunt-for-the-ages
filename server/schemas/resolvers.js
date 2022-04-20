@@ -100,15 +100,16 @@ const resolvers = {
             $push: {
               challenges: {
                 challengeName: data.challengeName,
-                location: {
-                  address1: data.location.address1,
-                  address2: data.location.address2,
-                  city: data.location.city,
-                  state: data.location.state,
-                  zipCode: data.location.zipCode,
-                },
+                location: 
+                  {
+                    address1: data.location.address1,
+                    address2: data.location.address2,
+                    city: data.location.city,
+                    state: data.location.state,
+                    zipCode: data.location.zipCode,
+                  },
                 todo: data.todo,
-                check: 0,
+                check: 0
               },
             },
           },
@@ -153,23 +154,37 @@ const resolvers = {
     deleteChallenge: async (_, { challengeId, huntId }, context) => {
       if (context.user) {
    
-        const hunt = await Hunt.findOneAndUpdate({ _id: huntId }, { $pull: { challenges: {_id: challengeId} } }, { new: true });
+        const hunt = await Hunt.findOneAndUpdate(
+          { _id: huntId }, 
+          { $pull: 
+            { challenges: 
+              {_id: challengeId} 
+            } 
+          }, 
+          { new: true });
         return hunt;
       }
       throw new AuthenticationError("You need to be logged in!");
     },
-    checkChallenge: async (_, { challengeId, huntId }, context) => {
-      if (context.user) {
-        const checkCheck = await Hunt.find({
-          challenges: {
-            $elemMatch : {_id: challengeId}
-          }
-        });
-        return console.log(checkCheck)
-      }
-      throw new AuthenticationError("You need to be logged in!");
-    },
+    // checkChallenge: async (_, { challengeId, huntId }, context) => {
+    //   if (context.user) {
+        
+    //     const checkCheck = await Hunt.findOneAndUpdate(
+    //       {_id: huntId, "challenges.challengeId": challengeId},
+    //       { $set:
+    //        { challenges:  { $not: this.challenges.check }}
+    //         // {_id: challengeId,
+    //         //    check: 
+    //         //   {$eq:[ false, $check]}
+    //         // }
+    //       }
+
+    //     );
+    //     return console.log(checkCheck)
+    //   }
+    //   throw new AuthenticationError("You need to be logged in!");
+    // },
   },
 };
-
+// .findOneAndUpdate({_id: day.id},[{$set:{present:{$eq:[false,"$present"]}}}]);
 module.exports = resolvers;
