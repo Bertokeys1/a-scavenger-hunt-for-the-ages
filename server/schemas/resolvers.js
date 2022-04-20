@@ -19,7 +19,7 @@ const resolvers = {
     },
     hunts: async (_, __, context) => {
       if (context.user) {
-        return Hunt.findAll();
+        return Hunt.find();
       }
       throw new AuthenticationError("You need to be logged in!");
     },
@@ -139,14 +139,9 @@ const resolvers = {
               challenges: {
                 _id: challengeId,
                 challengeName: data?.challengeName,
-                location: {
-                  address1: data?.location.address1,
-                  address2: data?.location.address2,
-                  city: data?.location.city,
-                  state: data?.location.state,
-                  zipCode: data?.location.zipCode,
-                },
+                location: { ...(data?.location? data.location : {})},
                 todo: data?.todo,
+                check: data?.check
               },
             },
           },
@@ -160,6 +155,17 @@ const resolvers = {
    
         const hunt = await Hunt.findOneAndUpdate({ _id: huntId }, { $pull: { challenges: {_id: challengeId} } }, { new: true });
         return hunt;
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+    checkChallenge: async (_, { challengeId, huntId }, context) => {
+      if (context.user) {
+        const checkCheck = await Hunt.find({
+          challenges: {
+            $elemMatch : {_id: challengeId}
+          }
+        });
+        return console.log(checkCheck)
       }
       throw new AuthenticationError("You need to be logged in!");
     },
