@@ -17,7 +17,7 @@ import Hunt from './pages/Hunt';
 import HuntForm from './components/HuntForm';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Hunt from './pages/Hunt';
+import HuntList from './components/HuntList';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
