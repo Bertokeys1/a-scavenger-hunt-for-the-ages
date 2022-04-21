@@ -31,12 +31,8 @@ const Hunt = () => {
       const { data } = await createHunt({
         variables: { data: {...formState}},
       });
-<<<<<<< HEAD
-      
-=======
 
     //   Auth.login(data.createHunt.token);
->>>>>>> d4494f3d821a464b998504b0ae1120bec0b0bd6a
     } catch (e) {
       console.error(e);
     }

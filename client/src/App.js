@@ -72,12 +72,6 @@ function App() {
                 element={<Profile />}
               />
               <Route 
-<<<<<<< HEAD
-                path="/me/:huntId"
-                element={<Hunt />}
-              />
-              
-=======
                 path="/hunts"
                 element={<Hunt />}
               />
@@ -85,7 +79,6 @@ function App() {
                 path="/newHunt"
                 element={<HuntForm />}
               />
->>>>>>> d4494f3d821a464b998504b0ae1120bec0b0bd6a
             </Routes>
           </div>
           <Footer />
