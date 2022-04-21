@@ -12,7 +12,9 @@ import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
+import Hunt from './pages/Hunt';
 
+import HuntForm from './components/HuntForm';
 import Header from './components/Header';
 import Footer from './components/Footer';
 
@@ -67,6 +69,14 @@ function App() {
               <Route 
                 path="/profiles/:username"
                 element={<Profile />}
+              />
+              <Route 
+                path="/hunts"
+                element={<Hunt />}
+              />
+              <Route 
+                path="/newHunt"
+                element={<HuntForm />}
               />
             </Routes>
           </div>
