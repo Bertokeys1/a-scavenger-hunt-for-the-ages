@@ -62,7 +62,7 @@ const resolvers = {
           huntName: data.huntName,
           challenges: [],
         });
-        const user = await User.findOneAndUpdate({ _id: context.user._id }, { $push: { hunts: hunt._id } }, { new: true });
+        const user = await User.findOneAndUpdate({ _id: context.user._id }, { $push: { hunts: hunt._id } }, { new: true }).populate('hunts');
         return user;
       }
       throw new AuthenticationError("You need to be logged in!");
@@ -166,24 +166,24 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
-    // checkChallenge: async (_, { challengeId, huntId }, context) => {
-    //   if (context.user) {
+    checkChallenge: async (_, { challengeId, huntId }, context) => {
+      if (context.user) {
         
-    //     const checkCheck = await Hunt.findOneAndUpdate(
-    //       {_id: huntId, "challenges.challengeId": challengeId},
-    //       { $set:
-    //        { challenges:  { $not: this.challenges.check }}
-    //         // {_id: challengeId,
-    //         //    check: 
-    //         //   {$eq:[ false, $check]}
-    //         // }
-    //       }
+        const checkCheck = await Hunt.findOneAndUpdate(
+          {_id: huntId, "challenges.challengeId": challengeId},
+          { $set:
+           { challenges:  { $not: this.challenges.check }}
+            // {_id: challengeId,
+            //    check: 
+            //   {$eq:[ false, $check]}
+            // }
+          }
 
-    //     );
-    //     return console.log(checkCheck)
-    //   }
-    //   throw new AuthenticationError("You need to be logged in!");
-    // },
+        );
+        return console.log(checkCheck)
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
   },
 };
 // .findOneAndUpdate({_id: day.id},[{$set:{present:{$eq:[false,"$present"]}}}]);
