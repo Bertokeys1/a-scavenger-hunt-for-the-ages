@@ -73,7 +73,7 @@ const typeDefs = gql`
     createChallenge(data:ChallengeData, huntId: ID!): Hunt
     updateChallenge(huntId: ID!, challengeId:ID!, data:ChallengeData): Hunt
     deleteChallenge(challengeId: ID!, huntId: ID!): Hunt
-    checkChallenge(challengeId: ID!): Challenge
+    checkChallenge(huntId: ID!, challengeId: ID!): Hunt
   }
 `;
 
