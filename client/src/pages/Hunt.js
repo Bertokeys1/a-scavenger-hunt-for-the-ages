@@ -40,6 +40,7 @@ const Hunt = (props) => {
       const { data } = await updateChallenge({
         variables: { ...challengeState },
       });
+      
     } catch (e) {
       console.error(e);
     }

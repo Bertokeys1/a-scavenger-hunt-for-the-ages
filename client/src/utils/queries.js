@@ -64,7 +64,7 @@ export const QUERY_CHALLENGES = gql`
       _id
       huntName
       challenges {
-        challengeId
+        _id
         challengeName
         location {
           address1
@@ -83,10 +83,8 @@ export const QUERY_CHALLENGES = gql`
 export const QUERY_SINGLE_CHALLENGE = gql`
   query getSingleChallenge($huntId: ID!) {
     hunt(huntId: $huntId) {
-      _id
-      huntName
-      challenges(challengeId: $challengeId) {
-        challengeId
+      challenge(challengeId: $challengeId) {
+        _id
         challengeName
         location {
           address1
