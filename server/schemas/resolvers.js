@@ -168,19 +168,24 @@ const resolvers = {
     },
     checkChallenge: async (_, { challengeId, huntId }, context) => {
       if (context.user) {
+        const hunt = await Hunt.findById(huntId)
         
-        const checkCheck = await Hunt.findOneAndUpdate(
-          {_id: huntId, "challenges.challengeId": challengeId},
-          { $set:
-           { challenges:  { $not: this.challenges.check }}
-            // {_id: challengeId,
-            //    check: 
-            //   {$eq:[ false, $check]}
-            // }
-          }
+        for (let i=0; i < hunt.challenges.length; i++) {
 
-        );
-        return console.log(checkCheck)
+          const stringifiedId = hunt.challenges[i]._id.toString()
+
+          if (stringifiedId === challengeId ) {
+            if (hunt.challenges[i].check == false) {
+              hunt.challenges[i].check=true
+            } else {
+              hunt.challenges[i].check=false
+            }
+          }
+        }
+
+        await hunt.save()
+       
+        return hunt
       }
       throw new AuthenticationError("You need to be logged in!");
     },
