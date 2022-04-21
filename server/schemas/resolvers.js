@@ -62,7 +62,7 @@ const resolvers = {
           huntName: data.huntName,
           challenges: [],
         });
-        const user = await User.findOneAndUpdate({ _id: context.user._id }, { $push: { hunts: hunt._id } }, { new: true }).populate('hunts');
+        const user = await User.findOneAndUpdate({ _id: context.user._id }, { $push: { hunts: hunt._id } }, { new: true }).populate("hunts");
         return user;
       }
       throw new AuthenticationError("You need to be logged in!");
@@ -100,16 +100,15 @@ const resolvers = {
             $push: {
               challenges: {
                 challengeName: data.challengeName,
-                location: 
-                  {
-                    address1: data.location.address1,
-                    address2: data.location.address2,
-                    city: data.location.city,
-                    state: data.location.state,
-                    zipCode: data.location.zipCode,
-                  },
+                location: {
+                  address1: data.location.address1,
+                  address2: data.location.address2,
+                  city: data.location.city,
+                  state: data.location.state,
+                  zipCode: data.location.zipCode,
+                },
                 todo: data.todo,
-                check: 0
+                check: 0,
               },
             },
           },
@@ -121,33 +120,32 @@ const resolvers = {
     },
     updateChallenge: async (_, { huntId, challengeId, data }, context) => {
       if (context.user) {
-        await Hunt.findOneAndUpdate(
-          { _id: huntId },
-          {
-            $pull: {
-              challenges: {
-                _id: challengeId,
-              },
-            },
-          },
-          { new: true }
-        );
-        
-        return Hunt.findOneAndUpdate(
-          { _id: huntId },
-          {
-            $push: {
-              challenges: {
-                _id: challengeId,
-                challengeName: data?.challengeName,
-                location: { ...(data?.location? data.location : {})},
-                todo: data?.todo,
-                check: data?.check
-              },
-            },
-          },
-          { new: true }
-        );
+        const {
+          challengeName,
+          todo,
+          location: { address1, address2, city, state, zipCode },
+        } = data;
+
+        const hunt = await Hunt.findById(huntId);
+
+        for (let i = 0; i < hunt.challenges.length; i++) {
+          const stringifiedId = hunt.challenges[i]._id.toString();
+          const challenge = hunt.challenges[i]
+
+          if (stringifiedId === challengeId) {
+            challenge.challengeName = challengeName;
+            challenge.todo = todo;
+            challenge.location.address1 = address1;
+            challenge.location.address2 = address2;
+            challenge.location.city = city;
+            challenge.location.state = state;
+            challenge.location.zipCode = zipCode;
+          }
+        }
+
+        await hunt.save();
+
+        return hunt;
       }
       throw new AuthenticationError("You need to be logged in!");
     },
@@ -168,24 +166,23 @@ const resolvers = {
     },
     checkChallenge: async (_, { challengeId, huntId }, context) => {
       if (context.user) {
-        const hunt = await Hunt.findById(huntId)
-        
-        for (let i=0; i < hunt.challenges.length; i++) {
+        const hunt = await Hunt.findById(huntId);
 
-          const stringifiedId = hunt.challenges[i]._id.toString()
+        for (let i = 0; i < hunt.challenges.length; i++) {
+          const stringifiedId = hunt.challenges[i]._id.toString();
 
-          if (stringifiedId === challengeId ) {
+          if (stringifiedId === challengeId) {
             if (hunt.challenges[i].check === false) {
-              hunt.challenges[i].check=true
+              hunt.challenges[i].check = true;
             } else {
-              hunt.challenges[i].check=false
+              hunt.challenges[i].check = false;
             }
           }
         }
 
-        await hunt.save()
-       
-        return hunt
+        await hunt.save();
+
+        return hunt;
       }
       throw new AuthenticationError("You need to be logged in!");
     },
