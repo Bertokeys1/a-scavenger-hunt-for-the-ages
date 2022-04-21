@@ -175,7 +175,7 @@ const resolvers = {
           const stringifiedId = hunt.challenges[i]._id.toString()
 
           if (stringifiedId === challengeId ) {
-            if (hunt.challenges[i].check == false) {
+            if (hunt.challenges[i].check === false) {
               hunt.challenges[i].check=true
             } else {
               hunt.challenges[i].check=false
