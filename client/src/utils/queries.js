@@ -6,6 +6,10 @@ export const QUERY_USER = gql`
       _id
       username
       email
+      hunts{
+        _id
+        huntName
+      }
     }
   }
 `;
@@ -16,6 +20,10 @@ export const QUERY_ME = gql`
       _id
       username
       email
+      hunts{
+        _id
+        huntName
+      }
     }
   }
 `;
@@ -35,9 +43,15 @@ export const QUERY_SINGLE_HUNTS = gql`
       _id
       huntName
       challenges {
-        challengeId
+        _id
         challengeName
-        location
+        location {
+          address1
+          address2
+          city
+          state
+          zipCode
+        }
         todo
         check
       }
