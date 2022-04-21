@@ -15,8 +15,8 @@ const HuntForm = () => {
   const [createHunt, { error }] = useMutation(CREATE_HUNT);
 
   const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
+    const { huntName, value } = event.target;
+    setFormData({ ...formData, huntName: value });
   };
 
   const handleFormSubmit = async (event) => {
@@ -24,7 +24,7 @@ const HuntForm = () => {
 
     try {
       const { data } = await createHunt({
-        variables: {...formData},
+        variables: {data: {...formData}},
       });
 
       navigate(`/hunt/${data.createHunt._id}`);
@@ -50,7 +50,7 @@ const HuntForm = () => {
                   placeholder="Your Hunts's Name"
                   name="huntname"
                   type="text"
-                  value={formData.name}
+                  value={formData.huntName}
                   onChange={handleInputChange}
                 />
                 <button
