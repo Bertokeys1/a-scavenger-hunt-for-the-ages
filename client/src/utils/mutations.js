@@ -32,6 +32,18 @@ export const CREATE_HUNT = gql`
       hunts {
         _id
         huntName
+        challenges {
+        _id
+        challengeName
+        location {
+          address1
+          address2
+          city
+          state
+          zipCode
+      }
+      todo
+      check
       }
     }
   }

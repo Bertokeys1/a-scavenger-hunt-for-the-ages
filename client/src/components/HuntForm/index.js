@@ -1,45 +1,39 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { useMutation } from "@apollo/client";
+import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { useMutation, useQuery } from "@apollo/client";
+// import { QUERY_HUNTS } from "../../utils/queries";
+import { CREATE_HUNT } from "../../utils/mutations";
 
-import { CREATE_HUNT } from "../utils/mutations";
-// check nameis correct before testing
+const HuntForm = () => {
+//   const { data } = useQuery(QUERY_HUNTS);
 
-import Auth from "../utils/auth";
-
-const Hunt = () => {
-  const [formState, setFormState] = useState({
-    huntname: "",
+  const [formData, setFormData] = useState({
+    huntName: "",
   });
-  const [createHunt, { error, data }] = useMutation(CREATE_HUNT);
+  let navigate = useNavigate();
 
-  // update state based on form input changes
-  const handleChange = (event) => {
+  const [createHunt, { error }] = useMutation(CREATE_HUNT);
+
+  const handleInputChange = (event) => {
     const { name, value } = event.target;
-
-    setFormState({
-      ...formState,
-      [name]: value,
-    });
+    setFormData({ ...formData, [name]: value });
   };
 
-  // submit form
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(formState);
+
     try {
       const { data } = await createHunt({
-        variables: { data: {...formState}},
+        variables: {...formData},
       });
 
-    //   Auth.login(data.createHunt.token);
-    } catch (e) {
-      console.error(e);
+      navigate(`/hunt/${data.createHunt._id}`);
+    } catch (err) {
+      console.error(err);
     }
 
-    // clear form values
-    setFormState({
-      huntname: "",
+    setFormData({
+      huntName: "",
     });
   };
 
@@ -49,20 +43,15 @@ const Hunt = () => {
         <div className="card">
           <h4 className="card-header bg-dark text-light p-2">New Hunt</h4>
           <div className="card-body">
-            {data ? (
-              <p>
-                Success! You may now head{" "}
-                <Link to="/">back to the homepage.</Link>
-              </p>
-            ) : (
+            {(
               <form onSubmit={handleFormSubmit}>
                 <input
                   className="form-input"
                   placeholder="Your Hunts's Name"
                   name="huntname"
                   type="text"
-                  value={formState.name}
-                  onChange={handleChange}
+                  value={formData.name}
+                  onChange={handleInputChange}
                 />
                 <button
                   className="btn btn-block btn-primary"
@@ -86,4 +75,4 @@ const Hunt = () => {
   );
 };
 
-export default Hunt;
+export default HuntForm;
