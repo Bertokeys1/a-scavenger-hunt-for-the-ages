@@ -6,7 +6,7 @@ import { ADD_CHALLENGE } from '../../utils/mutations';
 
 import Auth from '../../utils/auth';
 
-const ChallengeForm = ({ thoughtId }) => {
+const ChallengeForm = ({ huntId }) => {
   const [challengeData, setChallengeData] = useState('');
   const [characterCount, setCharacterCount] = useState(0);
 
@@ -19,15 +19,16 @@ const ChallengeForm = ({ thoughtId }) => {
       const { data } = await addChallenge({
         variables: {
           huntId,
-          challengeName,
+          challengeData: { challengeName,
           location: {
               address1,
               address2,
               city,
               state,
               zipCode
-          },
-          todo
+            },
+            todo
+            }
         },
       });
 

@@ -1,32 +1,24 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
-import { UPDATE_CHALLENGE } from "../utils/mutations";
+
+import { CREATE_HUNT } from "../utils/mutations";
+// check nameis correct before testing
 
 import Auth from "../utils/auth";
 
-const Hunt = (props) => {
-  const [challengeState, setChallengeState] = useState({
-    challengeName: "",
-    todo: "",
-    check: "",
-    location: {
-      address1: "",
-      address2: "",
-      city: "",
-      state: "",
-      zipCode: "",
-    },
+const Hunt = () => {
+  const [formState, setFormState] = useState({
+    huntname: "",
   });
-  
-  const [updateChallenge, { error, data }] = useMutation(UPDATE_CHALLENGE);
+  const [createHunt, { error, data }] = useMutation(CREATE_HUNT);
 
   // update state based on form input changes
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    setChallengeState({
-      ...challengeState,
+    setFormState({
+      ...formState,
       [name]: value,
     });
   };
@@ -34,29 +26,24 @@ const Hunt = (props) => {
   // submit form
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(challengeState);
-    // Do something with the form submit
+    console.log(formState);
     try {
-      const { data } = await updateChallenge({
-        variables: { ...challengeState },
+      const { data } = await createHunt({
+        variables: { data: {...formState}},
       });
+<<<<<<< HEAD
       
+=======
+
+    //   Auth.login(data.createHunt.token);
+>>>>>>> d4494f3d821a464b998504b0ae1120bec0b0bd6a
     } catch (e) {
       console.error(e);
     }
 
     // clear form values
-    setChallengeState({
-      challengeName: "",
-      todo: "",
-      check: "",
-      location: {
-        address1: "",
-        address2: "",
-        city: "",
-        state: "",
-        zipCode: "",
-      },
+    setFormState({
+      huntname: "",
     });
   };
 
@@ -64,23 +51,38 @@ const Hunt = (props) => {
     <main className="flex-row justify-center mb-4">
       <div className="col-12 col-lg-10">
         <div className="card">
-          <h4 className="card-header bg-dark text-light p-2">Login</h4>
+          <h4 className="card-header bg-dark text-light p-2">New Hunt</h4>
           <div className="card-body">
             {data ? (
               <p>
-                Success! You may now head <Link to="/">back to the homepage.</Link>
+                Success! You may now head{" "}
+                <Link to="/">back to the homepage.</Link>
               </p>
             ) : (
               <form onSubmit={handleFormSubmit}>
-                <input className="form-input" placeholder="Your email" name="email" type="email" value={challengeState.email} onChange={handleChange} />
-                <input className="form-input" placeholder="******" name="password" type="password" value={challengeState.password} onChange={handleChange} />
-                <button className="btn btn-block btn-primary" style={{ cursor: "pointer" }} type="submit">
+                <input
+                  className="form-input"
+                  placeholder="Your Hunts's Name"
+                  name="huntname"
+                  type="text"
+                  value={formState.name}
+                  onChange={handleChange}
+                />
+                <button
+                  className="btn btn-block btn-primary"
+                  style={{ cursor: "pointer" }}
+                  type="submit"
+                >
                   Submit
                 </button>
               </form>
             )}
 
-            {error && <div className="my-3 p-3 bg-danger text-white">{error.message}</div>}
+            {error && (
+              <div className="my-3 p-3 bg-danger text-white">
+                {error.message}
+              </div>
+            )}
           </div>
         </div>
       </div>

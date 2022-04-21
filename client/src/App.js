@@ -12,7 +12,9 @@ import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
+import Hunt from './pages/Hunt';
 
+import HuntForm from './components/HuntForm';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Hunt from './pages/Hunt';
@@ -70,10 +72,20 @@ function App() {
                 element={<Profile />}
               />
               <Route 
+<<<<<<< HEAD
                 path="/me/:huntId"
                 element={<Hunt />}
               />
               
+=======
+                path="/hunts"
+                element={<Hunt />}
+              />
+              <Route 
+                path="/newHunt"
+                element={<HuntForm />}
+              />
+>>>>>>> d4494f3d821a464b998504b0ae1120bec0b0bd6a
             </Routes>
           </div>
           <Footer />
