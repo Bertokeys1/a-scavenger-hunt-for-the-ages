@@ -191,5 +191,5 @@ const resolvers = {
     },
   },
 };
-// .findOneAndUpdate({_id: day.id},[{$set:{present:{$eq:[false,"$present"]}}}]);
+
 module.exports = resolvers;
