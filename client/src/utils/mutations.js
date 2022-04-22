@@ -150,3 +150,25 @@ export const DELETE_CHALLENGE = gql`
   }
 }
 `;
+
+export const CHECK_CHALLENGE = gql`
+  mutation checkChallenge($challengeId: ID!, $huntId: ID!) {
+  checkChallenge(challengeId: $challengeId, huntId: $huntId) {
+    _id
+    huntName
+    challenges {
+      _id
+      challengeName
+      location {
+        address1
+        address2
+        city
+        state
+        zipCode
+      }
+      todo
+      check
+    }
+  }
+}
+`;
