@@ -79,6 +79,11 @@ function App() {
                 path="/newHunt"
                 element={<HuntForm />}
               />
+              <Route 
+                path="/hunt/:id"
+                element={<HuntList />}
+              />
+              
             </Routes>
           </div>
           <Footer />
