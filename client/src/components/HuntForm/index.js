@@ -1,21 +1,18 @@
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { useMutation, useQuery } from "@apollo/client";
-// import { QUERY_HUNTS } from "../../utils/queries";
+// import { useNavigate } from "react-router-dom";
+import { useMutation } from "@apollo/client";
 import { CREATE_HUNT } from "../../utils/mutations";
 
 const HuntForm = () => {
-//   const { data } = useQuery(QUERY_HUNTS);
-
   const [formData, setFormData] = useState({
     huntName: "",
   });
-  let navigate = useNavigate();
+  // let navigate = useNavigate();
 
   const [createHunt, { error }] = useMutation(CREATE_HUNT);
 
   const handleInputChange = (event) => {
-    const { huntName, value } = event.target;
+    const { value } = event.target;
     setFormData({ ...formData, huntName: value });
   };
 
@@ -27,7 +24,8 @@ const HuntForm = () => {
         variables: {data: {...formData}},
       });
 
-      navigate(`/hunt/${data.createHunt._id}`);
+      console.log(data);
+      // navigate(`/hunts/${data.createHunt._id}`);
     } catch (err) {
       console.error(err);
     }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const HuntList = (props, {hunts, title,} ) => {
+const HuntList = ( {hunts, title,} ) => {
   if (!hunts.length) {
     return <h3>No Hunt Yet</h3>;
   }

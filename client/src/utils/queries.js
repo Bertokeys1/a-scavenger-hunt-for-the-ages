@@ -37,7 +37,7 @@ export const QUERY_HUNTS = gql`
   }
 `;
 
-export const QUERY_SINGLE_HUNTS = gql`
+export const QUERY_SINGLE_HUNT = gql`
   query getSingleHunt($huntId: ID!) {
     hunt(huntId: $huntId) {
       _id
