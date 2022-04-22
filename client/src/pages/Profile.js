@@ -46,8 +46,6 @@ const Profile = () => {
           <HuntList
             hunts={user.hunts}
             title={`${user.username}'s Hunts`}
-            showTitle={false}
-            showUsername={false}
           />
         </div>
         {!userParam && (

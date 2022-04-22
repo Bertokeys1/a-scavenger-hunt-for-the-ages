@@ -80,7 +80,7 @@ function App() {
                 element={<HuntForm />}
               />
               <Route 
-                path="/hunt/:id"
+                path="/hunts/:huntId"
                 element={<HuntList />}
               />
               

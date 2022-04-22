@@ -1,19 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const HuntList = ({
-  hunts,
-  title,
-  showTitle = true,
-  showUsername = true
-}) => {
+const HuntList = (props, {hunts, title,} ) => {
   if (!hunts.length) {
     return <h3>No Hunt Yet</h3>;
   }
 
   return (
     <div>
-      {showTitle && <h3>{title}</h3>}
+      {<h3>{title}</h3>}
       {hunts&&
         hunts.map((hunt) =>
          (
