@@ -18,6 +18,7 @@ const HuntList = ( {hunts, title,} ) => {
                 <Link
                   className="text-light"
                   to={`/hunt/${hunt._id}`}
+
                 >
                   {hunt.huntName} 
                 </Link>

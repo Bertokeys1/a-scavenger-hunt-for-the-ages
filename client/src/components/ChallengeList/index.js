@@ -17,12 +17,15 @@ const ChallengeList = ( {challenges, title,} ) => {
               
                 <Link
                   className="text-light"
-                  to={`/challenge/${challenge._id}`}
+
+                  to={`/challenges/${challenge._id}`}
+
                 >
                   {challenge.challengeName} 
                 </Link>
             </h4>
             {/* Possibly deletechallenge here if not on challengePage
+
              <Link
               className="btn btn-primary btn-block btn-squared"
               to={`/challenge/${challenge._id}`}
@@ -34,5 +37,6 @@ const ChallengeList = ( {challenges, title,} ) => {
     </div>
   );
 };
+
 
 export default ChallengeList;

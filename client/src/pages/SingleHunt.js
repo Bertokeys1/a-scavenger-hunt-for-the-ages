@@ -6,6 +6,7 @@ import { useQuery } from "@apollo/client";
 
 import ChallengeList from "../components/ChallengeList";
 
+
 import { QUERY_SINGLE_HUNT } from "../utils/queries";
 import ChallengeForm from "../components/ChallengeForm";
 
@@ -18,20 +19,26 @@ const SingleHunt = () => {
     variables: { huntId: huntId },
   });
 
-  const hunt = data?.hunt || {};
+  const hunt = data?.hunts || {};
   console.log(data);
+
 
   // if (loading) {
   //   return <div>Loading...</div>;
   // }
+
   return (
     <div className="my-3">
       <h3 className="card-header bg-dark text-light p-2 m-0">
-        {hunt.huntName} <br />
+        hunt <br />
       </h3>
-      <div className="my-5">
-        {/* <ChallengeList/> */}
-      </div>
+
+      <div className="col-12 col-md-10 mb-5">
+          <ChallengeList
+            challenges={hunt.challenges}
+            title={`${hunt.huntname}`}
+          />
+        </div>
       <div className="m-3 p-4" style={{ border: "1px dotted #1a1a1a" }}>
         <ChallengeForm/>
       </div>
