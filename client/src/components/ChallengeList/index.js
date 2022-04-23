@@ -1,28 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const ChallengeList = ( {challenges, title,} ) => {
+const ChallengeList = ( {challenges=[]} ) => {
   if (!challenges.length) {
     return <h3>No Challenge Yet</h3>;
   }
 
   return (
     <div>
-      {<h3>{title}</h3>}
       {challenges&&
         challenges.map((challenge) =>
          (
           <div key={challenge._id} className="card mb-3">
             <h4 className="card-header bg-primary text-light p-2 m-0">
               
-                <Link
-                  className="text-light"
-
-                  to={`/challenges/${challenge._id}`}
-
-                >
-                  {challenge.challengeName} 
-                </Link>
+                
+                  {challenge.challengeName}
+                  <br/>
+                  {challenge.todo} 
+                
             </h4>
             {/* Possibly deletechallenge here if not on challengePage
 
