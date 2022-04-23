@@ -9,6 +9,12 @@ const typeDefs = gql`
     hunts: [Hunt]
   }
 
+  type Hunt {
+    _id: ID!
+    huntName: String!
+    challenges: [Challenge]
+  }
+
   type Challenge {
     _id: ID!
     challengeName: String!
@@ -25,6 +31,10 @@ const typeDefs = gql`
     zipCode: String
   }
   
+  input HuntData {
+    huntName: String!
+  }
+
   input ChallengeData {
     challengeName: String!
     location: AddressData
@@ -38,16 +48,6 @@ const typeDefs = gql`
     state: String
     zipCode: String
   }
-  
-  type Hunt {
-    _id: ID!
-    huntName: String!
-    challenges: [Challenge]
-  }
-
-  input HuntData {
-    huntName: String!
-  }
 
   type Auth {
     token: ID!
@@ -59,7 +59,7 @@ const typeDefs = gql`
     user(username: String!): User
     me: User
     hunts: [Hunt]
-    hunt (_id: ID!): Hunt
+    hunt (huntId: ID!): Hunt
     }
 
   type Mutation {

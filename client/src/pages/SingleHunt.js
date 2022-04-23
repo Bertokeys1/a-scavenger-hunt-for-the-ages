@@ -4,8 +4,8 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 
-import ChallengeList from "../components/ChallengeList";
-
+// import ChallengeList from "../components/ChallengeList";
+// import ChallengeForm from "../components/ChallengeForm";
 
 import { QUERY_SINGLE_HUNT } from "../utils/queries";
 import ChallengeForm from "../components/ChallengeForm";
@@ -19,7 +19,7 @@ const SingleHunt = () => {
     variables: { huntId: huntId },
   });
 
-  const hunt = data?.hunts || {};
+  const hunt = data?.hunt || {};
   console.log(data);
 
 
@@ -30,15 +30,14 @@ const SingleHunt = () => {
   return (
     <div className="my-3">
       <h3 className="card-header bg-dark text-light p-2 m-0">
-        hunt <br />
+        {hunt.huntName} <br />
       </h3>
-
-      <div className="col-12 col-md-10 mb-5">
+      {/* <div className="col-12 col-md-10 mb-5">
           <ChallengeList
             challenges={hunt.challenges}
             title={`${hunt.huntname}`}
           />
-        </div>
+        </div> */}
       <div className="m-3 p-4" style={{ border: "1px dotted #1a1a1a" }}>
         <ChallengeForm/>
       </div>
