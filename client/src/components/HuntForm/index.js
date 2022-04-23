@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import { useNavigate } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { CREATE_HUNT } from "../../utils/mutations";
 
@@ -20,12 +19,10 @@ const HuntForm = () => {
     event.preventDefault();
 
     try {
-      const { data } = await createHunt({
+      await createHunt({
         variables: {data: {...formData}},
       });
 
-      console.log(data);
-      // navigate(`/hunts/${data.createHunt._id}`);
     } catch (err) {
       console.error(err);
     }

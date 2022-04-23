@@ -25,7 +25,7 @@ const ChallengeForm = ({huntId}) => {
     event.preventDefault();
 
     try {
-      const { data } = await createChallenge({
+      await createChallenge({
         variables: {
           huntId,
           data: {

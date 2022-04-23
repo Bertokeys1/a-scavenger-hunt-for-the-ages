@@ -36,7 +36,6 @@ const ChallengeList = ({ challenges = [] }) => {
     <div>
       {challenges &&
         challenges.map((challenge) => (
-          <div>
             <div key={challenge._id} className="card mb-3">
               <h4 className="card-header bg-primary text-light p-2 m-0 display-flex">
                 <ChekcboxExample {...challenges} />
@@ -48,6 +47,8 @@ const ChallengeList = ({ challenges = [] }) => {
               <p>{challenge.location?.state}</p>
               <p>{challenge.location?.zipCode}</p>
               <p>{challenge.todo}</p>
+
+              
               {/* Possibly deletechallenge here if not on challengePage
 
              <Link
@@ -57,7 +58,6 @@ const ChallengeList = ({ challenges = [] }) => {
               Join the challenge.
             </Link> */}
             </div>
-          </div>
         ))}
     </div>
   );
