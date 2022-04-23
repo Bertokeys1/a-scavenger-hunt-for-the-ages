@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const ChallengeList = ( {challenges, title,} ) => {
   if (!challenges.length) {
-    return <h3>No Hunt Yet</h3>;
+    return <h3>No Challenge Yet</h3>;
   }
 
   return (
@@ -17,12 +17,15 @@ const ChallengeList = ( {challenges, title,} ) => {
               
                 <Link
                   className="text-light"
+
                   to={`/challenges/${challenge._id}`}
+
                 >
                   {challenge.challengeName} 
                 </Link>
             </h4>
-            {/* Possibly deleteHunt here if not on HuntPage
+            {/* Possibly deletechallenge here if not on challengePage
+
              <Link
               className="btn btn-primary btn-block btn-squared"
               to={`/challenge/${challenge._id}`}
@@ -34,5 +37,6 @@ const ChallengeList = ( {challenges, title,} ) => {
     </div>
   );
 };
+
 
 export default ChallengeList;
