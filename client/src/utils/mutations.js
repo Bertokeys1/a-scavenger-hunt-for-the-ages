@@ -87,7 +87,7 @@ export const DELETE_HUNT = gql`
 `;
 
 export const CREATE_CHALLENGE = gql`
-  mutation createChallenge($huntId: ID!, $data: ChallengeData) {
+  mutation createChallenge($huntId: ID!, $data: ChallengeData!) {
   createChallenge(huntId: $huntId, data: $data) {
     _id
     huntName

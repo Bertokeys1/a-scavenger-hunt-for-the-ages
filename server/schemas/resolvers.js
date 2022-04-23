@@ -112,7 +112,9 @@ const resolvers = {
               },
             },
           },
-          { new: true }
+          { new: true,
+            runValidators: true
+          }
         );
         return hunt;
       }
