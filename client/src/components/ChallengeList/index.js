@@ -1,21 +1,48 @@
 import React from "react";
+import { useMutation } from "@apollo/client";
 import { useState } from "react";
 import { Checkbox, FormControlLabel } from "@mui/material";
-
+import {CHECK_CHALLENGE} from '../../utils/mutations'
+import {render} from 'react-dom'
 // Example of a checkbox function to track state
-function ChekcboxExample({ challenges = [] }) {
-  const [checked, setChecked] = useState("");
+
+
+function CheckboxGroup({challengeId, huntId, chezch}) {
+
+  const [checked, setChecked] = useState(true);
+  
+  const [checkChallenge, { error }] = useMutation(CHECK_CHALLENGE);
+  
+  const handleCheck = async (event) => {
+
+    setChecked(event.target.checked)
+
+    try {
+      await checkChallenge({
+        variables: {
+          huntId: huntId,
+          challengeId: challengeId
+        }});
+
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
   return (
     <div>
       <FormControlLabel
         control={
           <Checkbox
-            checked={challenges.check}
-            onChange={(e) => setChecked(e.target.checked)}
+            checked={chezch}
+            onChange={(e) => {
+              setChecked(e.target.checked)
+              handleCheck(e)
+            }}
             color="primary"
             inputProps={{
-              "aria-label": "secondary checkbox",
+              huntId: huntId,
+              challengeId: challengeId
             }}
           >
             Hello
@@ -27,18 +54,18 @@ function ChekcboxExample({ challenges = [] }) {
   );
 }
 
-const ChallengeList = ({ challenges = [] }) => {
+const ChallengeList = ({ challenges = [], huntId }) => {
   if (!challenges.length) {
     return <h3>No Challenge Yet</h3>;
   }
-
+  
   return (
     <div>
       {challenges &&
         challenges.map((challenge) => (
             <div key={challenge._id} className="card mb-3">
               <h4 className="card-header bg-primary text-light p-2 m-0 display-flex">
-                <ChekcboxExample {...challenges} />
+                <CheckboxGroup challengeId={challenge._id} huntId={huntId} chezch={challenge.check}/>
                 {challenge.challengeName}
               </h4>
               <p>{challenge.location?.address1}</p>
@@ -47,7 +74,8 @@ const ChallengeList = ({ challenges = [] }) => {
               <p>{challenge.location?.state}</p>
               <p>{challenge.location?.zipCode}</p>
               <p>{challenge.todo}</p>
-
+              
+              <p>Link to Google Maps: <a href={`https://www.google.com/maps/search/?api=1&query=${challenge.location?.address1} ${challenge.location?.address2} ${challenge.location?.city} ${challenge.location?.state} ${challenge.location?.zipCode}`}target="_blank" rel="noreferrer">Link</a></p>
               
               {/* Possibly deletechallenge here if not on challengePage
 

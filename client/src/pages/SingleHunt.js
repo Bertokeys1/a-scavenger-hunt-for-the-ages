@@ -3,7 +3,7 @@ import React from "react";
 // Import the `useParams()` hook
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-
+import { render } from 'react-dom'
 import ChallengeList from "../components/ChallengeList";
 
 import { QUERY_SINGLE_HUNT } from "../utils/queries";
@@ -34,6 +34,7 @@ const SingleHunt = () => {
       <div className="col-12 col-md-10 mb-5">
           <ChallengeList
             challenges={hunt.challenges}
+            huntId={huntId}
           />
         </div>
       <div className="m-3 p-4" style={{ border: "1px dotted #1a1a1a" }}>
