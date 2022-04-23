@@ -1,11 +1,8 @@
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { useMutation, useQuery } from "@apollo/client";
-import { QUERY_HUNTS } from "../../utils/queries";
+import { useMutation } from "@apollo/client";
 import { CREATE_CHALLENGE} from "../../utils/mutations";
 
 const ChallengeForm = ({huntId}) => {
-  const { data } = useQuery(QUERY_HUNTS);
 
   const [formData, setFormData] = useState({
     challengeName: '',
@@ -16,7 +13,6 @@ const ChallengeForm = ({huntId}) => {
     zipCode: '',
     todo: '',
   });
-  let navigate = useNavigate();
 
   const [createChallenge, { error }] = useMutation(CREATE_CHALLENGE);
 
@@ -44,7 +40,6 @@ const ChallengeForm = ({huntId}) => {
             todo: formData.todo}},
       });
 
-      // navigate(`/hunts/${data.createChallenge._id}`);
     } catch (err) {
       console.error(err);
     }
