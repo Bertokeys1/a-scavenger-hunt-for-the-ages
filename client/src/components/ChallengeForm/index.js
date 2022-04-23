@@ -4,18 +4,16 @@ import { useMutation, useQuery } from "@apollo/client";
 import { QUERY_HUNTS } from "../../utils/queries";
 import { CREATE_CHALLENGE} from "../../utils/mutations";
 
-const ChallengeForm = () => {
+const ChallengeForm = ({huntId}) => {
   const { data } = useQuery(QUERY_HUNTS);
 
   const [formData, setFormData] = useState({
     challengeName: '',
-    location: {
-      address1: '',
-      address2: '',
-      city: '',
-      state: '',
-      zipCode: '',
-    },
+    address1: '',
+    address2: '',
+    city: '',
+    state: '',
+    zipCode: '',
     todo: '',
   });
   let navigate = useNavigate();
@@ -32,7 +30,18 @@ const ChallengeForm = () => {
 
     try {
       const { data } = await createChallenge({
-        variables: {data: {...formData}},
+        variables: {
+          huntId,
+          data: {
+            challengeName: formData.challengeName,
+            location:{
+              address1: formData.address1,
+              address2: formData.address2,
+              city: formData.city,
+              state: formData.state,
+              zipCode: formData.zipCode
+            },
+            todo: formData.todo}},
       });
 
       navigate(`/hunt/${data.createChallenge._id}`);
@@ -72,41 +81,41 @@ const ChallengeForm = () => {
                 <input
                   className="form-input"
                   placeholder="Street Adress"
-                  name="location"
+                  name="address1"
                   type="text"
-                  value={formData.location.address1}
+                  value={formData.address1}
                   onChange={handleInputChange}
                 />
                 <input
                   className="form-input"
                   placeholder="Building/Unit number"
-                  name="challengeAddress2"
+                  name="address2"
                   type="text"
-                  value={formData.location.address2}
+                  value={formData.address2}
                   onChange={handleInputChange}
                 />
                 <input
                   className="form-input"
                   placeholder="City"
-                  name="challengeCity"
+                  name="city"
                   type="text"
-                  value={formData.location.city}
+                  value={formData.city}
                   onChange={handleInputChange}
                 />
                 <input
                   className="form-input"
                   placeholder="State"
-                  name="challengeState"
+                  name="state"
                   type="text"
-                  value={formData.location.state}
+                  value={formData.state}
                   onChange={handleInputChange}
                 />
                 <input
                   className="form-input"
                   placeholder="Zip Code"
-                  name="challengeZip"
+                  name="zipCode"
                   type="text"
-                  value={formData.location.zipCode}
+                  value={formData.zipCode}
                   onChange={handleInputChange}
                 />
                 <button
