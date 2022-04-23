@@ -4,10 +4,10 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 
-// import ChallengeList from "../components/ChallengeList";
-// import ChallengeForm from "../components/ChallengeForm";
+import ChallengeList from "../components/ChallengeList";
 
 import { QUERY_SINGLE_HUNT } from "../utils/queries";
+import ChallengeForm from "../components/ChallengeForm";
 
 const SingleHunt = () => {
   // Use `useParams()` to retrieve value of the route parameter `:huntId`
@@ -21,19 +21,19 @@ const SingleHunt = () => {
   const hunt = data?.hunt || {};
   console.log(data);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  // if (loading) {
+  //   return <div>Loading...</div>;
+  // }
   return (
     <div className="my-3">
       <h3 className="card-header bg-dark text-light p-2 m-0">
         {hunt.huntName} <br />
       </h3>
       <div className="my-5">
-        {/* <ChallengeList challenges={hunt.challenges} /> */}
+        {/* <ChallengeList/> */}
       </div>
       <div className="m-3 p-4" style={{ border: "1px dotted #1a1a1a" }}>
-        {/* <ChallengeForm huntId={hunt._id} /> */}
+        <ChallengeForm/>
       </div>
     </div>
   );

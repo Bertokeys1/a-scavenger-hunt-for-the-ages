@@ -71,11 +71,11 @@ function App() {
                 element={<Profile />}
               />
               <Route 
-                path="/hunts"
+                path="hunts"
                 element={<HuntList />}
               />
               <Route 
-                path="/hunts/:huntId"
+                path="hunts/:huntId"
                 element={<SingleHunt />}
               />
               
