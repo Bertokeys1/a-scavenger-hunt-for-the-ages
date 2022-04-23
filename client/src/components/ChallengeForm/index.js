@@ -44,13 +44,19 @@ const ChallengeForm = ({huntId}) => {
             todo: formData.todo}},
       });
 
-      navigate(`/hunt/${data.createChallenge._id}`);
+      // navigate(`/hunts/${data.createChallenge._id}`);
     } catch (err) {
       console.error(err);
     }
 
     setFormData({
-      challengeName: "",
+      challengeName: '',
+      address1: '',
+      address2: '',
+      city: '',
+      state: '',
+      zipCode: '',
+      todo: '',
     });
   };
 
