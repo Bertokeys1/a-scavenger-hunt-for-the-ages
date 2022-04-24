@@ -67,7 +67,7 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
 
     createHunt(data:HuntData!): User
-    updateHunt(_id: ID!, huntName: String!): Hunt
+    updateHunt(_id: ID!, huntName: String!): User
     deleteHunt(_id: ID!): User
 
     createChallenge(data:ChallengeData, huntId: ID!): Hunt

@@ -54,20 +54,7 @@ export const UPDATE_HUNT = gql`
   mutation updateHunt($id: ID!, $huntName: String!) {
   updateHunt(_id: $id, huntName: $huntName) {
     _id
-    huntName
-    challenges {
-      _id
-      challengeName
-      location {
-        address1
-        address2
-        city
-        state
-        zipCode
-      }
-      todo
-      check
-    }
+    username
   }
 }
 `;
@@ -78,6 +65,10 @@ export const DELETE_HUNT = gql`
     _id
     username
     email
+    hunts {
+      _id
+      huntName
+    }
   }
 }
 `;

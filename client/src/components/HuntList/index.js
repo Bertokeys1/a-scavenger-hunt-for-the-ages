@@ -1,13 +1,114 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from "@apollo/client";
-import { DELETE_HUNT } from "../../utils/mutations"
+import { DELETE_HUNT, UPDATE_HUNT } from "../../utils/mutations"
 import {QUERY_ME} from '../../utils/queries'
 
 import { Button } from "@mui/material"
 import DeleteIcon from "@mui/icons-material/Delete";
 
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
 import { Navigate, useNavigate } from 'react-router-dom';
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
+
+function BasicModal({huntName, huntId}) {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const [formData, setFormData] = useState({
+    huntName: huntName,
+  });
+
+  const [updateHunt, { error }] = useMutation(UPDATE_HUNT);
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({ [name]: value });
+  };
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      handleClose()
+      return await updateHunt({
+        variables: {
+          id: huntId,
+          huntName: formData.huntName  
+        },
+        refetchQueries: [QUERY_ME]
+      });
+
+    } catch (err) {
+      console.error(err);
+    }
+
+    // setFormData({
+    //   huntName: huntName,
+    // });
+  };
+
+
+  console.log(huntName)
+  return (
+    <div>
+      <Button onClick={handleOpen}>Open modal</Button>
+      <Modal
+        huntName={huntName}
+        
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Text in a modal
+          </Typography>
+          <form onSubmit={handleFormSubmit}>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            <input
+                  className="form-input"
+                  placeholder="Name of your hunt"
+                  name="huntName"
+                  type="text"
+                  value={formData.huntName}
+                  onChange={handleInputChange}
+                />
+                <button
+                  className="btn btn-block btn-primary"
+                  style={{ cursor: "pointer" }}
+                  type="submit"
+                >
+                  Submit
+                </button>
+            {huntName}
+          </Typography>
+
+          <Button onClick={handleOpen}>Open modal</Button>
+          </form>
+        </Box>
+      </Modal>
+    </div>
+  );
+}
+
+
+
 
 const HuntList = ( {hunts, title,} ) => {
 
@@ -36,6 +137,7 @@ const HuntList = ( {hunts, title,} ) => {
                 >
                   {hunt.huntName} 
                 </Link>
+                <BasicModal huntName={hunt.huntName} huntId={hunt._id}/>
                 <Button 
                   huntId={hunt._id}
                   onClick={async () => {
