@@ -2,10 +2,11 @@ import React from "react";
 import { useMutation } from "@apollo/client";
 import { useState } from "react";
 import { Checkbox, FormControlLabel } from "@mui/material";
-import {CHECK_CHALLENGE} from '../../utils/mutations'
+import {CHECK_CHALLENGE, DELETE_CHALLENGE} from '../../utils/mutations'
 import {render} from 'react-dom'
-// Example of a checkbox function to track state
 
+import { Button } from "@mui/material"
+import DeleteIcon from "@mui/icons-material/Delete";
 
 function CheckboxGroup({challengeId, huntId, chezch}) {
 
@@ -55,6 +56,9 @@ function CheckboxGroup({challengeId, huntId, chezch}) {
 }
 
 const ChallengeList = ({ challenges = [], huntId }) => {
+  
+  const [deleteChallenge, { error }] = useMutation(DELETE_CHALLENGE);
+
   if (!challenges.length) {
     return <h3>No Challenge Yet</h3>;
   }
@@ -67,6 +71,25 @@ const ChallengeList = ({ challenges = [], huntId }) => {
               <h4 className="card-header bg-primary text-light p-2 m-0 display-flex">
                 <CheckboxGroup challengeId={challenge._id} huntId={huntId} chezch={challenge.check}/>
                 {challenge.challengeName}
+                <Button 
+                  onClick={async () => {
+                    try {
+                      return await deleteChallenge({ 
+                        variables: {
+                          challengeId: challenge._id,
+                          huntId: huntId
+                        },
+                      })
+                    } catch (err) {
+                      console.error(err);
+                    }
+                  }} 
+                  variant="contained" 
+                  color="warning" 
+                  size="small" 
+                  endIcon={<DeleteIcon />}>
+                  Discard      
+                </Button>
               </h4>
               <p>{challenge.location?.address1}</p>
               <p>{challenge.location?.address2}</p>
