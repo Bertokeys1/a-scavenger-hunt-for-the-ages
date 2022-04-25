@@ -152,6 +152,7 @@ const HuntList = ( {hunts, title,} ) => {
             </div>
             <div className="display-flex align-items-center">
             <BasicModal huntName={hunt.huntName} huntId={hunt._id}/>
+            <div>
                 <Button 
                   huntId={hunt._id}
                   onClick={async () => {
@@ -174,6 +175,7 @@ const HuntList = ( {hunts, title,} ) => {
                   startIcon={<DeleteIcon />}>
                   Discard      
                 </Button>
+            </div>
             </div>
             {/* Possibly deleteHunt here if not on HuntPage
              <Link
