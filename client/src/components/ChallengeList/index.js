@@ -50,7 +50,7 @@ const style = {
 const theme = createTheme({
   typography: {
     fontFamily: "Amatic SC, cursive",
-    fontSize: "1.5rem"
+    fontSize: 20
   },
   palette: {
     primary: {
