@@ -303,7 +303,7 @@ const ChallengeList = ({ challenges = [], huntId }) => {
   const [deleteChallenge, { error }] = useMutation(DELETE_CHALLENGE);
 
   if (!challenges.length) {
-    return <h3>No Challenge Yet</h3>;
+    return <h3>No Challenges Yet</h3>;
   }
 
   return (

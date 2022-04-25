@@ -129,7 +129,7 @@ const HuntList = ( {hunts, title,} ) => {
   const [deleteHunt, { error }] = useMutation(DELETE_HUNT);
   
   if (!hunts.length) {
-    return <h3>No Hunt Yet</h3>;
+    return <h3>No Hunts Yet</h3>;
   }
 
   return (
