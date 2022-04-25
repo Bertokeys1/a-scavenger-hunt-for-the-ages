@@ -20,6 +20,7 @@ import HuntList from './components/HuntList';
 
 import Image from './assets/scavenger-backgroud.jpg'
 import Paper from '@mui/material/Paper';
+import Scroll from './assets/paper-scroll.png'
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -58,7 +59,8 @@ function App() {
         <Paper style={style.background}>
         <div className="flex-column justify-flex-start min-100-vh">
           <Header />
-          <div className="container">
+          <div className="container" style={{ backgroundImage: `url(${Scroll})`, backgroundSize: "cover"}}
+>
             <Routes>
               <Route 
                 path="/"
