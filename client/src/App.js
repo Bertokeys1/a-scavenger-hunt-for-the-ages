@@ -18,6 +18,9 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import HuntList from './components/HuntList';
 
+import Image from './assets/scavenger-backgroud.jpg'
+import Paper from '@mui/material/Paper';
+
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -42,10 +45,17 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+const style = {
+  background: {
+    backgroundImage: `url(${Image})`
+  }
+}
+
 function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
+        <Paper style={style.background}>
         <div className="flex-column justify-flex-start min-100-vh">
           <Header />
           <div className="container">
@@ -83,6 +93,7 @@ function App() {
           </div>
           <Footer />
         </div>
+        </Paper>
       </Router>
     </ApolloProvider>
   );
