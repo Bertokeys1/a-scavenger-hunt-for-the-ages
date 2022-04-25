@@ -8,7 +8,7 @@ import { Button } from "@mui/material"
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import SaveIcon from "@mui/icons-material/Save";
-
+import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
@@ -136,10 +136,9 @@ function BasicModal({challenge, huntId}) {
 
   return (
     <div>
-      <Button 
+      <Button size="large" 
       variant="contained" 
       color="primary" 
-      size="small" 
       startIcon={<EditIcon />}
       onClick={handleOpen}>
         Edit Challenge
@@ -159,64 +158,64 @@ function BasicModal({challenge, huntId}) {
           </Typography>
           <form>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                <input
-                  className="form-input"
+                <TextField
+                  fullWidth 
                   placeholder="Challenge Name"
                   name="challengeName"
-                  type="text"
+                  label="Challenge Name"
                   value={formData.challengeName}
                   onChange={handleInputChange}
-                ></input>
-                <input
-                  className="form-input"
+                />
+                <TextField
+                  fullWidth
                   placeholder="Challenge task"
                   name="todo"
-                  type="text"
+                  label="Challenge task"
                   value={formData.todo}
                   onChange={handleInputChange}
-                ></input>
-                <input
-                  className="form-input"
+                />
+                <TextField
+                  fullWidth
                   placeholder="Street Adress"
                   name="address1"
-                  type="text"
+                  label="Street Adress"
                   value={formData.address1}
                   onChange={handleInputChange}
                 />
-                <input
-                  className="form-input"
+                <TextField
+                  fullWidth
                   placeholder="Building/Unit number"
                   name="address2"
-                  type="text"
+                  label="Building/Unit number"
                   value={formData.address2}
                   onChange={handleInputChange}
                 />
-                <input
-                  className="form-input"
+                <TextField
+                  fullWidth
                   placeholder="City"
                   name="city"
-                  type="text"
+                  label="City"
                   value={formData.city}
                   onChange={handleInputChange}
                 />
-                <input
-                  className="form-input"
+                <TextField
+                  fullWidth
                   placeholder="State"
                   name="state"
-                  type="text"
+                  label="State"
                   value={formData.state}
                   onChange={handleInputChange}
                 />
-                <input
-                  className="form-input"
+                <TextField
+                  fullWidth
                   placeholder="Zip Code"
                   name="zipCode"
-                  type="text"
+                  label="Zip Code"
                   value={formData.zipCode}
                   onChange={handleInputChange}
                 />
-          </Typography>  
-                <Button
+              </Typography>  
+                <Button size="large"
                   onClick={handleFormSubmit} 
                   variant="contained" 
                   color="primary" 
@@ -248,7 +247,7 @@ const ChallengeList = ({ challenges = [], huntId }) => {
                 <CheckboxGroup challengeId={challenge._id} huntId={huntId} chezch={challenge.check}/>
                 {challenge.challengeName}
                 <BasicModal challenge={challenge} huntId={huntId}/>
-                <Button 
+                <Button size="large" 
                   onClick={async () => {
                     try {
                       return await deleteChallenge({ 
@@ -263,7 +262,6 @@ const ChallengeList = ({ challenges = [], huntId }) => {
                   }} 
                   variant="contained" 
                   color="warning" 
-                  size="small" 
                   startIcon={<DeleteIcon />}>
                   Discard      
                 </Button>

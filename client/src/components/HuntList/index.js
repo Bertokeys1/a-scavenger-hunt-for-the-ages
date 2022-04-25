@@ -8,7 +8,7 @@ import { Button } from "@mui/material"
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import SaveIcon from "@mui/icons-material/Save";
-
+import TextField from '@mui/material/TextField'
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
@@ -85,11 +85,11 @@ function BasicModal({huntName, huntId}) {
           </Typography>
           <form>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <input
-                  className="form-input"
-                  placeholder="Name of your hunt"
+          <TextField
+                  fullWidth 
+                  placeholder="Scavenger Hunt Name"
                   name="huntName"
-                  type="text"
+                  label="Scavenger Hunt Name"
                   value={formData.huntName}
                   onChange={handleInputChange}
                 />
@@ -128,7 +128,8 @@ const HuntList = ( {hunts, title,} ) => {
       {hunts&&
         hunts.map((hunt) =>
          (
-          <div key={hunt._id} className="card mb-3">
+          <div key={hunt._id} className="card mb-3 display-flex justify-content-between bg-primary p-3">
+            <div>
             <h4 className="display-flex card-header bg-primary text-light p-2 m-0">
               
                 <Link
@@ -138,7 +139,11 @@ const HuntList = ( {hunts, title,} ) => {
                 >
                   {hunt.huntName} 
                 </Link>
-                <BasicModal huntName={hunt.huntName} huntId={hunt._id}/>
+                
+            </h4>
+            </div>
+            <div className="display-flex align-items-center">
+            <BasicModal huntName={hunt.huntName} huntId={hunt._id}/>
                 <Button 
                   huntId={hunt._id}
                   onClick={async () => {
@@ -161,7 +166,7 @@ const HuntList = ( {hunts, title,} ) => {
                   startIcon={<DeleteIcon />}>
                   Discard      
                 </Button>
-            </h4>
+            </div>
             {/* Possibly deleteHunt here if not on HuntPage
              <Link
               className="btn btn-primary btn-block btn-squared"
