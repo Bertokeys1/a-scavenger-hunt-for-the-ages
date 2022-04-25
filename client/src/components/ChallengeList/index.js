@@ -262,6 +262,7 @@ const ChallengeList = ({ challenges = [], huntId }) => {
          
               <div className="display-flex">
               <BasicModal challenge={challenge} huntId={huntId}/>
+              <div>
                 <Button size="large" 
                   onClick={async () => {
                     try {
@@ -282,7 +283,8 @@ const ChallengeList = ({ challenges = [], huntId }) => {
                 </Button>
                 </div>
                 </div>
-              <p>{challenge.location?.address1}</p>
+                </div>
+                              <p>{challenge.location?.address1}</p>
               <p>{challenge.location?.address2}</p>
               <p>{challenge.location?.city}</p>
               <p>{challenge.location?.state}</p>
