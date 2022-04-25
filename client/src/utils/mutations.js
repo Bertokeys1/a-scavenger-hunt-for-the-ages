@@ -54,7 +54,7 @@ export const UPDATE_HUNT = gql`
   mutation updateHunt($id: ID!, $huntName: String!) {
   updateHunt(_id: $id, huntName: $huntName) {
     _id
-    username
+    huntName
   }
 }
 `;

@@ -6,6 +6,8 @@ import {QUERY_ME} from '../../utils/queries'
 
 import { Button } from "@mui/material"
 import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import SaveIcon from "@mui/icons-material/Save";
 
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -55,17 +57,20 @@ function BasicModal({huntName, huntId}) {
     } catch (err) {
       console.error(err);
     }
-
-    // setFormData({
-    //   huntName: huntName,
-    // });
   };
 
 
   console.log(huntName)
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
+      <Button 
+      variant="contained" 
+      color="primary" 
+      size="small" 
+      startIcon={<EditIcon />}
+      onClick={handleOpen}>
+        Edit Hunt
+      </Button>
       <Modal
         huntName={huntName}
         
@@ -77,9 +82,9 @@ function BasicModal({huntName, huntId}) {
         
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
+            Rename your Scavenger Hunt!
           </Typography>
-          <form onSubmit={handleFormSubmit}>
+          <form>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             <input
                   className="form-input"
@@ -89,17 +94,21 @@ function BasicModal({huntName, huntId}) {
                   value={formData.huntName}
                   onChange={handleInputChange}
                 />
-                <button
+                {/* <button
                   className="btn btn-block btn-primary"
                   style={{ cursor: "pointer" }}
                   type="submit"
                 >
                   Submit
-                </button>
-            {huntName}
-          </Typography>
-
-          <Button onClick={handleOpen}>Open modal</Button>
+                </button> */}
+          </Typography>  
+                <Button
+                  onClick={handleFormSubmit} 
+                  variant="contained" 
+                  color="primary" 
+                  startIcon={<SaveIcon />}>
+                  Submit      
+                </Button>
           </form>
         </Box>
       </Modal>
@@ -157,7 +166,7 @@ const HuntList = ( {hunts, title,} ) => {
                   variant="contained" 
                   color="warning" 
                   size="small" 
-                  endIcon={<DeleteIcon />}>
+                  startIcon={<DeleteIcon />}>
                   Discard      
                 </Button>
             </h4>
