@@ -61,7 +61,7 @@ function App() {
         <Paper style={style.background}>
         <div className="flex-column justify-flex-start min-100-vh">
           <Header />
-          <div className="container" style={{ backgroundImage: `url(${Scroll})`, backgroundSize: "cover"}}>
+          <div className="container" style={{backgroundRepeat: "no-repeat", paddingBottom: '25%', backgroundImage: `url(${Scroll})`, backgroundSize: "100% 100%"}}>
             <Routes>
               <Route 
                 path="/"

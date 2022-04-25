@@ -24,7 +24,7 @@ const SingleHunt = () => {
   }
 
   return (
-    <div className="my-3">
+    <div className="my-3" style={{ justifyContent: "center", paddingLeft: "12%", paddingTop: "18%", height: "30%", width: "80%"}}>
       <h3 className="display-flex card-header bg-dark text-light p-2 m-0 ">
         {hunt.huntName} <br />
       </h3>
@@ -34,7 +34,7 @@ const SingleHunt = () => {
             huntId={huntId}
           />
         </div>
-      <div className="m-3 p-4" style={{ border: "1px dotted #1a1a1a" }}>
+      <div className="m-3 p-4">
         <ChallengeForm
           huntId= {huntId}
         />
