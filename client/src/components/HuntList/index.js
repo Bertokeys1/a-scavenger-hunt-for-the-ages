@@ -15,6 +15,8 @@ import Modal from '@mui/material/Modal';
 import { Navigate, useNavigate } from 'react-router-dom';
 
 const style = {
+  modal: {
+ 
   position: 'absolute',
   top: '50%',
   left: '50%',
@@ -24,6 +26,12 @@ const style = {
   border: '2px solid #000',
   boxShadow: 24,
   p: 4,
+},
+
+flexbox: {
+  display: "flex",
+  justifyContent: "space-between",
+},
 };
 
 function BasicModal({huntName, huntId}) {
@@ -79,7 +87,7 @@ function BasicModal({huntName, huntId}) {
         aria-describedby="modal-modal-description"
       >
         
-        <Box sx={style}>
+        <Box sx={style.modal}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Rename your Scavenger Hunt!
           </Typography>
@@ -128,7 +136,7 @@ const HuntList = ( {hunts, title,} ) => {
       {hunts&&
         hunts.map((hunt) =>
          (
-          <div key={hunt._id} className="card mb-3 display-flex justify-content-between bg-primary p-3">
+          <div key={hunt._id} className="card mb-3 bg-primary p-3" style={style.flexbox}>
             <div>
             <h4 className="display-flex card-header bg-primary text-light p-2 m-0">
               

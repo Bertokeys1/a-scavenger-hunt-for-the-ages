@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { CREATE_CHALLENGE} from "../../utils/mutations";
+import TextField from '@mui/material/TextField';
 
 const ChallengeForm = ({huntId}) => {
 
@@ -63,7 +64,63 @@ const ChallengeForm = ({huntId}) => {
           <div className="card-body">
             {(
               <form onSubmit={handleFormSubmit}>
-                <input
+                 <TextField
+                  fullWidth 
+                  placeholder="Challenge Name"
+                  name="challengeName"
+                  label="Challenge Name"
+                  value={formData.challengeName}
+                  onChange={handleInputChange}
+                />
+                 <TextField
+                  fullWidth
+                  placeholder="Challenge task"
+                  name="todo"
+                  label="Challenge task"
+                  value={formData.todo}
+                  onChange={handleInputChange}
+                />
+                <TextField
+                  fullWidth
+                  placeholder="Street Adress"
+                  name="address1"
+                  label="Street Adress"
+                  value={formData.address1}
+                  onChange={handleInputChange}
+                />
+                <TextField
+                  fullWidth
+                  placeholder="Building/Unit number"
+                  name="address2"
+                  label="Building/Unit number"
+                  value={formData.address2}
+                  onChange={handleInputChange}
+                />
+                <TextField
+                  fullWidth
+                  placeholder="City"
+                  name="city"
+                  label="City"
+                  value={formData.city}
+                  onChange={handleInputChange}
+                />
+                <TextField
+                  fullWidth
+                  placeholder="State"
+                  name="state"
+                  label="State"
+                  value={formData.state}
+                  onChange={handleInputChange}
+                />
+                <TextField
+                  fullWidth
+                  placeholder="Zip Code"
+                  name="zipCode"
+                  label="Zip Code"
+                  value={formData.zipCode}
+                  onChange={handleInputChange}
+                />
+                {/* <input
                   className="form-input"
                   placeholder="Challenge Name"
                   name="challengeName"
@@ -118,7 +175,7 @@ const ChallengeForm = ({huntId}) => {
                   type="text"
                   value={formData.zipCode}
                   onChange={handleInputChange}
-                />
+                /> */}
                 <button
                   className="btn btn-block btn-primary"
                   style={{ cursor: "pointer" }}

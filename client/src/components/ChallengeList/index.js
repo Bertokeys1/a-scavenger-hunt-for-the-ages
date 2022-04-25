@@ -14,6 +14,8 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 
 const style = {
+  modal: {
+ 
   position: 'absolute',
   top: '50%',
   left: '50%',
@@ -23,6 +25,12 @@ const style = {
   border: '2px solid #000',
   boxShadow: 24,
   p: 4,
+},
+
+flexbox: {
+  display: "flex",
+  justifyContent: "space-between",
+},
 };
 
 function CheckboxGroup({challengeId, huntId, chezch}) {
@@ -152,7 +160,7 @@ function BasicModal({challenge, huntId}) {
         aria-describedby="modal-modal-description"
       >
         
-        <Box sx={style}>
+        <Box sx={style.modal}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Rename your Scavenger Hunt!
           </Typography>
@@ -243,10 +251,18 @@ const ChallengeList = ({ challenges = [], huntId }) => {
       {challenges &&
         challenges.map((challenge) => (
             <div key={challenge._id} className="card mb-3">
-              <h4 className="card-header bg-primary text-light p-2 m-0 display-flex">
+              <div className="card mb-3 bg-primary p-3" style={style.flexbox}>
+
+           
+              <h4 className="card-header bg-primary text-light p-2 display-flex m-0">
                 <CheckboxGroup challengeId={challenge._id} huntId={huntId} chezch={challenge.check}/>
                 {challenge.challengeName}
-                <BasicModal challenge={challenge} huntId={huntId}/>
+             
+              </h4>
+         
+              <div className="display-flex">
+              <BasicModal challenge={challenge} huntId={huntId}/>
+              <div>
                 <Button size="large" 
                   onClick={async () => {
                     try {
@@ -265,8 +281,10 @@ const ChallengeList = ({ challenges = [], huntId }) => {
                   startIcon={<DeleteIcon />}>
                   Discard      
                 </Button>
-              </h4>
-              <p>{challenge.location?.address1}</p>
+                </div>
+                </div>
+                </div>
+                              <p>{challenge.location?.address1}</p>
               <p>{challenge.location?.address2}</p>
               <p>{challenge.location?.city}</p>
               <p>{challenge.location?.state}</p>
