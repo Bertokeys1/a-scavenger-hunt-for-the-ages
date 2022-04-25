@@ -21,7 +21,7 @@ const Header = () => {
       <div className="container flex-row justify-space-between-lg justify-center align-center">
         <div>
           <Link className="text-light" to="/">
-            <h1 className="m-0">A Scavenger Hunt For The Ages</h1>
+            <h1 id="mainTitle" className="m-0">A Scavenger Hunt For The Ages</h1>
           </Link>
           <p className="m-0">Get into trouble.</p>
         </div>
@@ -29,6 +29,10 @@ const Header = () => {
           {Auth.loggedIn() ? (
             <>
               <Button 
+              sx={{
+                fontFamily: 'Amatic SC, cursive',
+                fontSize:20,
+              }}   
               component={Link} 
               to="/me" 
               variant="contained" 
@@ -38,6 +42,10 @@ const Header = () => {
                 {Auth.getProfile().data.username}'s hunts
               </Button>
               <Button
+              sx={{
+                fontFamily: 'Amatic SC, cursive',
+                fontSize:20,
+              }}   
               onClick={logout}
               variant="contained" 
               color="secondary" 
@@ -50,6 +58,10 @@ const Header = () => {
           ) : (
             <>
               <Button 
+              sx={{
+                fontFamily: 'Amatic SC, cursive',
+                fontSize:20,
+              }}   
               component={Link} 
               to="/login" 
               variant="contained" 
@@ -59,6 +71,10 @@ const Header = () => {
                 Login
               </Button>
               <Button 
+              sx={{
+                fontFamily: 'Amatic SC, cursive',
+                fontSize:20,
+              }}   
               component={Link} 
               to="/signup" 
               variant="contained" 

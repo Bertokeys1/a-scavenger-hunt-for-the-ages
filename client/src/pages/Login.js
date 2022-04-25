@@ -46,7 +46,7 @@ const Login = (props) => {
       <div className="col-12 col-lg-10">
         <div className="card">
           <h4 className="card-header bg-dark text-light p-2">Login</h4>
-          <div className="card-body">
+          <div className="card-body bg-light">
             {data ? (
               <p>
                 Success! You may now head{' '}
@@ -55,6 +55,13 @@ const Login = (props) => {
             ) : (
               <form>
                 <TextField
+                  inputProps={{style: {
+                    fontFamily: 'Amatic SC, cursive',
+                    fontSize: 28
+                  }}}   
+                  InputLabelProps={{style: {
+                    fontFamily: 'Amatic SC, cursive',
+                  }}} 
                   fullWidth 
                   placeholder="Your email"
                   name="email"
@@ -64,6 +71,13 @@ const Login = (props) => {
                   onChange={handleChange}
                 />
                 <TextField
+                  inputProps={{style: {
+                    fontFamily: 'Amatic SC, cursive',
+                    fontSize: 28
+                  }}}
+                  InputLabelProps={{style: {
+                    fontFamily: 'Amatic SC, cursive',
+                  }}} 
                   fullWidth 
                   placeholder="******"
                   name="password"
@@ -73,6 +87,10 @@ const Login = (props) => {
                   onChange={handleChange}
                 />
                 <Button 
+                  sx={{
+                    fontFamily: 'Amatic SC, cursive',
+                    fontSize:20,
+                  }}   
                   fullWidth
                   size="large"
                   onClick={handleFormSubmit} 
