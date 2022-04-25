@@ -67,7 +67,7 @@ function BasicModal({huntName, huntId}) {
       <Button 
       variant="contained" 
       color="primary" 
-      size="small" 
+      size="large" 
       startIcon={<EditIcon />}
       onClick={handleOpen}>
         Rename Hunt
@@ -123,7 +123,7 @@ const HuntList = ( {hunts, title,} ) => {
 
   return (
     <div>
-      {<h3>{title}</h3>}
+      {/* {<h3>{title}</h3>} */}
       {hunts&&
         hunts.map((hunt) =>
          (
@@ -162,7 +162,7 @@ const HuntList = ( {hunts, title,} ) => {
                   }} 
                   variant="contained" 
                   color="warning" 
-                  size="small" 
+                  size="large" 
                   startIcon={<DeleteIcon />}>
                   Discard      
                 </Button>

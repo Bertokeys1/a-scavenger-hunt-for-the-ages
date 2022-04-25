@@ -19,8 +19,10 @@ import Footer from './components/Footer';
 import HuntList from './components/HuntList';
 
 import Image from './assets/scavenger-backgroud.jpg'
-import Paper from '@mui/material/Paper';
 
+import { orange, green } from "@material-ui/core/colors";
+import Paper from '@mui/material/Paper';
+import { makeStyles, ThemeProvider, createTheme} from "@material-ui/core/styles"
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -52,50 +54,73 @@ const style = {
 }
 
 function App() {
+  const theme = createTheme({
+    typography: {
+      h2: {
+        fontSize:36,
+        marginBottom: 15,
+      },
+      subtitle1:{
+        fontSize: 12,
+  
+      }
+    },
+    palette: {
+      primary: {
+        main: green[400],
+      },
+      secondary: {
+        main: orange[400],
+      }
+    }
+  })
+  
   return (
+    <ThemeProvider theme={theme}>
     <ApolloProvider client={client}>
-      <Router>
-        <Paper style={style.background}>
-        <div className="flex-column justify-flex-start min-100-vh">
-          <Header />
-          <div className="container">
-            <Routes>
-              <Route 
-                path="/"
-                element={<Home />}
-              />
-              <Route 
-                path="/login"
-                element={<Login />}
-              />
-              <Route 
-                path="/signup"
-                element={<Signup />}
-              />
-              <Route 
-                path="/me"
-                element={<Profile />}
-              />
-              <Route 
-                path="/profiles/:username"
-                element={<Profile />}
-              />
-              <Route 
-                path="hunts"
-                element={<HuntList />}
-              />
-              <Route 
-                path="hunts/:huntId"
-                element={<SingleHunt />}
-              />
-              
-            </Routes>
+        <Router>
+          <Paper style={style.background}>
+          <div className="flex-column justify-flex-start min-100-vh">
+            <Header />
+            <div className="container">
+              <Routes>
+                <Route 
+                  path="/"
+                  element={<Home />}
+                />
+                <Route 
+                  path="/login"
+                  element={<Login />}
+                />
+                <Route 
+                  path="/signup"
+                  element={<Signup />}
+                />
+                <Route 
+                  path="/me"
+                  element={<Profile />}
+                />
+                <Route 
+                  path="/profiles/:username"
+                  element={<Profile />}
+                />
+                <Route 
+                  path="hunts"
+                  element={<HuntList />}
+                />
+                <Route 
+                  path="hunts/:huntId"
+                  element={<SingleHunt />}
+                />
+                
+              </Routes>
+            </div>
+            <Footer />
           </div>
-          <Footer />
-        </div>
-        </Paper>
-      </Router>
+          </Paper>
+        </Router>
     </ApolloProvider>
+      </ThemeProvider>
   );
 }
 
