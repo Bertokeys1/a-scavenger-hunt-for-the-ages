@@ -137,7 +137,12 @@ function BasicModal({challenge, huntId}) {
 
   return (
     <div>
-      <Button size="large" 
+      <Button 
+      sx={{
+        fontFamily: 'Amatic SC, cursive',
+        fontSize:20,
+      }}   
+      size="large" 
       variant="contained" 
       color="primary" 
       startIcon={<EditIcon />}
@@ -154,12 +159,16 @@ function BasicModal({challenge, huntId}) {
       >
         
         <Box sx={style.modal}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Rename your Scavenger Hunt!
-          </Typography>
           <form>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                 <TextField
+                  inputProps={{style: {
+                    fontFamily: 'Amatic SC, cursive',
+                    fontSize: 28
+                  }}}
+                  InputLabelProps={{style: {
+                    fontFamily: 'Amatic SC, cursive',
+                  }}}
                   fullWidth 
                   placeholder="Challenge Name"
                   name="challengeName"
@@ -168,6 +177,13 @@ function BasicModal({challenge, huntId}) {
                   onChange={handleInputChange}
                 />
                 <TextField
+                  inputProps={{style: {
+                    fontFamily: 'Amatic SC, cursive',
+                    fontSize: 28
+                  }}} 
+                  InputLabelProps={{style: {
+                    fontFamily: 'Amatic SC, cursive',
+                  }}}
                   fullWidth
                   placeholder="Challenge task"
                   name="todo"
@@ -176,6 +192,13 @@ function BasicModal({challenge, huntId}) {
                   onChange={handleInputChange}
                 />
                 <TextField
+                  inputProps={{style: {
+                    fontFamily: 'Amatic SC, cursive',
+                    fontSize: 28
+                  }}} 
+                  InputLabelProps={{style: {
+                    fontFamily: 'Amatic SC, cursive',
+                  }}}
                   fullWidth
                   placeholder="Street Adress"
                   name="address1"
@@ -184,6 +207,13 @@ function BasicModal({challenge, huntId}) {
                   onChange={handleInputChange}
                 />
                 <TextField
+                  inputProps={{style: {
+                    fontFamily: 'Amatic SC, cursive',
+                    fontSize: 28
+                  }}} 
+                  InputLabelProps={{style: {
+                    fontFamily: 'Amatic SC, cursive',
+                  }}}
                   fullWidth
                   placeholder="Building/Unit number"
                   name="address2"
@@ -192,6 +222,13 @@ function BasicModal({challenge, huntId}) {
                   onChange={handleInputChange}
                 />
                 <TextField
+                  inputProps={{style: {
+                    fontFamily: 'Amatic SC, cursive',
+                    fontSize: 28
+                  }}} 
+                  InputLabelProps={{style: {
+                    fontFamily: 'Amatic SC, cursive',
+                  }}}
                   fullWidth
                   placeholder="City"
                   name="city"
@@ -200,6 +237,13 @@ function BasicModal({challenge, huntId}) {
                   onChange={handleInputChange}
                 />
                 <TextField
+                  inputProps={{style: {
+                    fontFamily: 'Amatic SC, cursive',
+                    fontSize: 28
+                  }}} 
+                  InputLabelProps={{style: {
+                    fontFamily: 'Amatic SC, cursive',
+                  }}}
                   fullWidth
                   placeholder="State"
                   name="state"
@@ -208,6 +252,13 @@ function BasicModal({challenge, huntId}) {
                   onChange={handleInputChange}
                 />
                 <TextField
+                  inputProps={{style: {
+                    fontFamily: 'Amatic SC, cursive',
+                    fontSize: 28
+                  }}} 
+                  InputLabelProps={{style: {
+                    fontFamily: 'Amatic SC, cursive',
+                  }}}
                   fullWidth
                   placeholder="Zip Code"
                   name="zipCode"
@@ -216,7 +267,12 @@ function BasicModal({challenge, huntId}) {
                   onChange={handleInputChange}
                 />
               </Typography>  
-                <Button size="large"
+                <Button 
+                  sx={{
+                    fontFamily: 'Amatic SC, cursive',
+                    fontSize:20,
+                  }}   
+                  size="large"
                   onClick={handleFormSubmit} 
                   variant="contained" 
                   color="primary" 
@@ -247,16 +303,21 @@ const ChallengeList = ({ challenges = [], huntId }) => {
               <div className="card mb-3 bg-primary p-3" style={style.flexbox}>
 
            
-              <h4 className="card-header bg-primary text-light p-2 display-flex m-0">
+              <h2 className="card-header bg-primary text-light p-2 display-flex m-0">
                 <CheckboxGroup challengeId={challenge._id} huntId={huntId} chezch={challenge.check}/>
                 {challenge.challengeName}
              
-              </h4>
+              </h2>
          
               <div className="display-flex">
               <BasicModal challenge={challenge} huntId={huntId}/>
               <div>
-                <Button size="large" 
+                <Button 
+                  sx={{
+                    fontFamily: 'Amatic SC, cursive',
+                    fontSize:20,
+                  }}   
+                  size="large" 
                   onClick={async () => {
                     try {
                       return await deleteChallenge({ 

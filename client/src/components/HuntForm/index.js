@@ -37,11 +37,19 @@ const HuntForm = () => {
     <main className="flex-row justify-center mb-4">
       <div className="col-12 col-lg-10">
         <div className="card">
-          <h4 className="card-header bg-dark text-light p-2">New Hunt</h4>
+          <h2 className="card-header bg-dark text-light p-2">New Hunt</h2>
           <div className="card-body">
             {(
               <form>
                 <TextField
+                  inputProps={{style: {
+                    fontFamily: 'Amatic SC, cursive',
+                    fontSize: 30,
+                    fontType: "Bold"
+                  }}} 
+                  InputLabelProps={{style: {
+                    fontFamily: 'Amatic SC, cursive',
+                  }}}
                   fullWidth 
                   placeholder="Scavenger Hunt Name"
                   name="huntName"
@@ -50,6 +58,10 @@ const HuntForm = () => {
                   onChange={handleInputChange}
                 /> 
                 <Button
+                  sx={{
+                    fontFamily: 'Amatic SC, cursive',
+                    fontSize:20,
+                  }}   
                   fullWidth
                   onClick={handleFormSubmit} 
                   variant="contained" 

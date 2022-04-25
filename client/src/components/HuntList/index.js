@@ -64,12 +64,16 @@ function BasicModal({huntName, huntId}) {
   return (
     <div>
       <Button 
-      variant="contained" 
-      color="primary" 
-      size="large" 
-      startIcon={<EditIcon />}
-      onClick={handleOpen}>
-        Rename Hunt
+        sx={{
+          fontFamily: 'Amatic SC, cursive',
+          fontSize:20,
+        }}    
+        variant="contained" 
+        color="primary" 
+        size="large" 
+        startIcon={<EditIcon />}
+        onClick={handleOpen}>
+          Rename Hunt
       </Button>
       <Modal
         huntName={huntName}
@@ -81,27 +85,35 @@ function BasicModal({huntName, huntId}) {
       >
         
         <Box sx={style.modal}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Rename your Scavenger Hunt!
-          </Typography>
           <form>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
           <TextField
-                  fullWidth 
-                  placeholder="Scavenger Hunt Name"
-                  name="huntName"
-                  label="Scavenger Hunt Name"
-                  value={formData.huntName}
-                  onChange={handleInputChange}
-                />
+            inputProps={{style: {
+              fontFamily: 'Amatic SC, cursive',
+              fontSize: 20
+            }}} 
+            InputLabelProps={{style: {
+              fontFamily: 'Amatic SC, cursive',
+            }}}
+            fullWidth 
+            placeholder="Scavenger Hunt Name"
+            name="huntName"
+            label="Scavenger Hunt Name"
+            value={formData.huntName}
+            onChange={handleInputChange}
+          />
           </Typography>  
-                <Button
-                  onClick={handleFormSubmit} 
-                  variant="contained" 
-                  color="primary" 
-                  startIcon={<SaveIcon />}>
-                  Save      
-                </Button>
+          <Button
+            sx={{
+              fontFamily: 'Amatic SC, cursive',
+              fontSize:20,
+            }}   
+            onClick={handleFormSubmit} 
+            variant="contained" 
+            color="primary" 
+            startIcon={<SaveIcon />}>
+            Save      
+          </Button>
           </form>
         </Box>
       </Modal>
@@ -128,7 +140,7 @@ const HuntList = ( {hunts, title,} ) => {
          (
           <div key={hunt._id} className="card mb-3 p-3" style={style.flexbox}>
             <div>
-            <h4 className="display-flex card-header text-dark p-2 m-0">
+            <h2 className="display-flex font-bold text-dark p-2 m-0">
               
                 <Link
                   className="text-dark"
@@ -138,12 +150,16 @@ const HuntList = ( {hunts, title,} ) => {
                   {hunt.huntName} 
                 </Link>
                 
-            </h4>
+            </h2>
             </div>
             <div className="display-flex align-items-center">
             <BasicModal huntName={hunt.huntName} huntId={hunt._id}/>
             <div>
                 <Button 
+                  sx={{
+                    fontFamily: 'Amatic SC, cursive',
+                    fontSize:20,
+                  }}   
                   huntId={hunt._id}
                   onClick={async () => {
                     try {

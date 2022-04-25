@@ -61,11 +61,18 @@ const ChallengeForm = ({huntId}) => {
     <main className="flex-row justify-center mb-4">
       <div className="col-12 col-lg-10">
         <div className="card">
-          <h4 className="card-header bg-dark text-light p-2">New Challenge</h4>
+          <h2 className="card-header bg-dark text-light p-2">New Challenge</h2>
           <div className="card-body">
             {(
               <form>
                  <TextField
+                  inputProps={{style: {
+                    fontFamily: 'Amatic SC, cursive',
+                    fontSize: 28
+                  }}} 
+                  InputLabelProps={{style: {
+                    fontFamily: 'Amatic SC, cursive',
+                  }}}
                   fullWidth 
                   placeholder="Challenge Name"
                   name="challengeName"
@@ -74,6 +81,13 @@ const ChallengeForm = ({huntId}) => {
                   onChange={handleInputChange}
                 />
                  <TextField
+                  inputProps={{style: {
+                    fontFamily: 'Amatic SC, cursive',
+                    fontSize: 28
+                  }}} 
+                  InputLabelProps={{style: {
+                    fontFamily: 'Amatic SC, cursive',
+                  }}}
                   fullWidth
                   placeholder="Challenge task"
                   name="todo"
@@ -82,6 +96,13 @@ const ChallengeForm = ({huntId}) => {
                   onChange={handleInputChange}
                 />
                 <TextField
+                  inputProps={{style: {
+                    fontFamily: 'Amatic SC, cursive',
+                    fontSize: 28
+                  }}} 
+                  InputLabelProps={{style: {
+                    fontFamily: 'Amatic SC, cursive',
+                  }}}
                   fullWidth
                   placeholder="Street Adress"
                   name="address1"
@@ -90,6 +111,13 @@ const ChallengeForm = ({huntId}) => {
                   onChange={handleInputChange}
                 />
                 <TextField
+                  inputProps={{style: {
+                    fontFamily: 'Amatic SC, cursive',
+                    fontSize: 28
+                  }}} 
+                  InputLabelProps={{style: {
+                    fontFamily: 'Amatic SC, cursive',
+                  }}}
                   fullWidth
                   placeholder="Building/Unit number"
                   name="address2"
@@ -98,6 +126,13 @@ const ChallengeForm = ({huntId}) => {
                   onChange={handleInputChange}
                 />
                 <TextField
+                  inputProps={{style: {
+                    fontFamily: 'Amatic SC, cursive',
+                    fontSize: 28
+                  }}} 
+                  InputLabelProps={{style: {
+                    fontFamily: 'Amatic SC, cursive',
+                  }}}
                   fullWidth
                   placeholder="City"
                   name="city"
@@ -106,6 +141,13 @@ const ChallengeForm = ({huntId}) => {
                   onChange={handleInputChange}
                 />
                 <TextField
+                  inputProps={{style: {
+                    fontFamily: 'Amatic SC, cursive',
+                    fontSize: 28
+                  }}} 
+                  InputLabelProps={{style: {
+                    fontFamily: 'Amatic SC, cursive',
+                  }}}
                   fullWidth
                   placeholder="State"
                   name="state"
@@ -114,6 +156,13 @@ const ChallengeForm = ({huntId}) => {
                   onChange={handleInputChange}
                 />
                 <TextField
+                  inputProps={{style: {
+                    fontFamily: 'Amatic SC, cursive',
+                    fontSize: 28
+                  }}} 
+                  InputLabelProps={{style: {
+                    fontFamily: 'Amatic SC, cursive',
+                  }}}
                   fullWidth
                   placeholder="Zip Code"
                   name="zipCode"
@@ -122,6 +171,10 @@ const ChallengeForm = ({huntId}) => {
                   onChange={handleInputChange}
                 />
                 <Button
+                  sx={{
+                    fontFamily: 'Amatic SC, cursive',
+                    fontSize:20,
+                  }}   
                   fullWidth
                   onClick={handleFormSubmit} 
                   variant="contained" 
