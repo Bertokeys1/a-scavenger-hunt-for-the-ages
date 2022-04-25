@@ -4,15 +4,10 @@ import { useMutation } from "@apollo/client";
 import { DELETE_HUNT, UPDATE_HUNT } from "../../utils/mutations"
 import {QUERY_ME} from '../../utils/queries'
 
-import { Button } from "@mui/material"
+import { Button, TextField, Box, Typography, Modal} from "@mui/material"
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import SaveIcon from "@mui/icons-material/Save";
-import TextField from '@mui/material/TextField'
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
-import { Navigate, useNavigate } from 'react-router-dom';
 
 const style = {
   modal: {
@@ -127,9 +122,6 @@ const HuntList = ( {hunts, title,} ) => {
     return <h3>No Hunt Yet</h3>;
   }
 
-  // const navigate = useNavigate();
-  
-
   return (
     <div>
       {<h3>{title}</h3>}
@@ -177,13 +169,6 @@ const HuntList = ( {hunts, title,} ) => {
                 </Button>
             </div>
             </div>
-            {/* Possibly deleteHunt here if not on HuntPage
-             <Link
-              className="btn btn-primary btn-block btn-squared"
-              to={`/hunt/${hunt._id}`}
-            >
-              Join the hunt.
-            </Link> */}
           </div>
         ))}
     </div>

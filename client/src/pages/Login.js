@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
-
+import ExploreIcon from '@mui/icons-material/Explore';
+import { Button, TextField } from "@mui/material"
 import Auth from '../utils/auth';
 
 const Login = (props) => {
@@ -52,30 +53,34 @@ const Login = (props) => {
                 <Link to="/">back to the homepage.</Link>
               </p>
             ) : (
-              <form onSubmit={handleFormSubmit}>
-                <input
-                  className="form-input"
+              <form>
+                <TextField
+                  fullWidth 
                   placeholder="Your email"
                   name="email"
+                  label="Email Address"
                   type="email"
                   value={formState.email}
                   onChange={handleChange}
                 />
-                <input
-                  className="form-input"
+                <TextField
+                  fullWidth 
                   placeholder="******"
                   name="password"
                   type="password"
+                  label="Password"
                   value={formState.password}
                   onChange={handleChange}
                 />
-                <button
-                  className="btn btn-block btn-primary"
-                  style={{ cursor: 'pointer' }}
-                  type="submit"
-                >
-                  Submit
-                </button>
+                <Button 
+                  fullWidth
+                  size="large"
+                  onClick={handleFormSubmit} 
+                  variant="contained" 
+                  color="primary" 
+                  startIcon={<ExploreIcon />}>
+                  Login      
+                </Button>
               </form>
             )}
 

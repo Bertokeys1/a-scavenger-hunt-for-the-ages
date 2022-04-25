@@ -1,16 +1,11 @@
 import React from "react";
-import { Navigate, useNavigate } from 'react-router-dom';
-import { Button } from "@mui/material"
-import DeleteIcon from "@mui/icons-material/Delete";
 
 // Import the `useParams()` hook
 import { useParams } from "react-router-dom";
-import { useQuery, useMutation } from "@apollo/client";
-import { render } from 'react-dom'
+import { useQuery } from "@apollo/client";
 import ChallengeList from "../components/ChallengeList";
 
 import { QUERY_SINGLE_HUNT } from "../utils/queries";
-import { DELETE_HUNT } from "../utils/mutations"
 import ChallengeForm from "../components/ChallengeForm";
 
 const SingleHunt = () => {
@@ -23,26 +18,6 @@ const SingleHunt = () => {
   });
 
   const hunt = data?.hunt || {};
-  console.log(data);
-  
-  // const [deleteHunt, { error }] = useMutation(DELETE_HUNT);
-  // const navigate = useNavigate();
-  // const handleDelete = async (event) => {
-
-    
-    
-  //   try {
-  //     const data = await deleteHunt({ 
-  //       variables: {
-  //         id: huntId
-  //       }
-  //     })
-  //     return data, navigate('/me');
-      
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // }
 
   if (loading) {
     return <div>Loading...</div>;
@@ -52,15 +27,6 @@ const SingleHunt = () => {
     <div className="my-3">
       <h3 className="display-flex card-header bg-dark text-light p-2 m-0 ">
         {hunt.huntName} <br />
-        {/* <Button 
-        huntId={hunt._id}
-        onClick={handleDelete} 
-        variant="contained" 
-        color="warning" 
-        size="small" 
-        endIcon={<DeleteIcon />}>
-          Discard      
-        </Button> */}
       </h3>
       <div className="col-12 mb-5">
           <ChallengeList

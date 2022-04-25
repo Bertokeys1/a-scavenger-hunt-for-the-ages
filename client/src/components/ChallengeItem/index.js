@@ -1,1 +1,0 @@
-// This will contain a single challenge item and manage the state for the single challenge item. Which would allow us to update the challenge item
