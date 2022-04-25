@@ -65,10 +65,6 @@ export const DELETE_HUNT = gql`
     _id
     username
     email
-    hunts {
-      _id
-      huntName
-    }
   }
 }
 `;
