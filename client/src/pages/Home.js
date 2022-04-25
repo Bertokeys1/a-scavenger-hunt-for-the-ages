@@ -1,10 +1,5 @@
 import {Box} from '@mui/material'
 
-// height: 233,
-          // width: 350,
-          // maxHeight: { xs: 233, md: 167 },
-          // maxWidth: { xs: 350, md: 250 },
-
 const Home = () => {
 
   return (
