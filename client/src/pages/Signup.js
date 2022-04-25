@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
 import ExploreIcon from '@mui/icons-material/Explore';
-import { Button, TextField, Typography } from "@mui/material"
+import { Button, TextField } from "@mui/material"
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Auth from '../utils/auth';
-import { palette } from '@mui/system';
+
 
 const style = {
   inputProps:{

@@ -20,7 +20,6 @@ const style = {
     bgcolor: 'background.paper',
     p: 4,
   },
-
   flexbox: {
     display: "flex",
     justifyContent: "space-between",
@@ -71,7 +70,7 @@ function BasicModal({huntName, huntId}) {
     huntName: huntName,
   });
 
-  const [updateHunt, { error }] = useMutation(UPDATE_HUNT);
+  const [updateHunt] = useMutation(UPDATE_HUNT);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -151,7 +150,7 @@ function BasicModal({huntName, huntId}) {
 
 const HuntList = ( {hunts, title,} ) => {
 
-  const [deleteHunt, { error }] = useMutation(DELETE_HUNT);
+  const [deleteHunt] = useMutation(DELETE_HUNT);
   
   if (!hunts.length) {
     return <h3>No Hunts Yet</h3>;

@@ -66,12 +66,10 @@ const theme = createTheme({
 });
 
 function CheckboxGroup({ challengeId, huntId, chezch }) {
-  const [checked, setChecked] = useState(true);
 
-  const [checkChallenge, { error }] = useMutation(CHECK_CHALLENGE);
+  const [checkChallenge] = useMutation(CHECK_CHALLENGE);
 
   const handleCheck = async (event) => {
-    setChecked(event.target.checked);
 
     try {
       await checkChallenge({
@@ -92,7 +90,6 @@ function CheckboxGroup({ challengeId, huntId, chezch }) {
           <Checkbox
             checked={chezch}
             onChange={(e) => {
-              setChecked(e.target.checked);
               handleCheck(e);
             }}
             color="secondary"
@@ -100,9 +97,7 @@ function CheckboxGroup({ challengeId, huntId, chezch }) {
               huntId: huntId,
               challengeId: challengeId,
             }}
-          >
-            Hello
-          </Checkbox>
+          />
         }
         label=""
       />
@@ -131,7 +126,7 @@ function BasicModal({ challenge, huntId }) {
     todo: todo,
   });
 
-  const [updateChallenge, { error }] = useMutation(UPDATE_CHALLENGE);
+  const [updateChallenge] = useMutation(UPDATE_CHALLENGE);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -277,7 +272,7 @@ function BasicModal({ challenge, huntId }) {
 }
 
 const ChallengeList = ({ challenges = [], huntId }) => {
-  const [deleteChallenge, { error }] = useMutation(DELETE_CHALLENGE);
+  const [deleteChallenge] = useMutation(DELETE_CHALLENGE);
 
   if (!challenges.length) {
     return <h3>No Challenges Yet</h3>;
