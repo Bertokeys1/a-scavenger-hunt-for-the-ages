@@ -30,7 +30,7 @@ Challenges can be created in the hunt the user created in profile. In the hunt p
 
 
 ![Desktop view screenshot of homepage](/client/src/assets/Readme.png)
-![mobileview](/client/src/assets/)
+![mobileview](/client/src/assets/mobile.jpg)
 
 ## User Story
 
