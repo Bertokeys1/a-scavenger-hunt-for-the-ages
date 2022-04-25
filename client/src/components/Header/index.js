@@ -8,7 +8,11 @@ import ExploreIcon from '@mui/icons-material/Explore';
 import AddIcon from '@mui/icons-material/Add';
 
 const style = {
-  background: "#800020"
+  background: "#800020",
+  button: {
+    fontFamily: "Amatic SC, cursive",
+    fontSize: 20,
+  }
 }
 
 const Header = () => {
@@ -29,10 +33,7 @@ const Header = () => {
           {Auth.loggedIn() ? (
             <>
               <Button 
-              sx={{
-                fontFamily: 'Amatic SC, cursive',
-                fontSize:20,
-              }}   
+              sx={style.button}   
               component={Link} 
               to="/me" 
               variant="contained" 
@@ -42,10 +43,7 @@ const Header = () => {
                 {Auth.getProfile().data.username}'s hunts
               </Button>
               <Button
-              sx={{
-                fontFamily: 'Amatic SC, cursive',
-                fontSize:20,
-              }}   
+              sx={style.button}   
               onClick={logout}
               variant="contained" 
               color="secondary" 
@@ -58,10 +56,7 @@ const Header = () => {
           ) : (
             <>
               <Button 
-              sx={{
-                fontFamily: 'Amatic SC, cursive',
-                fontSize:20,
-              }}   
+              sx={style.button}   
               component={Link} 
               to="/login" 
               variant="contained" 
@@ -71,10 +66,7 @@ const Header = () => {
                 Login
               </Button>
               <Button 
-              sx={{
-                fontFamily: 'Amatic SC, cursive',
-                fontSize:20,
-              }}   
+              sx={style.button}   
               component={Link} 
               to="/signup" 
               variant="contained" 

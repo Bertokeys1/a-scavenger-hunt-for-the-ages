@@ -24,6 +24,21 @@ const style = {
     display: "flex",
     justifyContent: "space-between",
   },
+  inputProps:{
+    style:{
+      fontFamily: "Amatic SC, cursive",
+      fontSize: 28,
+    }
+  },
+  inputLabelProps: {
+    style:{
+      fontFamily: "Amatic SC, cursive",
+    }
+  },
+  button: {
+    fontFamily: "Amatic SC, cursive",
+    fontSize: 20,
+  }
 };
 
 function CheckboxGroup({ challengeId, huntId, chezch }) {
@@ -129,10 +144,7 @@ function BasicModal({ challenge, huntId }) {
   return (
     <div>
       <Button
-        sx={{
-          fontFamily: "Amatic SC, cursive",
-          fontSize: 20,
-        }}
+        sx={style.button}
         size="large"
         variant="contained"
         color="primary"
@@ -146,17 +158,8 @@ function BasicModal({ challenge, huntId }) {
           <form>
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
               <TextField
-                inputProps={{
-                  style: {
-                    fontFamily: "Amatic SC, cursive",
-                    fontSize: 28,
-                  },
-                }}
-                InputLabelProps={{
-                  style: {
-                    fontFamily: "Amatic SC, cursive",
-                  },
-                }}
+                inputProps={style.inputProps}
+                InputLabelProps={style.inputLabelProps}
                 fullWidth
                 placeholder="Challenge Name"
                 name="challengeName"
@@ -165,17 +168,8 @@ function BasicModal({ challenge, huntId }) {
                 onChange={handleInputChange}
               />
               <TextField
-                inputProps={{
-                  style: {
-                    fontFamily: "Amatic SC, cursive",
-                    fontSize: 28,
-                  },
-                }}
-                InputLabelProps={{
-                  style: {
-                    fontFamily: "Amatic SC, cursive",
-                  },
-                }}
+                inputProps={style.inputProps}
+                InputLabelProps={style.inputLabelProps}
                 fullWidth
                 placeholder="Challenge task"
                 name="todo"
@@ -184,17 +178,8 @@ function BasicModal({ challenge, huntId }) {
                 onChange={handleInputChange}
               />
               <TextField
-                inputProps={{
-                  style: {
-                    fontFamily: "Amatic SC, cursive",
-                    fontSize: 28,
-                  },
-                }}
-                InputLabelProps={{
-                  style: {
-                    fontFamily: "Amatic SC, cursive",
-                  },
-                }}
+                inputProps={style.inputProps}
+                InputLabelProps={style.inputLabelProps}
                 fullWidth
                 placeholder="Street Adress"
                 name="address1"
@@ -203,17 +188,8 @@ function BasicModal({ challenge, huntId }) {
                 onChange={handleInputChange}
               />
               <TextField
-                inputProps={{
-                  style: {
-                    fontFamily: "Amatic SC, cursive",
-                    fontSize: 28,
-                  },
-                }}
-                InputLabelProps={{
-                  style: {
-                    fontFamily: "Amatic SC, cursive",
-                  },
-                }}
+                inputProps={style.inputProps}
+                InputLabelProps={style.inputLabelProps}
                 fullWidth
                 placeholder="Building/Unit number"
                 name="address2"
@@ -222,17 +198,8 @@ function BasicModal({ challenge, huntId }) {
                 onChange={handleInputChange}
               />
               <TextField
-                inputProps={{
-                  style: {
-                    fontFamily: "Amatic SC, cursive",
-                    fontSize: 28,
-                  },
-                }}
-                InputLabelProps={{
-                  style: {
-                    fontFamily: "Amatic SC, cursive",
-                  },
-                }}
+                inputProps={style.inputProps}
+                InputLabelProps={style.inputLabelProps}
                 fullWidth
                 placeholder="City"
                 name="city"
@@ -241,17 +208,8 @@ function BasicModal({ challenge, huntId }) {
                 onChange={handleInputChange}
               />
               <TextField
-                inputProps={{
-                  style: {
-                    fontFamily: "Amatic SC, cursive",
-                    fontSize: 28,
-                  },
-                }}
-                InputLabelProps={{
-                  style: {
-                    fontFamily: "Amatic SC, cursive",
-                  },
-                }}
+                inputProps={style.inputProps}
+                InputLabelProps={style.inputLabelProps}
                 fullWidth
                 placeholder="State"
                 name="state"
@@ -260,17 +218,8 @@ function BasicModal({ challenge, huntId }) {
                 onChange={handleInputChange}
               />
               <TextField
-                inputProps={{
-                  style: {
-                    fontFamily: "Amatic SC, cursive",
-                    fontSize: 28,
-                  },
-                }}
-                InputLabelProps={{
-                  style: {
-                    fontFamily: "Amatic SC, cursive",
-                  },
-                }}
+                inputProps={style.inputProps}
+                InputLabelProps={style.inputLabelProps}
                 fullWidth
                 placeholder="Zip Code"
                 name="zipCode"
@@ -280,10 +229,7 @@ function BasicModal({ challenge, huntId }) {
               />
             </Typography>
             <Button
-              sx={{
-                fontFamily: "Amatic SC, cursive",
-                fontSize: 20,
-              }}
+              sx={style.button}
               size="large"
               onClick={handleFormSubmit}
               variant="contained"
@@ -321,10 +267,7 @@ const ChallengeList = ({ challenges = [], huntId }) => {
                 <BasicModal challenge={challenge} huntId={huntId} />
                 <div>
                   <Button
-                    sx={{
-                      fontFamily: "Amatic SC, cursive",
-                      fontSize: 20,
-                    }}
+                    sx={style.button}
                     size="large"
                     onClick={async () => {
                       try {
