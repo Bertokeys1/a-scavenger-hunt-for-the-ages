@@ -24,6 +24,7 @@ const style = {
   flexbox: {
     display: "flex",
     justifyContent: "space-between",
+    flexWrap: "wrap"
   },
   inputProps:{
     style:{
@@ -273,7 +274,7 @@ const ChallengeList = ({ challenges = [], huntId }) => {
                 {challenge.challengeName}
               </h2>
 
-              <div className="display-flex">
+              <div className="display-flex flex-wrap">
                 <BasicModal challenge={challenge} huntId={huntId} />
                 <div>
                   <Button

@@ -23,6 +23,7 @@ const style = {
   flexbox: {
     display: "flex",
     justifyContent: "space-between",
+    flexWrap: "wrap",
     marginTop: "auto",
   },
   inputProps:{
@@ -157,7 +158,7 @@ const HuntList = ( {hunts, title,} ) => {
                 
             </h2>
             </div>
-            <div className="display-flex align-items-center">
+            <div className="display-flex align-items-center flex-wrap">
             <BasicModal huntName={hunt.huntName} huntId={hunt._id}/>
             <div>
                 <Button 
