@@ -17,14 +17,13 @@ const style = {
     transform: 'translate(-50%, -50%)',
     width: 400,
     bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
     p: 4,
   },
 
   flexbox: {
     display: "flex",
     justifyContent: "space-between",
+    marginTop: "auto",
   },
 };
 
@@ -127,12 +126,12 @@ const HuntList = ( {hunts, title,} ) => {
       {hunts&&
         hunts.map((hunt) =>
          (
-          <div key={hunt._id} className="card mb-3 bg-primary p-3" style={style.flexbox}>
+          <div key={hunt._id} className="card mb-3 p-3" style={style.flexbox}>
             <div>
-            <h4 className="display-flex card-header bg-primary text-light p-2 m-0">
+            <h4 className="display-flex card-header text-dark p-2 m-0">
               
                 <Link
-                  className="text-light"
+                  className="text-dark"
                   to={`/hunts/${hunt._id}`}
 
                 >
