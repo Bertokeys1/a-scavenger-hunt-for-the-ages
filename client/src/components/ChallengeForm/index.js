@@ -4,6 +4,25 @@ import { CREATE_CHALLENGE} from "../../utils/mutations";
 import {Button, TextField} from '@mui/material';
 import SaveIcon from "@mui/icons-material/Save";
 
+const style = {
+  inputProps:{
+    style:{
+      fontFamily: "Amatic SC, cursive",
+      fontSize: 28,
+    }
+  },
+  inputLabelProps: {
+    style:{
+      fontFamily: "Amatic SC, cursive",
+    }
+  },
+  button: {
+    fontFamily: "Amatic SC, cursive",
+    fontSize: 20,
+    margin:.5
+  }
+};
+
 const ChallengeForm = ({huntId}) => {
 
   const [formData, setFormData] = useState({
@@ -66,13 +85,8 @@ const ChallengeForm = ({huntId}) => {
             {(
               <form>
                  <TextField
-                  inputProps={{style: {
-                    fontFamily: 'Amatic SC, cursive',
-                    fontSize: 28
-                  }}} 
-                  InputLabelProps={{style: {
-                    fontFamily: 'Amatic SC, cursive',
-                  }}}
+                  inputProps={style.inputProps} 
+                  InputLabelProps={style.inputLabelProps}
                   fullWidth 
                   placeholder="Challenge Name"
                   name="challengeName"
@@ -81,13 +95,8 @@ const ChallengeForm = ({huntId}) => {
                   onChange={handleInputChange}
                 />
                  <TextField
-                  inputProps={{style: {
-                    fontFamily: 'Amatic SC, cursive',
-                    fontSize: 28
-                  }}} 
-                  InputLabelProps={{style: {
-                    fontFamily: 'Amatic SC, cursive',
-                  }}}
+                  inputProps={style.inputProps} 
+                  InputLabelProps={style.inputLabelProps}
                   fullWidth
                   placeholder="Challenge task"
                   name="todo"
@@ -96,13 +105,8 @@ const ChallengeForm = ({huntId}) => {
                   onChange={handleInputChange}
                 />
                 <TextField
-                  inputProps={{style: {
-                    fontFamily: 'Amatic SC, cursive',
-                    fontSize: 28
-                  }}} 
-                  InputLabelProps={{style: {
-                    fontFamily: 'Amatic SC, cursive',
-                  }}}
+                  inputProps={style.inputProps} 
+                  InputLabelProps={style.inputLabelProps}
                   fullWidth
                   placeholder="Street Adress"
                   name="address1"
@@ -111,13 +115,8 @@ const ChallengeForm = ({huntId}) => {
                   onChange={handleInputChange}
                 />
                 <TextField
-                  inputProps={{style: {
-                    fontFamily: 'Amatic SC, cursive',
-                    fontSize: 28
-                  }}} 
-                  InputLabelProps={{style: {
-                    fontFamily: 'Amatic SC, cursive',
-                  }}}
+                  inputProps={style.inputProps} 
+                  InputLabelProps={style.inputLabelProps}
                   fullWidth
                   placeholder="Building/Unit number"
                   name="address2"
@@ -126,13 +125,8 @@ const ChallengeForm = ({huntId}) => {
                   onChange={handleInputChange}
                 />
                 <TextField
-                  inputProps={{style: {
-                    fontFamily: 'Amatic SC, cursive',
-                    fontSize: 28
-                  }}} 
-                  InputLabelProps={{style: {
-                    fontFamily: 'Amatic SC, cursive',
-                  }}}
+                  inputProps={style.inputProps} 
+                  InputLabelProps={style.inputLabelProps}
                   fullWidth
                   placeholder="City"
                   name="city"
@@ -141,13 +135,8 @@ const ChallengeForm = ({huntId}) => {
                   onChange={handleInputChange}
                 />
                 <TextField
-                  inputProps={{style: {
-                    fontFamily: 'Amatic SC, cursive',
-                    fontSize: 28
-                  }}} 
-                  InputLabelProps={{style: {
-                    fontFamily: 'Amatic SC, cursive',
-                  }}}
+                  inputProps={style.inputProps} 
+                  InputLabelProps={style.inputLabelProps}
                   fullWidth
                   placeholder="State"
                   name="state"
@@ -156,13 +145,8 @@ const ChallengeForm = ({huntId}) => {
                   onChange={handleInputChange}
                 />
                 <TextField
-                  inputProps={{style: {
-                    fontFamily: 'Amatic SC, cursive',
-                    fontSize: 28
-                  }}} 
-                  InputLabelProps={{style: {
-                    fontFamily: 'Amatic SC, cursive',
-                  }}}
+                  inputProps={style.inputProps} 
+                  InputLabelProps={style.inputLabelProps}
                   fullWidth
                   placeholder="Zip Code"
                   name="zipCode"
@@ -171,10 +155,7 @@ const ChallengeForm = ({huntId}) => {
                   onChange={handleInputChange}
                 />
                 <Button
-                  sx={{
-                    fontFamily: 'Amatic SC, cursive',
-                    fontSize:20,
-                  }}   
+                  sx={style.button}   
                   fullWidth
                   onClick={handleFormSubmit} 
                   variant="contained" 

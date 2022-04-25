@@ -23,8 +23,25 @@ const style = {
   flexbox: {
     display: "flex",
     justifyContent: "space-between",
+    flexWrap: "wrap",
     marginTop: "auto",
   },
+  inputProps:{
+    style:{
+      fontFamily: "Amatic SC, cursive",
+      fontSize: 28,
+    }
+  },
+  inputLabelProps: {
+    style:{
+      fontFamily: "Amatic SC, cursive",
+    }
+  },
+  button: {
+    fontFamily: "Amatic SC, cursive",
+    fontSize: 20,
+    margin:.5
+  }
 };
 
 function BasicModal({huntName, huntId}) {
@@ -64,10 +81,7 @@ function BasicModal({huntName, huntId}) {
   return (
     <div>
       <Button 
-        sx={{
-          fontFamily: 'Amatic SC, cursive',
-          fontSize:20,
-        }}    
+        sx={style.button}    
         variant="contained" 
         color="primary" 
         size="large" 
@@ -88,13 +102,8 @@ function BasicModal({huntName, huntId}) {
           <form>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
           <TextField
-            inputProps={{style: {
-              fontFamily: 'Amatic SC, cursive',
-              fontSize: 20
-            }}} 
-            InputLabelProps={{style: {
-              fontFamily: 'Amatic SC, cursive',
-            }}}
+            inputProps={style.inputProps}
+            InputLabelProps={style.inputLabelProps}
             fullWidth 
             placeholder="Scavenger Hunt Name"
             name="huntName"
@@ -104,10 +113,7 @@ function BasicModal({huntName, huntId}) {
           />
           </Typography>  
           <Button
-            sx={{
-              fontFamily: 'Amatic SC, cursive',
-              fontSize:20,
-            }}   
+            sx={style.button}   
             onClick={handleFormSubmit} 
             variant="contained" 
             color="primary" 
@@ -152,14 +158,11 @@ const HuntList = ( {hunts, title,} ) => {
                 
             </h2>
             </div>
-            <div className="display-flex align-items-center">
+            <div className="display-flex align-items-center flex-wrap">
             <BasicModal huntName={hunt.huntName} huntId={hunt._id}/>
             <div>
                 <Button 
-                  sx={{
-                    fontFamily: 'Amatic SC, cursive',
-                    fontSize:20,
-                  }}   
+                  sx={style.button}   
                   huntId={hunt._id}
                   onClick={async () => {
                     try {

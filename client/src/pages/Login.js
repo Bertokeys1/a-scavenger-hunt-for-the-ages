@@ -6,6 +6,25 @@ import ExploreIcon from '@mui/icons-material/Explore';
 import { Button, TextField } from "@mui/material"
 import Auth from '../utils/auth';
 
+const style = {
+  inputProps:{
+    style:{
+      fontFamily: "Amatic SC, cursive",
+      fontSize: 28,
+    }
+  },
+  inputLabelProps: {
+    style:{
+      fontFamily: "Amatic SC, cursive",
+    }
+  },
+  button: {
+    fontFamily: "Amatic SC, cursive",
+    fontSize: 20,
+    margin:.5
+  }
+};
+
 const Login = (props) => {
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [login, { error, data }] = useMutation(LOGIN_USER);
@@ -55,13 +74,8 @@ const Login = (props) => {
             ) : (
               <form>
                 <TextField
-                  inputProps={{style: {
-                    fontFamily: 'Amatic SC, cursive',
-                    fontSize: 28
-                  }}}   
-                  InputLabelProps={{style: {
-                    fontFamily: 'Amatic SC, cursive',
-                  }}} 
+                  inputProps={style.inputProps}   
+                  InputLabelProps={style.inputLabelProps} 
                   fullWidth 
                   placeholder="Your email"
                   name="email"
@@ -71,13 +85,8 @@ const Login = (props) => {
                   onChange={handleChange}
                 />
                 <TextField
-                  inputProps={{style: {
-                    fontFamily: 'Amatic SC, cursive',
-                    fontSize: 28
-                  }}}
-                  InputLabelProps={{style: {
-                    fontFamily: 'Amatic SC, cursive',
-                  }}} 
+                  inputProps={style.inputProps}   
+                  InputLabelProps={style.inputLabelProps} 
                   fullWidth 
                   placeholder="******"
                   name="password"
@@ -87,10 +96,7 @@ const Login = (props) => {
                   onChange={handleChange}
                 />
                 <Button 
-                  sx={{
-                    fontFamily: 'Amatic SC, cursive',
-                    fontSize:20,
-                  }}   
+                  sx={style.button}   
                   fullWidth
                   size="large"
                   onClick={handleFormSubmit} 

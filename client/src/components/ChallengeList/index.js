@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { CHECK_CHALLENGE, DELETE_CHALLENGE, UPDATE_CHALLENGE } from "../../utils/mutations";
 
-import { Button, TextField, Box, Typography, Modal, Checkbox, FormControlLabel } from "@mui/material";
+import { Button, TextField, Box, Typography, Modal, Checkbox, FormControlLabel, Container } from "@mui/material";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import SaveIcon from "@mui/icons-material/Save";
@@ -23,8 +24,32 @@ const style = {
   flexbox: {
     display: "flex",
     justifyContent: "space-between",
+    flexWrap: "wrap"
   },
+  inputProps:{
+    style:{
+      fontFamily: "Amatic SC, cursive",
+      fontSize: 28,
+    }
+  },
+  inputLabelProps: {
+    style:{
+      fontFamily: "Amatic SC, cursive",
+    }
+  },
+  button: {
+    fontFamily: "Amatic SC, cursive",
+    fontSize: 20,
+    margin:.5
+  }
 };
+
+const theme = createTheme({
+  typography: {
+    fontFamily: "Amatic SC, cursive",
+    fontSize: "1.5rem"
+  },
+});
 
 function CheckboxGroup({ challengeId, huntId, chezch }) {
   const [checked, setChecked] = useState(true);
@@ -129,10 +154,7 @@ function BasicModal({ challenge, huntId }) {
   return (
     <div>
       <Button
-        sx={{
-          fontFamily: "Amatic SC, cursive",
-          fontSize: 20,
-        }}
+        sx={style.button}
         size="large"
         variant="contained"
         color="primary"
@@ -146,17 +168,8 @@ function BasicModal({ challenge, huntId }) {
           <form>
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
               <TextField
-                inputProps={{
-                  style: {
-                    fontFamily: "Amatic SC, cursive",
-                    fontSize: 28,
-                  },
-                }}
-                InputLabelProps={{
-                  style: {
-                    fontFamily: "Amatic SC, cursive",
-                  },
-                }}
+                inputProps={style.inputProps}
+                InputLabelProps={style.inputLabelProps}
                 fullWidth
                 placeholder="Challenge Name"
                 name="challengeName"
@@ -165,17 +178,8 @@ function BasicModal({ challenge, huntId }) {
                 onChange={handleInputChange}
               />
               <TextField
-                inputProps={{
-                  style: {
-                    fontFamily: "Amatic SC, cursive",
-                    fontSize: 28,
-                  },
-                }}
-                InputLabelProps={{
-                  style: {
-                    fontFamily: "Amatic SC, cursive",
-                  },
-                }}
+                inputProps={style.inputProps}
+                InputLabelProps={style.inputLabelProps}
                 fullWidth
                 placeholder="Challenge task"
                 name="todo"
@@ -184,17 +188,8 @@ function BasicModal({ challenge, huntId }) {
                 onChange={handleInputChange}
               />
               <TextField
-                inputProps={{
-                  style: {
-                    fontFamily: "Amatic SC, cursive",
-                    fontSize: 28,
-                  },
-                }}
-                InputLabelProps={{
-                  style: {
-                    fontFamily: "Amatic SC, cursive",
-                  },
-                }}
+                inputProps={style.inputProps}
+                InputLabelProps={style.inputLabelProps}
                 fullWidth
                 placeholder="Street Adress"
                 name="address1"
@@ -203,17 +198,8 @@ function BasicModal({ challenge, huntId }) {
                 onChange={handleInputChange}
               />
               <TextField
-                inputProps={{
-                  style: {
-                    fontFamily: "Amatic SC, cursive",
-                    fontSize: 28,
-                  },
-                }}
-                InputLabelProps={{
-                  style: {
-                    fontFamily: "Amatic SC, cursive",
-                  },
-                }}
+                inputProps={style.inputProps}
+                InputLabelProps={style.inputLabelProps}
                 fullWidth
                 placeholder="Building/Unit number"
                 name="address2"
@@ -222,17 +208,8 @@ function BasicModal({ challenge, huntId }) {
                 onChange={handleInputChange}
               />
               <TextField
-                inputProps={{
-                  style: {
-                    fontFamily: "Amatic SC, cursive",
-                    fontSize: 28,
-                  },
-                }}
-                InputLabelProps={{
-                  style: {
-                    fontFamily: "Amatic SC, cursive",
-                  },
-                }}
+                inputProps={style.inputProps}
+                InputLabelProps={style.inputLabelProps}
                 fullWidth
                 placeholder="City"
                 name="city"
@@ -241,17 +218,8 @@ function BasicModal({ challenge, huntId }) {
                 onChange={handleInputChange}
               />
               <TextField
-                inputProps={{
-                  style: {
-                    fontFamily: "Amatic SC, cursive",
-                    fontSize: 28,
-                  },
-                }}
-                InputLabelProps={{
-                  style: {
-                    fontFamily: "Amatic SC, cursive",
-                  },
-                }}
+                inputProps={style.inputProps}
+                InputLabelProps={style.inputLabelProps}
                 fullWidth
                 placeholder="State"
                 name="state"
@@ -260,17 +228,8 @@ function BasicModal({ challenge, huntId }) {
                 onChange={handleInputChange}
               />
               <TextField
-                inputProps={{
-                  style: {
-                    fontFamily: "Amatic SC, cursive",
-                    fontSize: 28,
-                  },
-                }}
-                InputLabelProps={{
-                  style: {
-                    fontFamily: "Amatic SC, cursive",
-                  },
-                }}
+                inputProps={style.inputProps}
+                InputLabelProps={style.inputLabelProps}
                 fullWidth
                 placeholder="Zip Code"
                 name="zipCode"
@@ -280,10 +239,7 @@ function BasicModal({ challenge, huntId }) {
               />
             </Typography>
             <Button
-              sx={{
-                fontFamily: "Amatic SC, cursive",
-                fontSize: 20,
-              }}
+              sx={style.button}
               size="large"
               onClick={handleFormSubmit}
               variant="contained"
@@ -308,6 +264,7 @@ const ChallengeList = ({ challenges = [], huntId }) => {
 
   return (
     <div>
+      <ThemeProvider theme={theme}>
       {challenges &&
         challenges.map((challenge) => (
           <div key={challenge._id} className="card mb-3">
@@ -317,14 +274,11 @@ const ChallengeList = ({ challenges = [], huntId }) => {
                 {challenge.challengeName}
               </h2>
 
-              <div className="display-flex">
+              <div className="display-flex flex-wrap">
                 <BasicModal challenge={challenge} huntId={huntId} />
                 <div>
                   <Button
-                    sx={{
-                      fontFamily: "Amatic SC, cursive",
-                      fontSize: 20,
-                    }}
+                    sx={style.button}
                     size="large"
                     onClick={async () => {
                       try {
@@ -347,21 +301,30 @@ const ChallengeList = ({ challenges = [], huntId }) => {
                 </div>
               </div>
             </div>
-            <p>{challenge.todo}</p>
-            <p>{challenge.location?.address1}</p>
-            <p>{challenge.location?.address2}</p>
-            <p>{challenge.location?.city}</p>
-            <p>{challenge.location?.state}</p>
-            <p>{challenge.location?.zipCode}</p>
-
-            <p>
-              Link to Google Maps:{" "}
-              <a href={`https://www.google.com/maps/search/?api=1&query=${challenge.location?.address1} ${challenge.location?.address2} ${challenge.location?.city} ${challenge.location?.state} ${challenge.location?.zipCode}`} target="_blank" rel="noreferrer">
-                Link
-              </a>
-            </p>
+            <Container>
+            <p>Task: {challenge.todo}</p>
+            <Box
+            sx={{
+                
+              }}
+            >
+              <Typography>
+              Location:<br/>
+              &emsp;{challenge.location?.address1}<br/>
+              &emsp;{challenge.location?.address2}<br/>
+              &emsp;{challenge.location?.city}, {challenge.location?.state} {challenge.location?.zipCode}
+              </Typography>
+              <p>
+                Link to Google Maps:{" "}
+                <a href={`https://www.google.com/maps/search/?api=1&query=${challenge.location?.address1} ${challenge.location?.address2} ${challenge.location?.city} ${challenge.location?.state} ${challenge.location?.zipCode}`} target="_blank" rel="noreferrer">
+                  Link
+                </a>
+              </p>
+            </Box>
+            </Container>
           </div>
         ))}
+        </ThemeProvider>
     </div>
   );
 };

@@ -4,6 +4,26 @@ import { CREATE_HUNT } from "../../utils/mutations";
 import { Button, TextField } from "@mui/material"
 import SaveIcon from "@mui/icons-material/Save";
 
+const style = {
+  inputProps:{
+    style:{
+      fontFamily: "Amatic SC, cursive",
+      fontSize: 30,
+      fontType: "Bold"
+    }
+  },
+  inputLabelProps: {
+    style:{
+      fontFamily: "Amatic SC, cursive",
+    }
+  },
+  button: {
+    fontFamily: "Amatic SC, cursive",
+    fontSize: 20,
+    margin:.5
+  }
+};
+
 const HuntForm = () => {
   const [formData, setFormData] = useState({
     huntName: "",
@@ -42,14 +62,8 @@ const HuntForm = () => {
             {(
               <form>
                 <TextField
-                  inputProps={{style: {
-                    fontFamily: 'Amatic SC, cursive',
-                    fontSize: 30,
-                    fontType: "Bold"
-                  }}} 
-                  InputLabelProps={{style: {
-                    fontFamily: 'Amatic SC, cursive',
-                  }}}
+                  inputProps={style.inputProps} 
+                  InputLabelProps={style.inputLabelProps}
                   fullWidth 
                   placeholder="Scavenger Hunt Name"
                   name="huntName"
@@ -58,10 +72,7 @@ const HuntForm = () => {
                   onChange={handleInputChange}
                 /> 
                 <Button
-                  sx={{
-                    fontFamily: 'Amatic SC, cursive',
-                    fontSize:20,
-                  }}   
+                  sx={style.button}   
                   fullWidth
                   onClick={handleFormSubmit} 
                   variant="contained" 

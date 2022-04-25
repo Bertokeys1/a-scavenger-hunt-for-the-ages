@@ -8,6 +8,25 @@ import { Button, TextField, Typography } from "@mui/material"
 import Auth from '../utils/auth';
 import { palette } from '@mui/system';
 
+const style = {
+  inputProps:{
+    style:{
+      fontFamily: "Amatic SC, cursive",
+      fontSize: 28,
+    }
+  },
+  inputLabelProps: {
+    style:{
+      fontFamily: "Amatic SC, cursive",
+    }
+  },
+  button: {
+    fontFamily: "Amatic SC, cursive",
+    fontSize: 20,
+    margin:.5
+  }
+};
+
 const Signup = () => {
   const [formState, setFormState] = useState({
     username: '',
@@ -55,13 +74,8 @@ const Signup = () => {
               <form>
                 <TextField
                   fullWidth 
-                  inputProps={{style: {
-                    fontFamily: 'Amatic SC, cursive',
-                    fontSize: 28
-                  }}} 
-                  InputLabelProps={{style: {
-                    fontFamily: 'Amatic SC, cursive',
-                  }}}
+                  inputProps={style.inputProps} 
+                  InputLabelProps={style.inputLabelProps}
                   placeholder="Your username"
                   name="username"
                   type="text"
@@ -71,13 +85,8 @@ const Signup = () => {
                 />
                 <TextField
                   fullWidth
-                  inputProps={{style: {
-                    fontFamily: 'Amatic SC, cursive',
-                    fontSize: 28
-                  }}} 
-                  InputLabelProps={{style: {
-                    fontFamily: 'Amatic SC, cursive',
-                  }}}
+                  inputProps={style.inputProps} 
+                  InputLabelProps={style.inputLabelProps}
                   placeholder="Your email"
                   name="email"
                   label="Email Address"
@@ -87,13 +96,8 @@ const Signup = () => {
                 />
                 <TextField
                   fullWidth
-                  inputProps={{style: {
-                    fontFamily: 'Amatic SC, cursive',
-                    fontSize: 28
-                  }}} 
-                  InputLabelProps={{style: {
-                    fontFamily: 'Amatic SC, cursive',
-                  }}}
+                  inputProps={style.inputProps} 
+                  InputLabelProps={style.inputLabelProps}
                   placeholder="******"
                   name="password"
                   type="password"
@@ -102,10 +106,7 @@ const Signup = () => {
                   onChange={handleChange}
                 />
                 <Button 
-                  sx={{
-                    fontFamily: 'Amatic SC, cursive',
-                    fontSize:20,
-                  }}   
+                  sx={style.button}   
                   fullWidth
                   size="large"
                   onClick={handleFormSubmit} 
