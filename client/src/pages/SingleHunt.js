@@ -25,7 +25,7 @@ const SingleHunt = () => {
 
   return (
     <div className="my-3" style={{ justifyContent: "center", paddingLeft: "12%", paddingTop: "18%", height: "30%", width: "80%"}}>
-      <h3 className="display-flex card-header bg-dark text-light p-2 m-0 ">
+      <h3 className="display-flex card-header text-light p-2 m-0 ">
         {hunt.huntName} <br />
       </h3>
       <div className="col-12 mb-5">
