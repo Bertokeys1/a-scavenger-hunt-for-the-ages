@@ -19,6 +19,7 @@ const style = {
   button: {
     fontFamily: "Amatic SC, cursive",
     fontSize: 20,
+    margin:.5
   }
 };
 
