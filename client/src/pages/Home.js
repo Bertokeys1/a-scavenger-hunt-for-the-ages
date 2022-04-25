@@ -8,7 +8,9 @@ const Home = () => {
       <Box
         component="img"
         sx={{
-          width: '100%'
+          width: '100%',
+          paddingTop: '20%',
+          paddingRight: '8%'
           
         }}
         alt="The house from the offer."

@@ -40,17 +40,15 @@ const Profile = () => {
   return (
     <div className= "my-5">
         <div className= "my-5">
-      <div className="flex-row justify-center m-5 my-5">
-        <h2 className="col-12 col-md-10 text-dark pb-3 pt-5 my-5">
+      <div className="flex-row justify-center m-5 my-5" style={{paddingTop: "7%"}}>
+        <h2 className="col-12 col-md-10 text-dark pt-5 my-5">
         {user.username}'s Hunts
         </h2>
 
         
         <div className="col-12 col-md-10 my-5">
           <HuntList
-            hunts={user.hunts}
-            title={`${user.username}'s Hunts`}
-            
+            hunts={user.hunts}  
             />
         </div>
         {!userParam && (
