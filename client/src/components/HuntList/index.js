@@ -8,6 +8,7 @@ import { Button, TextField, Box, Typography, Modal} from "@mui/material"
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import SaveIcon from "@mui/icons-material/Save";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const style = {
   modal: {
@@ -41,8 +42,25 @@ const style = {
     fontFamily: "Amatic SC, cursive",
     fontSize: 20,
     margin:.5
+  },
+  textfield:{
+    margin:.5
   }
 };
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#4A494A",
+    },
+    secondary: {
+      main: "#4A7B9D",
+    },
+    warning: {
+      main: "#800020"
+    }
+  }
+});
 
 function BasicModal({huntName, huntId}) {
   const [open, setOpen] = React.useState(false);
@@ -83,7 +101,7 @@ function BasicModal({huntName, huntId}) {
       <Button 
         sx={style.button}    
         variant="contained" 
-        color="primary" 
+        color="secondary" 
         size="large" 
         startIcon={<EditIcon />}
         onClick={handleOpen}>
@@ -102,6 +120,7 @@ function BasicModal({huntName, huntId}) {
           <form>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
           <TextField
+            sx={style.textfield}
             inputProps={style.inputProps}
             InputLabelProps={style.inputLabelProps}
             fullWidth 
@@ -116,7 +135,7 @@ function BasicModal({huntName, huntId}) {
             sx={style.button}   
             onClick={handleFormSubmit} 
             variant="contained" 
-            color="primary" 
+            color="secondary" 
             startIcon={<SaveIcon />}>
             Save      
           </Button>
@@ -139,6 +158,7 @@ const HuntList = ( {hunts, title,} ) => {
   }
 
   return (
+    <ThemeProvider theme={theme}>
     <div>
       {/* {<h3>{title}</h3>} */}
       {hunts&&
@@ -179,7 +199,7 @@ const HuntList = ( {hunts, title,} ) => {
                     }
                   }} 
                   variant="contained" 
-                  color="warning" 
+                  color="primary" 
                   size="large" 
                   startIcon={<DeleteIcon />}>
                   Discard      
@@ -189,6 +209,7 @@ const HuntList = ( {hunts, title,} ) => {
           </div>
         ))}
     </div>
+    </ThemeProvider>
   );
 };
 

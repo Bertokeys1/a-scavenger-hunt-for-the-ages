@@ -41,6 +41,9 @@ const style = {
     fontFamily: "Amatic SC, cursive",
     fontSize: 20,
     margin:.5
+  },
+  textfield:{
+    margin:.5
   }
 };
 
@@ -49,6 +52,17 @@ const theme = createTheme({
     fontFamily: "Amatic SC, cursive",
     fontSize: "1.5rem"
   },
+  palette: {
+    primary: {
+      main: "#4A494A",
+    },
+    secondary: {
+      main: "#4A7B9D",
+    },
+    warning: {
+      main: "#800020"
+    }
+  }
 });
 
 function CheckboxGroup({ challengeId, huntId, chezch }) {
@@ -81,7 +95,7 @@ function CheckboxGroup({ challengeId, huntId, chezch }) {
               setChecked(e.target.checked);
               handleCheck(e);
             }}
-            color="primary"
+            color="secondary"
             inputProps={{
               huntId: huntId,
               challengeId: challengeId,
@@ -157,7 +171,7 @@ function BasicModal({ challenge, huntId }) {
         sx={style.button}
         size="large"
         variant="contained"
-        color="primary"
+        color="secondary"
         startIcon={<EditIcon />}
         onClick={handleOpen}
       >
@@ -168,6 +182,7 @@ function BasicModal({ challenge, huntId }) {
           <form>
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
               <TextField
+                sx={style.textfield}
                 inputProps={style.inputProps}
                 InputLabelProps={style.inputLabelProps}
                 fullWidth
@@ -178,6 +193,7 @@ function BasicModal({ challenge, huntId }) {
                 onChange={handleInputChange}
               />
               <TextField
+                sx={style.textfield}
                 inputProps={style.inputProps}
                 InputLabelProps={style.inputLabelProps}
                 fullWidth
@@ -188,6 +204,7 @@ function BasicModal({ challenge, huntId }) {
                 onChange={handleInputChange}
               />
               <TextField
+                sx={style.textfield}
                 inputProps={style.inputProps}
                 InputLabelProps={style.inputLabelProps}
                 fullWidth
@@ -198,6 +215,7 @@ function BasicModal({ challenge, huntId }) {
                 onChange={handleInputChange}
               />
               <TextField
+                sx={style.textfield}
                 inputProps={style.inputProps}
                 InputLabelProps={style.inputLabelProps}
                 fullWidth
@@ -208,6 +226,7 @@ function BasicModal({ challenge, huntId }) {
                 onChange={handleInputChange}
               />
               <TextField
+                sx={style.textfield}
                 inputProps={style.inputProps}
                 InputLabelProps={style.inputLabelProps}
                 fullWidth
@@ -218,6 +237,7 @@ function BasicModal({ challenge, huntId }) {
                 onChange={handleInputChange}
               />
               <TextField
+                sx={style.textfield}
                 inputProps={style.inputProps}
                 InputLabelProps={style.inputLabelProps}
                 fullWidth
@@ -228,6 +248,7 @@ function BasicModal({ challenge, huntId }) {
                 onChange={handleInputChange}
               />
               <TextField
+                sx={style.textfield}
                 inputProps={style.inputProps}
                 InputLabelProps={style.inputLabelProps}
                 fullWidth
@@ -243,7 +264,7 @@ function BasicModal({ challenge, huntId }) {
               size="large"
               onClick={handleFormSubmit}
               variant="contained"
-              color="primary"
+              color="secondary"
               startIcon={<SaveIcon />}
             >
               Save
@@ -293,7 +314,7 @@ const ChallengeList = ({ challenges = [], huntId }) => {
                       }
                     }}
                     variant="contained"
-                    color="warning"
+                    color="primary"
                     startIcon={<DeleteIcon />}
                   >
                     Discard
