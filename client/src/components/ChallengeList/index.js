@@ -244,10 +244,10 @@ const ChallengeList = ({ challenges = [], huntId }) => {
       {challenges &&
         challenges.map((challenge) => (
             <div key={challenge._id} className="card mb-3">
-              <div className="card mb-3 bg-primary p-3" style={style.flexbox}>
+              <div className="card mb-3 p-3" style={style.flexbox}>
 
            
-              <h4 className="card-header bg-primary text-light p-2 display-flex m-0">
+              <h4 className="p-2 display-flex m-0">
                 <CheckboxGroup challengeId={challenge._id} huntId={huntId} chezch={challenge.check}/>
                 {challenge.challengeName}
              
