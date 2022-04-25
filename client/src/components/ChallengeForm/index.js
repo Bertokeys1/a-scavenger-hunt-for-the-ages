@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { CREATE_CHALLENGE} from "../../utils/mutations";
-import TextField from '@mui/material/TextField';
+import {Button, TextField} from '@mui/material';
+import SaveIcon from "@mui/icons-material/Save";
 
 const ChallengeForm = ({huntId}) => {
 
@@ -63,7 +64,7 @@ const ChallengeForm = ({huntId}) => {
           <h4 className="card-header bg-dark text-light p-2">New Challenge</h4>
           <div className="card-body">
             {(
-              <form onSubmit={handleFormSubmit}>
+              <form>
                  <TextField
                   fullWidth 
                   placeholder="Challenge Name"
@@ -120,69 +121,14 @@ const ChallengeForm = ({huntId}) => {
                   value={formData.zipCode}
                   onChange={handleInputChange}
                 />
-                {/* <input
-                  className="form-input"
-                  placeholder="Challenge Name"
-                  name="challengeName"
-                  type="text"
-                  value={formData.challengeName}
-                  onChange={handleInputChange}
-                ></input>
-                <input
-                  className="form-input"
-                  placeholder="Challenge task"
-                  name="todo"
-                  type="text"
-                  value={formData.todo}
-                  onChange={handleInputChange}
-                ></input>
-                <input
-                  className="form-input"
-                  placeholder="Street Adress"
-                  name="address1"
-                  type="text"
-                  value={formData.address1}
-                  onChange={handleInputChange}
-                />
-                <input
-                  className="form-input"
-                  placeholder="Building/Unit number"
-                  name="address2"
-                  type="text"
-                  value={formData.address2}
-                  onChange={handleInputChange}
-                />
-                <input
-                  className="form-input"
-                  placeholder="City"
-                  name="city"
-                  type="text"
-                  value={formData.city}
-                  onChange={handleInputChange}
-                />
-                <input
-                  className="form-input"
-                  placeholder="State"
-                  name="state"
-                  type="text"
-                  value={formData.state}
-                  onChange={handleInputChange}
-                />
-                <input
-                  className="form-input"
-                  placeholder="Zip Code"
-                  name="zipCode"
-                  type="text"
-                  value={formData.zipCode}
-                  onChange={handleInputChange}
-                /> */}
-                <button
-                  className="btn btn-block btn-primary"
-                  style={{ cursor: "pointer" }}
-                  type="submit"
-                >
-                  Submit
-                </button>
+                <Button
+                  fullWidth
+                  onClick={handleFormSubmit} 
+                  variant="contained" 
+                  color="primary" 
+                  startIcon={<SaveIcon />}>
+                  Submit      
+                </Button>
               </form>
             )}
 

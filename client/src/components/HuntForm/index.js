@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { CREATE_HUNT } from "../../utils/mutations";
+import { Button, TextField } from "@mui/material"
+import SaveIcon from "@mui/icons-material/Save";
 
 const HuntForm = () => {
   const [formData, setFormData] = useState({
     huntName: "",
   });
-  // let navigate = useNavigate();
-
+  
   const [createHunt, { error }] = useMutation(CREATE_HUNT);
 
   const handleInputChange = (event) => {
@@ -39,22 +40,23 @@ const HuntForm = () => {
           <h4 className="card-header bg-dark text-light p-2">New Hunt</h4>
           <div className="card-body">
             {(
-              <form onSubmit={handleFormSubmit}>
-                <input
-                  className="form-input"
-                  placeholder="Your Hunts's Name"
-                  name="huntname"
-                  type="text"
+              <form>
+                <TextField
+                  fullWidth 
+                  placeholder="Scavenger Hunt Name"
+                  name="huntName"
+                  label="Scavenger Hunt Name"
                   value={formData.huntName}
                   onChange={handleInputChange}
-                />
-                <button
-                  className="btn btn-block btn-primary"
-                  style={{ cursor: "pointer" }}
-                  type="submit"
-                >
-                  Submit
-                </button>
+                /> 
+                <Button
+                  fullWidth
+                  onClick={handleFormSubmit} 
+                  variant="contained" 
+                  color="primary" 
+                  startIcon={<SaveIcon />}>
+                  Submit      
+                </Button>
               </form>
             )}
 
