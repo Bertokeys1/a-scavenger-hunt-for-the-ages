@@ -1,36 +1,30 @@
 import React,  { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { Checkbox, FormControlLabel } from "@mui/material";
-import {CHECK_CHALLENGE, DELETE_CHALLENGE, UPDATE_CHALLENGE} from '../../utils/mutations'
-import {render} from 'react-dom'
+import {CHECK_CHALLENGE, DELETE_CHALLENGE, UPDATE_CHALLENGE} from '../../utils/mutations';
 
-import { Button } from "@mui/material"
+import { Button, TextField, Box, Typography, Modal, Checkbox, FormControlLabel  } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import SaveIcon from "@mui/icons-material/Save";
-import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
+
 
 const style = {
   modal: {
- 
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-},
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  },
 
-flexbox: {
-  display: "flex",
-  justifyContent: "space-between",
-},
+  flexbox: {
+    display: "flex",
+    justifyContent: "space-between",
+  },
 };
 
 function CheckboxGroup({challengeId, huntId, chezch}) {
@@ -106,7 +100,6 @@ function BasicModal({challenge, huntId}) {
     zipCode: zipCode,
     todo: todo,
   });
-  console.log(formData)
 
   const [updateChallenge, { error }] = useMutation(UPDATE_CHALLENGE);
 
@@ -284,23 +277,15 @@ const ChallengeList = ({ challenges = [], huntId }) => {
                 </div>
                 </div>
                 </div>
-                              <p>{challenge.location?.address1}</p>
+              <p>{challenge.todo}</p>
+              <p>{challenge.location?.address1}</p>
               <p>{challenge.location?.address2}</p>
               <p>{challenge.location?.city}</p>
               <p>{challenge.location?.state}</p>
               <p>{challenge.location?.zipCode}</p>
-              <p>{challenge.todo}</p>
               
               <p>Link to Google Maps: <a href={`https://www.google.com/maps/search/?api=1&query=${challenge.location?.address1} ${challenge.location?.address2} ${challenge.location?.city} ${challenge.location?.state} ${challenge.location?.zipCode}`}target="_blank" rel="noreferrer">Link</a></p>
               
-              {/* Possibly deletechallenge here if not on challengePage
-
-             <Link
-              className="btn btn-primary btn-block btn-squared"
-              to={`/challenge/${challenge._id}`}
-            >
-              Join the challenge.
-            </Link> */}
             </div>
         ))}
     </div>
