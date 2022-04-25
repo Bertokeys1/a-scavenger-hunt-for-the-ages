@@ -67,13 +67,12 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
-    updateHunt: async (_, { _id, data }, context) => {
+    updateHunt: async (_, { _id, huntName }, context) => {
       if (context.user) {
         const updatedHunt = await Hunt.findByIdAndUpdate(
           { _id },
           {
-            huntName: data.huntName,
-            challenges: data.challenges,
+            huntName: huntName,
           },
           { new: true }
         );

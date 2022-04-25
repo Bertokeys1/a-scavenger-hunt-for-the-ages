@@ -55,19 +55,6 @@ export const UPDATE_HUNT = gql`
   updateHunt(_id: $id, huntName: $huntName) {
     _id
     huntName
-    challenges {
-      _id
-      challengeName
-      location {
-        address1
-        address2
-        city
-        state
-        zipCode
-      }
-      todo
-      check
-    }
   }
 }
 `;
