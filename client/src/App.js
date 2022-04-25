@@ -49,7 +49,9 @@ const client = new ApolloClient({
 
 const style = {
   background: {
-    backgroundImage: `url(${Image})`
+    backgroundImage: `url(${Image})`,
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover"
   }
 }
 
