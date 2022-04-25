@@ -13,6 +13,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { Navigate, useNavigate } from 'react-router-dom';
+
 const style = {
   position: 'absolute',
   top: '50%',
@@ -59,8 +60,6 @@ function BasicModal({huntName, huntId}) {
     }
   };
 
-
-  console.log(huntName)
   return (
     <div>
       <Button 
@@ -69,7 +68,7 @@ function BasicModal({huntName, huntId}) {
       size="small" 
       startIcon={<EditIcon />}
       onClick={handleOpen}>
-        Edit Hunt
+        Rename Hunt
       </Button>
       <Modal
         huntName={huntName}
@@ -94,20 +93,13 @@ function BasicModal({huntName, huntId}) {
                   value={formData.huntName}
                   onChange={handleInputChange}
                 />
-                {/* <button
-                  className="btn btn-block btn-primary"
-                  style={{ cursor: "pointer" }}
-                  type="submit"
-                >
-                  Submit
-                </button> */}
           </Typography>  
                 <Button
                   onClick={handleFormSubmit} 
                   variant="contained" 
                   color="primary" 
                   startIcon={<SaveIcon />}>
-                  Submit      
+                  Save      
                 </Button>
           </form>
         </Box>

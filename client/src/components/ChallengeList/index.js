@@ -1,12 +1,29 @@
-import React from "react";
+import React,  { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { useState } from "react";
 import { Checkbox, FormControlLabel } from "@mui/material";
-import {CHECK_CHALLENGE, DELETE_CHALLENGE} from '../../utils/mutations'
+import {CHECK_CHALLENGE, DELETE_CHALLENGE, UPDATE_CHALLENGE} from '../../utils/mutations'
 import {render} from 'react-dom'
 
 import { Button } from "@mui/material"
 import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import SaveIcon from "@mui/icons-material/Save";
+
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 
 function CheckboxGroup({challengeId, huntId, chezch}) {
 
@@ -55,6 +72,165 @@ function CheckboxGroup({challengeId, huntId, chezch}) {
   );
 }
 
+function BasicModal({challenge, huntId}) {
+
+  const {
+    challengeName, 
+    todo, 
+    location: {
+      address1, 
+      address2, 
+      city, 
+      state, 
+      zipCode
+    }} = challenge
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  
+  const [formData, setFormData] = useState({
+    challengeName: challengeName,
+    address1: address1,
+    address2: address2,
+    city: city,
+    state: state,
+    zipCode: zipCode,
+    todo: todo,
+  });
+  console.log(formData)
+
+  const [updateChallenge, { error }] = useMutation(UPDATE_CHALLENGE);
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      handleClose()
+      return await updateChallenge({
+        variables: {
+          huntId: huntId,
+          challengeId: challenge._id,
+          data: {
+            challengeName: formData.challengeName,
+            location:{
+              address1: formData.address1,
+              address2: formData.address2,
+              city: formData.city,
+              state: formData.state,
+              zipCode: formData.zipCode
+            },
+            todo: formData.todo
+          }},        
+      });
+
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  return (
+    <div>
+      <Button 
+      variant="contained" 
+      color="primary" 
+      size="small" 
+      startIcon={<EditIcon />}
+      onClick={handleOpen}>
+        Edit Challenge
+      </Button>
+      <Modal
+        {...challenge} 
+        huntId={huntId}
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Rename your Scavenger Hunt!
+          </Typography>
+          <form>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                <input
+                  className="form-input"
+                  placeholder="Challenge Name"
+                  name="challengeName"
+                  type="text"
+                  value={formData.challengeName}
+                  onChange={handleInputChange}
+                ></input>
+                <input
+                  className="form-input"
+                  placeholder="Challenge task"
+                  name="todo"
+                  type="text"
+                  value={formData.todo}
+                  onChange={handleInputChange}
+                ></input>
+                <input
+                  className="form-input"
+                  placeholder="Street Adress"
+                  name="address1"
+                  type="text"
+                  value={formData.address1}
+                  onChange={handleInputChange}
+                />
+                <input
+                  className="form-input"
+                  placeholder="Building/Unit number"
+                  name="address2"
+                  type="text"
+                  value={formData.address2}
+                  onChange={handleInputChange}
+                />
+                <input
+                  className="form-input"
+                  placeholder="City"
+                  name="city"
+                  type="text"
+                  value={formData.city}
+                  onChange={handleInputChange}
+                />
+                <input
+                  className="form-input"
+                  placeholder="State"
+                  name="state"
+                  type="text"
+                  value={formData.state}
+                  onChange={handleInputChange}
+                />
+                <input
+                  className="form-input"
+                  placeholder="Zip Code"
+                  name="zipCode"
+                  type="text"
+                  value={formData.zipCode}
+                  onChange={handleInputChange}
+                />
+          </Typography>  
+                <Button
+                  onClick={handleFormSubmit} 
+                  variant="contained" 
+                  color="primary" 
+                  startIcon={<SaveIcon />}>
+                  Save      
+                </Button>
+          </form>
+        </Box>
+      </Modal>
+    </div>
+  );
+}
+
+
 const ChallengeList = ({ challenges = [], huntId }) => {
   
   const [deleteChallenge, { error }] = useMutation(DELETE_CHALLENGE);
@@ -71,6 +247,7 @@ const ChallengeList = ({ challenges = [], huntId }) => {
               <h4 className="card-header bg-primary text-light p-2 m-0 display-flex">
                 <CheckboxGroup challengeId={challenge._id} huntId={huntId} chezch={challenge.check}/>
                 {challenge.challengeName}
+                <BasicModal challenge={challenge} huntId={huntId}/>
                 <Button 
                   onClick={async () => {
                     try {
@@ -87,7 +264,7 @@ const ChallengeList = ({ challenges = [], huntId }) => {
                   variant="contained" 
                   color="warning" 
                   size="small" 
-                  endIcon={<DeleteIcon />}>
+                  startIcon={<DeleteIcon />}>
                   Discard      
                 </Button>
               </h4>
