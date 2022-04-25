@@ -42,7 +42,7 @@ const Profile = () => {
         <div className= "my-5">
       <div className="flex-row justify-center m-5 my-5">
         <h2 className="col-12 col-md-10 text-dark pb-3 pt-5 my-5">
-          Viewing {userParam ? `${user.username}'s` : 'your'} profile.
+        {user.username}'s Hunts
         </h2>
 
         

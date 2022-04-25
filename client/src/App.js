@@ -19,6 +19,7 @@ import Footer from './components/Footer';
 import HuntList from './components/HuntList';
 
 import Image from './assets/scavenger-backgroud.jpg'
+
 import Paper from '@mui/material/Paper';
 import Scroll from './assets/paper-scroll.png'
 
@@ -53,14 +54,14 @@ const style = {
 }
 
 function App() {
+
   return (
     <ApolloProvider client={client}>
       <Router>
         <Paper style={style.background}>
         <div className="flex-column justify-flex-start min-100-vh">
           <Header />
-          <div className="container" style={{ backgroundImage: `url(${Scroll})`, backgroundSize: "cover"}}
->
+          <div className="container" style={{ backgroundImage: `url(${Scroll})`, backgroundSize: "cover"}}>
             <Routes>
               <Route 
                 path="/"
@@ -92,11 +93,10 @@ function App() {
               />
               
             </Routes>
+            </div>
           </div>
-          <Footer />
-        </div>
-        </Paper>
-      </Router>
+          </Paper>
+        </Router>
     </ApolloProvider>
   );
 }

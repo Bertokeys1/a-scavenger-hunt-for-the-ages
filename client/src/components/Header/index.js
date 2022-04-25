@@ -1,7 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import {Button} from '@mui/material'
 import Auth from '../../utils/auth';
+import LogoutIcon from '@mui/icons-material/Logout';
+import MapIcon from '@mui/icons-material/Map';
+import ExploreIcon from '@mui/icons-material/Explore';
+import AddIcon from '@mui/icons-material/Add';
 
 const style = {
   background: "#800020"
@@ -24,21 +28,45 @@ const Header = () => {
         <div>
           {Auth.loggedIn() ? (
             <>
-              <Link className="btn btn-lg btn-info m-2" to="/me">
-                {Auth.getProfile().data.username}'s profile
-              </Link>
-              <button className="btn btn-lg btn-light m-2" onClick={logout}>
+              <Button 
+              component={Link} 
+              to="/me" 
+              variant="contained" 
+              color="primary"
+              size="large"
+              startIcon={<MapIcon/>}>
+                {Auth.getProfile().data.username}'s hunts
+              </Button>
+              <Button
+              onClick={logout}
+              variant="contained" 
+              color="secondary" 
+              size="large"
+              endIcon={<LogoutIcon/>} 
+              >
                 Logout
-              </button>
+              </Button>
             </>
           ) : (
             <>
-              <Link className="btn btn-lg btn-info m-2" to="/login">
+              <Button 
+              component={Link} 
+              to="/login" 
+              variant="contained" 
+              color="primary"
+              size="large"
+              startIcon={<ExploreIcon/>}>
                 Login
-              </Link>
-              <Link className="btn btn-lg btn-light m-2" to="/signup">
+              </Button>
+              <Button 
+              component={Link} 
+              to="/signup" 
+              variant="contained" 
+              color="secondary"
+              size="large"
+              startIcon={<AddIcon/>}>
                 Signup
-              </Link>
+              </Button>
             </>
           )}
         </div>
