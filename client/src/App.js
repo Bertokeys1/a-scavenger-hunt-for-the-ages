@@ -23,6 +23,11 @@ import Image from './assets/scavenger-backgroud.jpg'
 import Paper from '@mui/material/Paper';
 import Scroll from './assets/paper-scroll.png'
 
+import ScrollTop from './assets/paper-scroll-top.png'
+import ScrollMid from './assets/paper-scroll-mid.png'
+import ScrollBot from './assets/paper-scroll-bottom.png'
+
+
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -61,9 +66,12 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <Paper style={style.background}>
-        <div className="flex-column justify-flex-start min-100-vh">
+        <div className="flex-column justify-flex-start">
           <Header />
-          <div className="container" style={{backgroundRepeat: "no-repeat", paddingBottom: '25%', backgroundImage: `url(${Scroll})`, backgroundSize: "100% 100%"}}>
+      <div className="container" style={{paddingTop: "15%", backgroundImage: `url(${ScrollTop})`,  backgroundSize: "100% 100%", backgroundRepeat: "no-repeat"}}>
+      <p> </p>
+      </div>
+          <div className="container" style={{backgroundRepeat: "no-repeat", backgroundImage: `url(${ScrollMid})`, backgroundSize: "100% 100%"}}>
             <Routes>
               <Route 
                 path="/"
@@ -96,6 +104,9 @@ function App() {
               
             </Routes>
             </div>
+          <div className="container" style={{paddingBottom:"15%", backgroundImage: `url(${ScrollBot})`,  backgroundSize: "100% 100%", backgroundRepeat: "no-repeat"}}>
+          <p></p>
+          </div>
           </div>
           </Paper>
         </Router>
