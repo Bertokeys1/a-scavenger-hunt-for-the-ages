@@ -276,7 +276,7 @@ const ChallengeList = ({ challenges = [], huntId }) => {
                 </Button>
                 </div>
                 </div>
-                </div>
+                </div> 
               <p>{challenge.todo}</p>
               <p>{challenge.location?.address1}</p>
               <p>{challenge.location?.address2}</p>
