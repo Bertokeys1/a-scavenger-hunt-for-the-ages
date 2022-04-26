@@ -40,8 +40,8 @@ const Profile = () => {
   return (
     <div className= "my-5">
         <div className= "my-5">
-      <div className="flex-row justify-center m-5 my-5" style={{paddingTop: "7%"}}>
-        <h1 className="col-12 col-md-10 text-dark pt-5 my-5">
+      <div className="flex-row justify-center">
+        <h1 className="col-12 col-md-10 text-dark">
         {user.username}'s Hunts
         </h1>
 

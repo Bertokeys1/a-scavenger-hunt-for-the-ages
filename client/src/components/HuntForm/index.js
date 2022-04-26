@@ -77,7 +77,7 @@ const HuntForm = () => {
 
   return (
     <ThemeProvider theme={theme}>
-    <main className="flex-row justify-center mb-4">
+    <main className="flex-row justify-center mt-5">
       <div className="col-12 col-lg-10">
         <div className="card">
           <h2 className="card-header bg-dark text-light p-2">New Hunt</h2>
