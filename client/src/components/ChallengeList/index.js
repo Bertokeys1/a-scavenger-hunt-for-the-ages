@@ -41,23 +41,35 @@ const style = {
     fontFamily: "Amatic SC, cursive",
     fontSize: 20,
     margin:.5
+  },
+  textfield:{
+    margin:.5
   }
 };
 
 const theme = createTheme({
   typography: {
     fontFamily: "Amatic SC, cursive",
-    fontSize: "1.5rem"
+    fontSize: 20
   },
+  palette: {
+    primary: {
+      main: "#4A494A",
+    },
+    secondary: {
+      main: "#4A7B9D",
+    },
+    warning: {
+      main: "#800020"
+    }
+  }
 });
 
 function CheckboxGroup({ challengeId, huntId, chezch }) {
-  const [checked, setChecked] = useState(true);
 
-  const [checkChallenge, { error }] = useMutation(CHECK_CHALLENGE);
+  const [checkChallenge] = useMutation(CHECK_CHALLENGE);
 
   const handleCheck = async (event) => {
-    setChecked(event.target.checked);
 
     try {
       await checkChallenge({
@@ -78,17 +90,14 @@ function CheckboxGroup({ challengeId, huntId, chezch }) {
           <Checkbox
             checked={chezch}
             onChange={(e) => {
-              setChecked(e.target.checked);
               handleCheck(e);
             }}
-            color="primary"
+            color="secondary"
             inputProps={{
               huntId: huntId,
               challengeId: challengeId,
             }}
-          >
-            Hello
-          </Checkbox>
+          />
         }
         label=""
       />
@@ -117,7 +126,7 @@ function BasicModal({ challenge, huntId }) {
     todo: todo,
   });
 
-  const [updateChallenge, { error }] = useMutation(UPDATE_CHALLENGE);
+  const [updateChallenge] = useMutation(UPDATE_CHALLENGE);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -157,7 +166,7 @@ function BasicModal({ challenge, huntId }) {
         sx={style.button}
         size="large"
         variant="contained"
-        color="primary"
+        color="secondary"
         startIcon={<EditIcon />}
         onClick={handleOpen}
       >
@@ -168,6 +177,7 @@ function BasicModal({ challenge, huntId }) {
           <form>
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
               <TextField
+                sx={style.textfield}
                 inputProps={style.inputProps}
                 InputLabelProps={style.inputLabelProps}
                 fullWidth
@@ -178,6 +188,7 @@ function BasicModal({ challenge, huntId }) {
                 onChange={handleInputChange}
               />
               <TextField
+                sx={style.textfield}
                 inputProps={style.inputProps}
                 InputLabelProps={style.inputLabelProps}
                 fullWidth
@@ -188,6 +199,7 @@ function BasicModal({ challenge, huntId }) {
                 onChange={handleInputChange}
               />
               <TextField
+                sx={style.textfield}
                 inputProps={style.inputProps}
                 InputLabelProps={style.inputLabelProps}
                 fullWidth
@@ -198,6 +210,7 @@ function BasicModal({ challenge, huntId }) {
                 onChange={handleInputChange}
               />
               <TextField
+                sx={style.textfield}
                 inputProps={style.inputProps}
                 InputLabelProps={style.inputLabelProps}
                 fullWidth
@@ -208,6 +221,7 @@ function BasicModal({ challenge, huntId }) {
                 onChange={handleInputChange}
               />
               <TextField
+                sx={style.textfield}
                 inputProps={style.inputProps}
                 InputLabelProps={style.inputLabelProps}
                 fullWidth
@@ -218,6 +232,7 @@ function BasicModal({ challenge, huntId }) {
                 onChange={handleInputChange}
               />
               <TextField
+                sx={style.textfield}
                 inputProps={style.inputProps}
                 InputLabelProps={style.inputLabelProps}
                 fullWidth
@@ -228,6 +243,7 @@ function BasicModal({ challenge, huntId }) {
                 onChange={handleInputChange}
               />
               <TextField
+                sx={style.textfield}
                 inputProps={style.inputProps}
                 InputLabelProps={style.inputLabelProps}
                 fullWidth
@@ -243,7 +259,7 @@ function BasicModal({ challenge, huntId }) {
               size="large"
               onClick={handleFormSubmit}
               variant="contained"
-              color="primary"
+              color="secondary"
               startIcon={<SaveIcon />}
             >
               Save
@@ -256,7 +272,7 @@ function BasicModal({ challenge, huntId }) {
 }
 
 const ChallengeList = ({ challenges = [], huntId }) => {
-  const [deleteChallenge, { error }] = useMutation(DELETE_CHALLENGE);
+  const [deleteChallenge] = useMutation(DELETE_CHALLENGE);
 
   if (!challenges.length) {
     return <h3>No Challenges Yet</h3>;
@@ -293,7 +309,7 @@ const ChallengeList = ({ challenges = [], huntId }) => {
                       }
                     }}
                     variant="contained"
-                    color="warning"
+                    color="primary"
                     startIcon={<DeleteIcon />}
                   >
                     Discard

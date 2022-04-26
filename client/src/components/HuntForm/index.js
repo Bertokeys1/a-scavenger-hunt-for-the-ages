@@ -3,6 +3,7 @@ import { useMutation } from "@apollo/client";
 import { CREATE_HUNT } from "../../utils/mutations";
 import { Button, TextField } from "@mui/material"
 import SaveIcon from "@mui/icons-material/Save";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const style = {
   inputProps:{
@@ -21,8 +22,29 @@ const style = {
     fontFamily: "Amatic SC, cursive",
     fontSize: 20,
     margin:.5
+  },
+  textfield:{
+    margin:.5
   }
 };
+
+const theme = createTheme({
+  typography: {
+    fontFamily: "Amatic SC, cursive",
+    fontSize: 20
+  },
+  palette: {
+    primary: {
+      main: "#4A494A",
+    },
+    secondary: {
+      main: "#4A7B9D",
+    },
+    warning: {
+      main: "#800020"
+    }
+  }
+});
 
 const HuntForm = () => {
   const [formData, setFormData] = useState({
@@ -54,6 +76,7 @@ const HuntForm = () => {
   };
 
   return (
+    <ThemeProvider theme={theme}>
     <main className="flex-row justify-center mb-4">
       <div className="col-12 col-lg-10">
         <div className="card">
@@ -62,6 +85,7 @@ const HuntForm = () => {
             {(
               <form>
                 <TextField
+                  sx={style.textfield}
                   inputProps={style.inputProps} 
                   InputLabelProps={style.inputLabelProps}
                   fullWidth 
@@ -76,7 +100,7 @@ const HuntForm = () => {
                   fullWidth
                   onClick={handleFormSubmit} 
                   variant="contained" 
-                  color="primary" 
+                  color="secondary" 
                   startIcon={<SaveIcon />}>
                   Submit      
                 </Button>
@@ -92,6 +116,7 @@ const HuntForm = () => {
         </div>
       </div>
     </main>
+    </ThemeProvider>
   );
 };
 

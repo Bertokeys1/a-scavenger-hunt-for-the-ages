@@ -4,9 +4,10 @@ import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
 import ExploreIcon from '@mui/icons-material/Explore';
-import { Button, TextField, Typography } from "@mui/material"
+import { Button, TextField } from "@mui/material"
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Auth from '../utils/auth';
-import { palette } from '@mui/system';
+
 
 const style = {
   inputProps:{
@@ -24,8 +25,25 @@ const style = {
     fontFamily: "Amatic SC, cursive",
     fontSize: 20,
     margin:.5
+  },
+  textfield:{
+    margin:.5
   }
 };
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#4A494A",
+    },
+    secondary: {
+      main: "#4A7B9D",
+    },
+    warning: {
+      main: "#800020"
+    }
+  }
+});
 
 const Signup = () => {
   const [formState, setFormState] = useState({
@@ -60,6 +78,7 @@ const Signup = () => {
   };
 
   return (
+    <ThemeProvider theme={theme}>
     <main className="flex-row justify-center mb-4">
       <div className="col-12 col-lg-10">
         <div className="card">
@@ -73,7 +92,8 @@ const Signup = () => {
             ) : (
               <form>
                 <TextField
-                  fullWidth 
+                  fullWidth
+                  sx={style.textfield} 
                   inputProps={style.inputProps} 
                   InputLabelProps={style.inputLabelProps}
                   placeholder="Your username"
@@ -85,6 +105,7 @@ const Signup = () => {
                 />
                 <TextField
                   fullWidth
+                  sx={style.textfield}
                   inputProps={style.inputProps} 
                   InputLabelProps={style.inputLabelProps}
                   placeholder="Your email"
@@ -96,6 +117,7 @@ const Signup = () => {
                 />
                 <TextField
                   fullWidth
+                  sx={style.textfield}
                   inputProps={style.inputProps} 
                   InputLabelProps={style.inputLabelProps}
                   placeholder="******"
@@ -111,7 +133,7 @@ const Signup = () => {
                   size="large"
                   onClick={handleFormSubmit} 
                   variant="contained" 
-                  color="primary" 
+                  color="secondary" 
                   startIcon={<ExploreIcon />}>
                   Create Account      
                 </Button>
@@ -128,6 +150,7 @@ const Signup = () => {
         </div>
       </div>
     </main>
+    </ThemeProvider>
   );
 };
 

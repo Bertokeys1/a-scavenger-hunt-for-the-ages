@@ -8,6 +8,7 @@ import { Button, TextField, Box, Typography, Modal} from "@mui/material"
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import SaveIcon from "@mui/icons-material/Save";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const style = {
   modal: {
@@ -19,7 +20,6 @@ const style = {
     bgcolor: 'background.paper',
     p: 4,
   },
-
   flexbox: {
     display: "flex",
     justifyContent: "space-between",
@@ -41,8 +41,25 @@ const style = {
     fontFamily: "Amatic SC, cursive",
     fontSize: 20,
     margin:.5
+  },
+  textfield:{
+    margin:.5
   }
 };
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#4A494A",
+    },
+    secondary: {
+      main: "#4A7B9D",
+    },
+    warning: {
+      main: "#800020"
+    }
+  }
+});
 
 function BasicModal({huntName, huntId}) {
   const [open, setOpen] = React.useState(false);
@@ -53,7 +70,7 @@ function BasicModal({huntName, huntId}) {
     huntName: huntName,
   });
 
-  const [updateHunt, { error }] = useMutation(UPDATE_HUNT);
+  const [updateHunt] = useMutation(UPDATE_HUNT);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -83,7 +100,7 @@ function BasicModal({huntName, huntId}) {
       <Button 
         sx={style.button}    
         variant="contained" 
-        color="primary" 
+        color="secondary" 
         size="large" 
         startIcon={<EditIcon />}
         onClick={handleOpen}>
@@ -102,6 +119,7 @@ function BasicModal({huntName, huntId}) {
           <form>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
           <TextField
+            sx={style.textfield}
             inputProps={style.inputProps}
             InputLabelProps={style.inputLabelProps}
             fullWidth 
@@ -116,7 +134,7 @@ function BasicModal({huntName, huntId}) {
             sx={style.button}   
             onClick={handleFormSubmit} 
             variant="contained" 
-            color="primary" 
+            color="secondary" 
             startIcon={<SaveIcon />}>
             Save      
           </Button>
@@ -132,13 +150,14 @@ function BasicModal({huntName, huntId}) {
 
 const HuntList = ( {hunts, title,} ) => {
 
-  const [deleteHunt, { error }] = useMutation(DELETE_HUNT);
+  const [deleteHunt] = useMutation(DELETE_HUNT);
   
   if (!hunts.length) {
     return <h3>No Hunts Yet</h3>;
   }
 
   return (
+    <ThemeProvider theme={theme}>
     <div>
       {/* {<h3>{title}</h3>} */}
       {hunts&&
@@ -179,7 +198,7 @@ const HuntList = ( {hunts, title,} ) => {
                     }
                   }} 
                   variant="contained" 
-                  color="warning" 
+                  color="primary" 
                   size="large" 
                   startIcon={<DeleteIcon />}>
                   Discard      
@@ -189,6 +208,7 @@ const HuntList = ( {hunts, title,} ) => {
           </div>
         ))}
     </div>
+    </ThemeProvider>
   );
 };
 
