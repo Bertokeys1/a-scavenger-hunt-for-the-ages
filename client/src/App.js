@@ -19,13 +19,11 @@ import Header from './components/Header';
 import HuntList from './components/HuntList';
 
 import Image from './assets/scavenger-backgroud.jpg'
-
-import Paper from '@mui/material/Paper';
-import Scroll from './assets/paper-scroll.png'
-
 import ScrollTop from './assets/paper-scroll-top.png'
 import ScrollMid from './assets/paper-scroll-mid.png'
 import ScrollBot from './assets/paper-scroll-bottom.png'
+
+import Paper from '@mui/material/Paper';
 
 
 // Construct our main GraphQL API endpoint
