@@ -15,7 +15,7 @@ import Profile from './pages/Profile';
 import SingleHunt from './pages/SingleHunt';
 
 import Header from './components/Header';
-import Footer from './components/Footer';
+// import Footer from './components/Footer';
 import HuntList from './components/HuntList';
 
 import Image from './assets/scavenger-backgroud.jpg'

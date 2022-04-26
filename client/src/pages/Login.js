@@ -5,6 +5,47 @@ import { LOGIN_USER } from '../utils/mutations';
 import ExploreIcon from '@mui/icons-material/Explore';
 import { Button, TextField } from "@mui/material"
 import Auth from '../utils/auth';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+const style = {
+  inputProps:{
+    style:{
+      fontFamily: "Amatic SC, cursive",
+      fontSize: 28,
+    }
+  },
+  inputLabelProps: {
+    style:{
+      fontFamily: "Amatic SC, cursive",
+    }
+  },
+  button: {
+    fontFamily: "Amatic SC, cursive",
+    fontSize: 20,
+    margin:.5
+  },
+  textfield:{
+    margin:.5
+  }
+};
+
+const theme = createTheme({
+  typography: {
+    fontFamily: "Amatic SC, cursive",
+    fontSize: 20
+  },
+  palette: {
+    primary: {
+      main: "#4A494A",
+    },
+    secondary: {
+      main: "#4A7B9D",
+    },
+    warning: {
+      main: "#800020"
+    }
+  }
+});
 
 const Login = (props) => {
   const [formState, setFormState] = useState({ email: '', password: '' });
@@ -42,11 +83,12 @@ const Login = (props) => {
   };
 
   return (
+    <ThemeProvider theme={theme}>
     <main className="flex-row justify-center mb-4">
       <div className="col-12 col-lg-10">
         <div className="card">
           <h4 className="card-header bg-dark text-light p-2">Login</h4>
-          <div className="card-body">
+          <div className="card-body bg-light">
             {data ? (
               <p>
                 Success! You may now head{' '}
@@ -55,6 +97,9 @@ const Login = (props) => {
             ) : (
               <form>
                 <TextField
+                  sx={style.textfield}
+                  inputProps={style.inputProps}   
+                  InputLabelProps={style.inputLabelProps} 
                   fullWidth 
                   placeholder="Your email"
                   name="email"
@@ -64,6 +109,9 @@ const Login = (props) => {
                   onChange={handleChange}
                 />
                 <TextField
+                  sx={style.textfield}
+                  inputProps={style.inputProps}   
+                  InputLabelProps={style.inputLabelProps} 
                   fullWidth 
                   placeholder="******"
                   name="password"
@@ -73,11 +121,12 @@ const Login = (props) => {
                   onChange={handleChange}
                 />
                 <Button 
+                  sx={style.button}   
                   fullWidth
                   size="large"
                   onClick={handleFormSubmit} 
                   variant="contained" 
-                  color="primary" 
+                  color="secondary" 
                   startIcon={<ExploreIcon />}>
                   Login      
                 </Button>
@@ -93,6 +142,7 @@ const Login = (props) => {
         </div>
       </div>
     </main>
+    </ThemeProvider>
   );
 };
 

@@ -372,7 +372,7 @@ h4,
 h5,
 h6 {
   font-family: 'Amatic SC', cursive;
-  margin: 0 0 0.5rem;
+  margin: 0 0 0rem;
   line-height: 1.25;
 }
 
@@ -401,7 +401,7 @@ h6 {
 }
 
 p {
-  font-size: 1.1rem;
+  font-size: 24px;
   margin: 0 0 1rem;
   line-height: 1.5;
 }
@@ -1707,4 +1707,8 @@ label form [type='radio'] {
   .align-content-center-xl {
     align-content: center;
   }
+}
+
+#mainTitle {
+  font-size: 3rem;
 }

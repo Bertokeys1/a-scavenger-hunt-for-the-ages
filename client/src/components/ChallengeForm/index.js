@@ -3,6 +3,47 @@ import { useMutation } from "@apollo/client";
 import { CREATE_CHALLENGE} from "../../utils/mutations";
 import {Button, TextField} from '@mui/material';
 import SaveIcon from "@mui/icons-material/Save";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+const style = {
+  inputProps:{
+    style:{
+      fontFamily: "Amatic SC, cursive",
+      fontSize: 28,
+    }
+  },
+  inputLabelProps: {
+    style:{
+      fontFamily: "Amatic SC, cursive",
+    }
+  },
+  button: {
+    fontFamily: "Amatic SC, cursive",
+    fontSize: 20,
+    margin:.5
+  },
+  textfield:{
+    margin:.5
+  }
+};
+
+const theme = createTheme({
+  typography: {
+    fontFamily: "Amatic SC, cursive",
+    fontSize: 20
+  },
+  palette: {
+    primary: {
+      main: "#4A494A",
+    },
+    secondary: {
+      main: "#4A7B9D",
+    },
+    warning: {
+      main: "#800020"
+    }
+  }
+});
 
 const ChallengeForm = ({huntId}) => {
 
@@ -58,14 +99,18 @@ const ChallengeForm = ({huntId}) => {
   };
 
   return (
+    <ThemeProvider theme={theme}>
     <main className="flex-row justify-center mb-4">
       <div className="col-12 col-lg-10">
         <div className="card">
-          <h4 className="card-header bg-dark text-light p-2">New Challenge</h4>
+          <h2 className="card-header bg-dark text-light p-2">New Challenge</h2>
           <div className="card-body">
             {(
               <form>
                  <TextField
+                  sx={style.textfield}
+                  inputProps={style.inputProps} 
+                  InputLabelProps={style.inputLabelProps}
                   fullWidth 
                   placeholder="Challenge Name"
                   name="challengeName"
@@ -74,6 +119,9 @@ const ChallengeForm = ({huntId}) => {
                   onChange={handleInputChange}
                 />
                  <TextField
+                  sx={style.textfield}
+                  inputProps={style.inputProps} 
+                  InputLabelProps={style.inputLabelProps}
                   fullWidth
                   placeholder="Challenge task"
                   name="todo"
@@ -82,6 +130,9 @@ const ChallengeForm = ({huntId}) => {
                   onChange={handleInputChange}
                 />
                 <TextField
+                  sx={style.textfield}
+                  inputProps={style.inputProps} 
+                  InputLabelProps={style.inputLabelProps}
                   fullWidth
                   placeholder="Street Adress"
                   name="address1"
@@ -90,6 +141,9 @@ const ChallengeForm = ({huntId}) => {
                   onChange={handleInputChange}
                 />
                 <TextField
+                  sx={style.textfield}
+                  inputProps={style.inputProps} 
+                  InputLabelProps={style.inputLabelProps}
                   fullWidth
                   placeholder="Building/Unit number"
                   name="address2"
@@ -98,6 +152,9 @@ const ChallengeForm = ({huntId}) => {
                   onChange={handleInputChange}
                 />
                 <TextField
+                  sx={style.textfield}
+                  inputProps={style.inputProps} 
+                  InputLabelProps={style.inputLabelProps}
                   fullWidth
                   placeholder="City"
                   name="city"
@@ -106,6 +163,9 @@ const ChallengeForm = ({huntId}) => {
                   onChange={handleInputChange}
                 />
                 <TextField
+                  sx={style.textfield}
+                  inputProps={style.inputProps} 
+                  InputLabelProps={style.inputLabelProps}
                   fullWidth
                   placeholder="State"
                   name="state"
@@ -114,6 +174,9 @@ const ChallengeForm = ({huntId}) => {
                   onChange={handleInputChange}
                 />
                 <TextField
+                  sx={style.textfield}
+                  inputProps={style.inputProps} 
+                  InputLabelProps={style.inputLabelProps}
                   fullWidth
                   placeholder="Zip Code"
                   name="zipCode"
@@ -122,10 +185,11 @@ const ChallengeForm = ({huntId}) => {
                   onChange={handleInputChange}
                 />
                 <Button
+                  sx={style.button}   
                   fullWidth
                   onClick={handleFormSubmit} 
                   variant="contained" 
-                  color="primary" 
+                  color="secondary" 
                   startIcon={<SaveIcon />}>
                   Submit      
                 </Button>
@@ -141,6 +205,7 @@ const ChallengeForm = ({huntId}) => {
         </div>
       </div>
     </main>
+    </ThemeProvider>
   );
 };
 

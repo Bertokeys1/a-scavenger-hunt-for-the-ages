@@ -5,7 +5,45 @@ import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
 import ExploreIcon from '@mui/icons-material/Explore';
 import { Button, TextField } from "@mui/material"
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Auth from '../utils/auth';
+
+
+const style = {
+  inputProps:{
+    style:{
+      fontFamily: "Amatic SC, cursive",
+      fontSize: 28,
+    }
+  },
+  inputLabelProps: {
+    style:{
+      fontFamily: "Amatic SC, cursive",
+    }
+  },
+  button: {
+    fontFamily: "Amatic SC, cursive",
+    fontSize: 20,
+    margin:.5
+  },
+  textfield:{
+    margin:.5
+  }
+};
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#4A494A",
+    },
+    secondary: {
+      main: "#4A7B9D",
+    },
+    warning: {
+      main: "#800020"
+    }
+  }
+});
 
 const Signup = () => {
   const [formState, setFormState] = useState({
@@ -40,11 +78,12 @@ const Signup = () => {
   };
 
   return (
+    <ThemeProvider theme={theme}>
     <main className="flex-row justify-center mb-4">
       <div className="col-12 col-lg-10">
         <div className="card">
           <h4 className="card-header bg-dark text-light p-2">Sign Up</h4>
-          <div className="card-body">
+          <div className="card-body bg-light">
             {data ? (
               <p>
                 Success! You may now head{' '}
@@ -53,7 +92,10 @@ const Signup = () => {
             ) : (
               <form>
                 <TextField
-                  fullWidth 
+                  fullWidth
+                  sx={style.textfield} 
+                  inputProps={style.inputProps} 
+                  InputLabelProps={style.inputLabelProps}
                   placeholder="Your username"
                   name="username"
                   type="text"
@@ -62,7 +104,10 @@ const Signup = () => {
                   onChange={handleChange}
                 />
                 <TextField
-                  fullWidth 
+                  fullWidth
+                  sx={style.textfield}
+                  inputProps={style.inputProps} 
+                  InputLabelProps={style.inputLabelProps}
                   placeholder="Your email"
                   name="email"
                   label="Email Address"
@@ -71,7 +116,10 @@ const Signup = () => {
                   onChange={handleChange}
                 />
                 <TextField
-                  fullWidth 
+                  fullWidth
+                  sx={style.textfield}
+                  inputProps={style.inputProps} 
+                  InputLabelProps={style.inputLabelProps}
                   placeholder="******"
                   name="password"
                   type="password"
@@ -80,14 +128,16 @@ const Signup = () => {
                   onChange={handleChange}
                 />
                 <Button 
+                  sx={style.button}   
                   fullWidth
                   size="large"
                   onClick={handleFormSubmit} 
                   variant="contained" 
-                  color="primary" 
+                  color="secondary" 
                   startIcon={<ExploreIcon />}>
                   Create Account      
                 </Button>
+                
               </form>
             )}
 
@@ -100,6 +150,7 @@ const Signup = () => {
         </div>
       </div>
     </main>
+    </ThemeProvider>
   );
 };
 

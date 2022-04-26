@@ -8,6 +8,7 @@ import { Button, TextField, Box, Typography, Modal} from "@mui/material"
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import SaveIcon from "@mui/icons-material/Save";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const style = {
   modal: {
@@ -19,13 +20,46 @@ const style = {
     bgcolor: 'background.paper',
     p: 4,
   },
-
   flexbox: {
     display: "flex",
     justifyContent: "space-between",
+    flexWrap: "wrap",
     marginTop: "auto",
   },
+  inputProps:{
+    style:{
+      fontFamily: "Amatic SC, cursive",
+      fontSize: 28,
+    }
+  },
+  inputLabelProps: {
+    style:{
+      fontFamily: "Amatic SC, cursive",
+    }
+  },
+  button: {
+    fontFamily: "Amatic SC, cursive",
+    fontSize: 20,
+    margin:.5
+  },
+  textfield:{
+    margin:.5
+  }
 };
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#4A494A",
+    },
+    secondary: {
+      main: "#4A7B9D",
+    },
+    warning: {
+      main: "#800020"
+    }
+  }
+});
 
 function BasicModal({huntName, huntId}) {
   const [open, setOpen] = React.useState(false);
@@ -36,7 +70,7 @@ function BasicModal({huntName, huntId}) {
     huntName: huntName,
   });
 
-  const [updateHunt, { error }] = useMutation(UPDATE_HUNT);
+  const [updateHunt] = useMutation(UPDATE_HUNT);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -64,12 +98,13 @@ function BasicModal({huntName, huntId}) {
   return (
     <div>
       <Button 
-      variant="contained" 
-      color="primary" 
-      size="large" 
-      startIcon={<EditIcon />}
-      onClick={handleOpen}>
-        Rename Hunt
+        sx={style.button}    
+        variant="contained" 
+        color="secondary" 
+        size="large" 
+        startIcon={<EditIcon />}
+        onClick={handleOpen}>
+          Rename Hunt
       </Button>
       <Modal
         huntName={huntName}
@@ -81,27 +116,28 @@ function BasicModal({huntName, huntId}) {
       >
         
         <Box sx={style.modal}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Rename your Scavenger Hunt!
-          </Typography>
           <form>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
           <TextField
-                  fullWidth 
-                  placeholder="Scavenger Hunt Name"
-                  name="huntName"
-                  label="Scavenger Hunt Name"
-                  value={formData.huntName}
-                  onChange={handleInputChange}
-                />
+            sx={style.textfield}
+            inputProps={style.inputProps}
+            InputLabelProps={style.inputLabelProps}
+            fullWidth 
+            placeholder="Scavenger Hunt Name"
+            name="huntName"
+            label="Scavenger Hunt Name"
+            value={formData.huntName}
+            onChange={handleInputChange}
+          />
           </Typography>  
-                <Button
-                  onClick={handleFormSubmit} 
-                  variant="contained" 
-                  color="primary" 
-                  startIcon={<SaveIcon />}>
-                  Save      
-                </Button>
+          <Button
+            sx={style.button}   
+            onClick={handleFormSubmit} 
+            variant="contained" 
+            color="secondary" 
+            startIcon={<SaveIcon />}>
+            Save      
+          </Button>
           </form>
         </Box>
       </Modal>
@@ -114,13 +150,14 @@ function BasicModal({huntName, huntId}) {
 
 const HuntList = ( {hunts, title,} ) => {
 
-  const [deleteHunt, { error }] = useMutation(DELETE_HUNT);
+  const [deleteHunt] = useMutation(DELETE_HUNT);
   
   if (!hunts.length) {
-    return <h3>No Hunt Yet</h3>;
+    return <h3>No Hunts Yet</h3>;
   }
 
   return (
+    <ThemeProvider theme={theme}>
     <div>
       {/* {<h3>{title}</h3>} */}
       {hunts&&
@@ -128,7 +165,7 @@ const HuntList = ( {hunts, title,} ) => {
          (
           <div key={hunt._id} className="card mb-3 p-3" style={style.flexbox}>
             <div>
-            <h4 className="display-flex card-header text-dark p-2 m-0">
+            <h2 className="display-flex font-bold text-dark p-2 m-0">
               
                 <Link
                   className="text-dark"
@@ -138,12 +175,13 @@ const HuntList = ( {hunts, title,} ) => {
                   {hunt.huntName} 
                 </Link>
                 
-            </h4>
+            </h2>
             </div>
-            <div className="display-flex align-items-center">
+            <div className="display-flex align-items-center flex-wrap">
             <BasicModal huntName={hunt.huntName} huntId={hunt._id}/>
             <div>
                 <Button 
+                  sx={style.button}   
                   huntId={hunt._id}
                   onClick={async () => {
                     try {
@@ -160,7 +198,7 @@ const HuntList = ( {hunts, title,} ) => {
                     }
                   }} 
                   variant="contained" 
-                  color="warning" 
+                  color="primary" 
                   size="large" 
                   startIcon={<DeleteIcon />}>
                   Discard      
@@ -170,6 +208,7 @@ const HuntList = ( {hunts, title,} ) => {
           </div>
         ))}
     </div>
+    </ThemeProvider>
   );
 };
 
