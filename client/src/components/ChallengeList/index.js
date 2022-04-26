@@ -318,24 +318,23 @@ const ChallengeList = ({ challenges = [], huntId }) => {
               </div>
             </div>
             <Container>
-            <p>Task: {challenge.todo}</p>
+            {challenge.todo && (<p>Task: {challenge.todo}</p>)}
             <Box
             sx={{
                 
               }}
             >
               <Typography>
-              Location:<br/>
-              &emsp;{challenge.location?.address1}<br/>
-              &emsp;{challenge.location?.address2}<br/>
-              &emsp;{challenge.location?.city}, {challenge.location?.state} {challenge.location?.zipCode}
+              {challenge.location.address1 && (<>Location:<br/>&emsp;{challenge.location?.address1}<br/></>)}
+              {challenge.location.address2 && (<>&emsp;{challenge.location?.address2}<br/></>)}
+              {challenge.location.city && (<>&emsp;{challenge.location?.city},</>)} {challenge.location.state && (<>{challenge.location?.state}</>)} {challenge.location.zipCode && (<>{challenge.location?.zipCode}</>)}
               </Typography>
-              <p>
+              {challenge.location.address1 && (<p>
                 Link to Google Maps:{" "}
                 <a href={`https://www.google.com/maps/search/?api=1&query=${challenge.location?.address1} ${challenge.location?.address2} ${challenge.location?.city} ${challenge.location?.state} ${challenge.location?.zipCode}`} target="_blank" rel="noreferrer">
                   Link
                 </a>
-              </p>
+              </p>)}
             </Box>
             </Container>
           </div>
